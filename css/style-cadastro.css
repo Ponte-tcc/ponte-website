@@ -1,0 +1,242 @@
+ 
+.content{
+
+    padding: 16px;
+    text-align: center;
+    margin-top: 3%;
+
+}
+
+.content h1, .content p{
+
+    width: 400px;
+    margin:1px auto;
+
+}
+
+.content h1{
+
+    background: linear-gradient(to bottom right, rgb(24, 111, 211),rgb(0, 119, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size:60px;
+    text-transform: uppercase;
+
+}
+
+.content p{
+
+    color:#3f3f3f;
+    font-size: 25px;
+
+}
+
+
+
+/*--Form Login--*/
+
+
+.box{
+
+    width: 50%;
+    height: 51%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: transparent;
+    text-align: center;
+    border:1px solid rgb(136, 136, 136) ;
+    border-radius: 2%;
+    background-color: rgb(236, 236, 236);
+    margin-top: 5%;
+    
+    
+}
+
+.box-login h1{
+  
+    background: linear-gradient(to bottom right, rgb(22, 63, 110),rgb(53, 100, 155));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 70px;
+    margin-top: 0%;
+  
+}
+
+.box-login input[type = "text"],
+.box input[type = "password"],
+.box input[type = "email"],
+.box input[type = "date"]{
+  
+    background: none;
+    margin: 20px auto ;
+    text-align: center;
+    border: 2px solid #000000;
+    padding: 14px 10px;
+    width: 74%;
+    outline: none;
+    color: rgb(0, 0, 0);
+    border-radius: 24px;
+    transition: 0.5s;
+   
+}
+
+  .box-login input[type = "text"]:focus,
+  .box input[type = "password"]:focus,
+  .box input[type = "email"]:focus,
+  .box input[type = "date"]:focus{
+  
+    transition: 0.5s;
+    width: 76%;
+    border-color: rgb(0, 119, 255);
+
+}
+
+
+
+.box-login input[type = "submit"]{
+  
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto 25px auto;
+    width: 200px;
+    text-align: center;
+    border: 2px solid rgb(0, 119, 255);
+    padding: 14px 40px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    border-radius: 24px;
+    transition:0.5s;  
+    cursor: pointer;
+}
+  .box-login input[type = "submit"]:hover{
+    
+    color: rgb(255, 255, 255);
+    background:rgb(0, 119, 255);
+    transition:0.5s;
+    
+  
+}
+   
+  
+.login input[name = "se-ja-tem-login"]{
+  
+    border:0;
+    background: none;
+    display: block;
+    margin: auto auto;
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: -16px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 16px;
+   
+}
+  
+.login input[type = "submit"]{
+    
+    margin: 2% auto;
+    transition:0.5s;
+  
+}
+  
+.login input[type = "submit"]:hover{
+  
+   color: rgb(0, 119, 255);
+   transition:0.5s
+  
+}
+
+.display{
+
+    display: flex;
+    justify-content: space-between;
+    max-width: 1271.5px;
+    width: 100%;
+    margin: 1px auto;
+    
+
+}
+
+.container-left,
+.container-right{
+
+    width: 40%;
+    
+}
+
+.container-left{
+
+    padding-left: 10%;
+
+}
+
+.container-right{
+
+    padding-right: 10%;
+
+}
+
+  
+.text-box{
+  
+    display: flex;
+    width: 75%;
+    height: 42%;
+    margin: 8px auto;
+    
+}
+    
+.text-box [name = "user"],
+.text-box [name = "password"],
+.text-box [name = "email"],
+.text-box [name = "born"]{
+    
+    height: 14px;
+    margin-top: 9%;
+    color:rgb(0, 119, 255);
+  
+}
+  
+    
+  
+
+
+
+.color{
+
+    
+    background-image: linear-gradient(to bottom right, rgb(22, 63, 110),rgb(53, 100, 155));
+    margin-top: 1%;
+    width: 100%;
+    height: 448px;
+    
+}
+
+
+/*--Footer--*/
+
+footer{
+
+    background-color: rgb(54, 54, 54);
+    margin-top: 15%;
+    width: 100%;
+    height: 272px;
+    color: white;
+
+}
+
+
+
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+
+
+
