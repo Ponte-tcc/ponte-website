@@ -1,0 +1,62 @@
+:root{
+
+--cor-azul-txt: linear-gradient(to bottom right, rgb(22, 63, 110),rgb(53, 100, 155));
+
+}
+
+#main-suporte h1{
+
+    text-align: center;
+    background: var(--cor-azul-txt);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-weight: 500;
+    font-size: 80px;
+
+}
+
+#text-area{
+
+padding: 0 30%;
+
+}
+
+textarea {
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  
+    resize: none;
+    width: 100%;
+    height: 350px;
+    border-radius: 6px;
+
+}
+
+#submit-btn input[id="submit-suporte"]{
+
+    width: 20%;
+    margin: 3% 40%;
+
+    border: 2px solid rgb(0, 119, 255);
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-size: 23px;
+
+    padding: 12px;
+    transition: 0.25s;
+
+}
+
+#submit-btn input[id="submit-suporte"]:hover{
+
+    color: rgb(255, 255, 255);
+    background:rgb(0, 119, 255);
+    transition:0.5s;
+
+}
+
