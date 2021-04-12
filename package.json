@@ -1,0 +1,26 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "Forum final paper",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ponte-tcc/ponte-website.git"
+  },
+  "author": "Nicolas viana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ponte-tcc/ponte-website/issues"
+  },
+  "homepage": "https://github.com/Ponte-tcc/ponte-website#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

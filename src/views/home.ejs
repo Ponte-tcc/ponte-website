@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<!--Head-->
+
+    <%- include('parts/page-head', { title : 'Home', linkCss : '/css/style-home.css', linkHeader : '/css/style-header.css'} )  %>
+
+<!--Head-->
+
+    <body>
+        
+        <!--Header-->
+
+        <%- include('parts/page-header', { title : ''})  %>
+        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+
+        <!--Header-->
+        
+        <div id = "primary-content">
+
+            <div class="container-topo">
+
+                <div class="content-topo"></div>
+                
+            </div>
+
+            <div class="container-left">
+                
+                <div class="content-left"></div>
+            
+            </div>
+
+            <div class="container-right">
+
+                <div class="content-right"></div>
+                
+            </div>
+
+        </div>
+
+        <main>           
+        
+            <div class="container-principal">
+
+                <div class="content-principal">
+
+                    <div class="publicacao"> 
+
+                        <div class="caixa-perfil">
+                                <div class="avatar-perfil"><img src="<%= users[2].avatar %> " id="avatar-publi"></div>
+                                <div class="nome-perfil"> <h3> <%= users[2].name %> </h3> </div>
+                        </div>
+                        
+
+                        <div class="publicar">
+
+                            <textarea maxlength="140" form="publicar-btn" name="text-publicar" id="text-publicar" placeholder="Escreva sua publicação aqui..."></textarea>
+
+                            <form id="publicar-btn" action="/" method="post">
+                                <input type="submit">
+                            </form>
+
+                        </div>   
+                        
+                        
+
+                    </div>
+
+                    <% publi.forEach((publis) => { %>
+
+                    <div id="publicados">
+
+                        <div class="container">
+
+                            <div class="caixa-perfil">
+                                <div class="avatar-perfil"><img src="<%= users.avatar %> " id="avatar-publi"></div>
+                                <div class="nome-perfil"> <h3> <%= users.name %> </h3> </div>
+                            </div>
+                        
+
+                            <div class="publiGo">
+
+                                <div class="publi-dado" >
+                                    <%= publi.publiGo %> 
+                                </div>
+
+                            </div> 
+                        </div>
+
+                        <div class="separator">
+                        </div>
+
+                    </div>
+
+                    <% }) %> 
+
+                    
+
+                </div>
+
+            </div>
+            
+            
+        </main>
+
+        <%- include ('parts/page-footer') %>
+        
+    </body>
+
+</html>

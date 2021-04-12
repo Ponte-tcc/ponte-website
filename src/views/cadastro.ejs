@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+  
+    <!--Head-->
+
+    <%- include('parts/page-head', { title : 'Cadastro', linkCss : '/css/style-cadastro.css', linkHeader : '/css/style-header-login.css'} )  %>
+
+<!--Head-->
+
+    <body>
+        
+        <!--Header-->
+
+        <%- include('parts/page-header-login', { title : ''})  %>
+        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+
+        <!--Header-->
+      
+  <main>
+
+    
+
+    <div class="content">
+
+        <h1>Bem Vindo</h1>
+        <p>Vamos codar juntos :D</p>
+
+    </div>     
+
+        <div class="box">
+
+            <form class="box-cad" method="post" action="/cadastro">
+          
+              <h1>cadastro</h1>
+
+              <div class="display">
+
+                <div class = "container-left">
+
+                  <div class="text-box">
+
+                      <i class="far fa-user" aria-hidden="true" name="user">
+                      </i><input type="text" maxlength="15" minlength="4" name="name" id="user-cad" placeholder="Nome de usuário">
+
+                  </div>
+
+                  <div class="text-box">
+
+                      <i class="far fa-envelope" aria-hidden="true" name="email">
+                      </i><input type="email" maxlength="25" minlength="10" name="email" id="email-cad" placeholder="Email">
+
+                  </div>
+
+                </div>
+
+                <div class = "container-right">
+
+                    
+                  <div class="text-box">
+
+                      <i class="far fa-lock" aria-hidden="true" name="password"></i>
+                      <input type="password" maxlength="32" minlength="6" name="password" id="senha-cad" placeholder="Senha">
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              
+          
+            </form> 
+            <button id="submit">Cadastrar</button>
+          
+            <div id="login-btn-delim">
+                <a href="/" id="login-btn"><input type="submit" name="se-ja-tem-login" value="Se já tem um login, Logar-se"></a>
+            </div>
+          
+        </div>
+          
+        
+
+  </main>
+
+      <div class="color">
+      </div>
+
+      <%- include ('parts/page-footer') %>
+
+    </body>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
+  <script src="/script/app.js"></script>
+  <script src="/script/authentication.js"></script>
+ 
+</html>
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+    <!--Head-->
+
+    <%- include('parts/page-head', { title : 'Suporte', linkCss : '/css/style-suporte.css', linkHeader : '/css/style-header.css'} )  %>
+
+    <!--Head-->
+
+    <body>
+        
+        <!--Header-->
+
+        <%- include('parts/page-header', { title : ''})  %>
+        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+
+        <!--Header-->
+        
+
+        <main>
+
+            <div id="main-suporte">
+
+                <h1>Suporte</h1>
+
+                <div class="container">
+
+                    <div id="guia">
+
+                        <h3>Aqui você pode relatar algum bug, ou algum outro problema técnico que esteja tendo</h3>
+
+                    </div>
+
+                    <section id="text-area">
+
+                        <textarea placeholder="Digite aqui..."></textarea>
+                        <section id="submit-btn"><form method="POST" action="./"><input type="submit" name="submit-suporte" id="submit-suporte"></form></section>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <div class="color">
+        </div>
+
+        <%- include ('parts/page-footer') %>
+
+    </body>
+
+</html>
