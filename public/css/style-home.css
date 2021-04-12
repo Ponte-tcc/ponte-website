@@ -1,0 +1,252 @@
+/*Delimitação de Conteúdo*/
+
+
+.content-topo,
+.content-left,
+.content-principal,
+.content-right{
+
+    background-color: rgb(231, 231, 231);
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 8px;
+
+}
+
+.container-topo,
+.container-left,
+.container-principal,
+.container-right{
+
+    padding: 10px;
+
+}
+
+.content-topo{
+
+    height: 200px;
+    width: 100%;
+    margin: 0;
+
+}
+
+.container-left{
+
+    width: 14.5%;
+    margin: 0;
+    float: left;
+    height: 100vw;
+
+}
+
+.content-left{
+
+    max-width: 400px;
+    width: 100%;
+    margin: 0;
+    float: left;
+    height: 100vw;
+}
+
+.container-principal{
+
+    margin: 0;
+    padding: 10px;
+    height: 100vw;
+
+}
+
+.content-principal{
+
+    margin: 0;
+    height: 100vw;
+    padding: 25px;
+
+}
+
+.container-right{
+
+    width: 14.5%;
+    margin: 0;
+    float: right;
+    height: 100vw;
+
+}
+
+.content-right{
+
+    max-width: 400px;
+    width: 100%;
+    margin: 0;
+    float: right;
+    height: 100vw;
+
+}
+
+/*End-Delimitação de Conteúdo*/
+
+
+/*Conteúdo Principal*/
+
+
+.publicacao{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 400px;
+
+}
+
+.caixa-perfil{
+
+    width: 250px;
+    height: 300px;
+    background-color: rgb(231, 231, 231);
+    /*border: 1px solid rgb(202, 202, 202);
+    border-radius: 8px;*/
+
+}
+
+.publicar{
+
+    width: 1420px;
+    height: 350px;
+    /*background-color: rgb(231, 231, 231);
+    border: 1px solid rgb(202, 202, 202);*/
+    border-radius: 8px;
+
+}
+
+.avatar-perfil{
+
+    width: 150px;
+    height: 150px;
+
+    border: 2px solid rgb(0, 132, 255);
+    border-radius: 8px;
+
+    padding: 1px;
+
+    margin: 35px auto 0 auto;
+    
+
+}
+
+#avatar-publi{
+
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.nome-perfil{
+
+    width: 100%;
+    text-align: center;
+
+}
+
+textarea {
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  
+    resize: none;
+    width: 90%;
+    height: 350px;
+
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 6px;
+
+    background-color: rgb(231, 231, 231) ;
+
+    outline: none;
+
+    padding: 15px;
+
+}
+
+textarea:focus{
+
+    border: 1px solid rgb(0, 0, 0);
+
+}
+
+
+textarea[placeholder="Escreva sua publicação aqui..."]{
+
+    font-size: 20px;
+}
+
+.publicar input[type="submit"]{
+
+    background-color: transparent;
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 5px;
+
+    padding: 5px;
+
+    font-size: 20px;
+    color: rgb(53, 53, 53);
+
+    float: right;
+
+    margin-right: 10%;
+    margin-top: 1%;
+
+    width: 130px;
+
+    outline: none;
+
+}
+
+.publicar input[type="submit"]:hover{
+
+    border: 1px solid rgb(0, 0, 0);
+    cursor: pointer;
+
+}
+
+.separator{
+
+    width: 100%;
+    border-bottom: 1px solid rgba(131, 131, 131, 0.438) ;
+    margin: auto;
+}
+
+#publicados{
+
+    width: 100%;
+    height: 350px;
+
+}
+
+#publicados .container{
+
+    display: flex;
+    margin-bottom: 120px;
+
+}
+
+.publiGo{
+
+    width: 75%;
+
+}
+
+.publi-dado{
+
+    width: 100%;
+    height: 350px;
+
+    border: 1px solid rgb(133, 133, 133);
+    border-radius: 6px;
+
+    background-color: rgb(231, 231, 231) ;
+
+
+    padding: 15px;
+
+}

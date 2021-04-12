@@ -1,0 +1,73 @@
+/*Root*/
+
+:root{
+
+    --cor-txt: rgb(0, 132, 255);
+    --background-color: rgb(240, 240, 240);
+    --header-color: white;
+    --shadow-header-color: rgb(194, 194, 194);
+    --wrapper-color: white;
+    --shadow-wrapper-color: rgb(85, 85, 85);
+    --cor-hover: rgb(243, 243, 243);    
+
+    }
+
+
+/*CSS Padrão*/
+
+
+*{
+
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    
+}
+
+body{
+
+    background-color: var(--background-color);
+    margin: 0;
+
+}
+
+main{
+
+    padding: 0 15%;
+    margin: auto;
+  
+}
+
+
+/*Header*/
+
+
+header{
+
+    max-width: 100%;
+    height: 56px;
+    box-shadow: 0px 2px 8px var(--shadow-header-color);
+    background-color: var(--header-color);
+    padding: 0 15%;
+
+     
+}
+
+.ponte-img{
+
+   width: 125px; 
+   max-height: 52px;
+   display: flex;
+   align-items: center;
+   padding-top: 5px;
+
+   margin: auto;
+   
+      
+}
+
+.ponte-img img{
+
+    margin: 0;
+    
+
+}

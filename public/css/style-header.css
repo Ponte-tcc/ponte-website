@@ -1,0 +1,525 @@
+/*Root*/
+
+:root{
+
+    --cor-txt: rgb(0, 132, 255);
+    --background-color: rgb(240, 240, 240);
+    --header-color: white;
+    --shadow-header-color: rgb(194, 194, 194);
+    --wrapper-color: white;
+    --shadow-wrapper-color: rgb(85, 85, 85);
+    --cor-hover: rgb(243, 243, 243);    
+
+    }
+
+
+/*CSS Padrão*/
+
+
+*{
+
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    
+}
+
+body{
+
+    background-color: var(--background-color);
+    margin: 0;
+
+}
+
+main{
+
+    padding: 0 15%;
+    margin: auto;
+  
+}
+
+
+/*Header*/
+
+
+header{
+
+    max-width: 100%;
+    height: 56px;
+    box-shadow: 0px 2px 8px var(--shadow-header-color);
+    background-color: var(--header-color);
+    padding: 0 15%;
+
+     
+}
+
+.busca{
+
+    margin-top: -40px;
+
+}
+
+
+/*Nav*/
+
+
+#nav{
+
+    height: 52px;
+    max-width: 100%;
+   
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+#nav-help,
+#nav-login{
+    
+    width: 10%;
+    height: 52px;
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#nav-help{
+
+    margin-left: 40%;
+
+}
+
+#nav-login{
+
+    margin-right: 15%;
+
+}
+
+#nav-login a#login-txt{
+
+    display: none;
+
+}
+
+#nav-login a#login-txt .show{
+
+    display: block;
+
+}
+
+#nav a#suporte-txt,
+#nav a#login-txt{
+
+    color: var(--cor-txt);
+    text-decoration: none;
+    font-size: 26px;
+
+}
+
+#nav .box-suporte-txt,
+#nav .box-login-txt{
+
+   height: 40px;
+   padding: 12px;
+   line-height: 10px;
+   margin-top: -36px;
+
+   transition: all 0.4s ease;
+}
+
+
+#nav .box-login-txt:hover,
+#nav .box-suporte-txt:hover{
+    
+    transition: all 0.4s ease;
+    background-color: var(--cor-hover);
+    border-radius: 5px;
+}
+
+
+/*End-Nav*/
+
+
+
+/*Drop down sobre*/
+
+nav#sobre{
+
+    margin-left: 50%;
+    margin-top: -46px;
+    
+    
+
+}
+
+nav#sobre .drop-btn{
+
+    width: 200px;
+    border-radius: 5px;
+    line-height: 55px;
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--cor-txt);
+    padding: 0 20px;
+
+}
+nav#sobre .drop-btn span{
+
+    margin-top: 8px;
+    margin-left: 8px;
+    line-height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    padding: 0 6px;
+    cursor: pointer;
+
+    transition: all 0.4s ease;
+
+}
+
+nav#sobre .drop-btn span:hover{
+
+    transition: all 0.4s ease;
+    background-color: var(--cor-hover);
+
+}
+
+nav#sobre .wrapper{
+
+    position: absolute;
+    display: flex;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 5px;
+    background: var(--wrapper-color);
+    display: none;
+    box-shadow: 0px 2px 8px var(--shadow-wrapper-color);
+    transition: 0.3s;
+
+
+}
+
+nav#sobre .wrapper.show{
+
+    transition: 0.3s;
+    display: block;
+    display: flex;
+
+}
+
+nav#sobre .wrapper ul{
+
+    width: 200px;
+    list-style: none;
+    padding: 10px;
+    transition: 0.3s;
+
+}
+
+nav#sobre .wrapper ul#drop-down li{
+
+    line-height: 55px;
+
+}
+
+nav#sobre .wrapper ul#drop-down li a{
+
+    
+    color: var(--cor-txt);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 10px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    text-decoration: none;
+
+    transition: all 0.4s ease;
+
+}
+
+nav#sobre .wrapper ul#drop-down li:hover a{
+
+    transition: all 0.4s ease;
+    background: var(--cor-hover);
+
+}
+
+nav#sobre ul#drop-down li a .icon{
+
+    height: 40px;
+    width: 40px;
+    margin-right: 13px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+
+}
+
+nav#sobre ul#drop-down li a .icon span{
+
+    line-height: 40px;
+    font-size: 20px;
+    color: var(--cor-txt);
+
+}
+
+
+/*End-Drop down sobre*/
+
+
+/*Drop down perfil*/
+
+nav#perfil{
+
+    height: 54px;
+    margin-left: 22%;
+    margin-top: -46px;
+    
+
+}
+
+nav#perfil .drop-btn-perfil{
+
+    width: 200px;
+    border-radius: 5px;
+    line-height: 55px;
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--cor-txt);
+    padding: 0 20px;
+
+}
+nav#perfil .drop-btn-perfil span{
+
+    margin-top: 0px;
+    margin-left: 8px;
+    line-height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    padding: 0 6px;
+    cursor: pointer;
+
+    transition: all 0.4s ease;
+
+}
+
+nav#perfil .drop-btn-perfil span:hover{
+
+    transition: all 0.4s ease;
+    background-color: var(--cor-hover);
+    
+
+}
+
+nav#perfil .wrapper-perfil{
+
+    
+    position: absolute;
+    display: flex;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 5px;
+    background: var(--wrapper-color);
+    display: none;
+    box-shadow: 0px 2px 8px var(--shadow-wrapper-color);
+    transition: 0.3s;
+
+
+}
+
+nav#perfil .wrapper-perfil.show{
+
+    transition: 0.3s;
+    display: block;
+    display: flex;
+
+}
+
+nav#perfil .wrapper-perfil ul{
+
+    width: 200px;
+    list-style: none;
+    padding: 10px;
+    transition: 0.3s;
+
+}
+
+nav#perfil .wrapper-perfil ul#drop-down-perfil li{
+
+    line-height: 55px;
+
+}
+
+nav#perfil .wrapper-perfil ul#drop-down-perfil li a{
+
+    
+    color: var(--cor-txt);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 10px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    text-decoration: none;
+
+    transition: all 0.4s ease;
+
+}
+
+nav#perfil .wrapper-perfil ul#drop-down-perfil li:hover a{
+
+    transition: all 0.4s ease;
+    background: #e2e2e2;
+
+}
+
+nav#perfil ul#drop-down-perfil li a .icon{
+
+    height: 40px;
+    width: 40px;
+    margin-right: 13px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+
+}
+
+nav#perfil ul#drop-down-perfil li a .icon span{
+
+    line-height: 40px;
+    font-size: 20px;
+    color: var(--cor-txt);
+
+}
+
+
+/*End-Drop down perfil*/
+
+  
+
+/*Logo*/
+
+
+.ponte-img{
+
+   width: 125px; 
+   max-height: 52px;
+   display: flex;
+   align-items: center;
+   padding-top: 5px;
+   
+      
+}
+
+.ponte-img img{
+
+    margin: 0;
+    
+
+}
+
+
+/*Barra de Pesquisa*/
+
+.busca{
+
+    margin-left: 15%;
+    width:250px ;
+
+}
+
+#busca-header{
+
+    height: 25px;
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 4px;
+    max-width: 200px;
+    width: 100%;
+    height: 25px; 
+
+    transition: all 0.4s ease;
+
+}
+
+#busca-header:focus{
+
+    transition: all 0.4s ease;
+    outline: none;
+    border: 1px solid rgb(110, 110, 110);
+
+}
+
+#btnBusca{
+
+    background-color: transparent;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.4s ease;
+    
+
+}
+
+#btnBusca:hover{
+
+    background-color: rgb(233, 233, 233);
+    transition: all 0.4s ease; 
+   
+}
+
+#btnBusca:focus{
+
+    border: 1px solid rgb(165, 165, 165);
+   
+}
+
+/*Perfil*/
+
+#foto-perfil{
+
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    
+    position: absolute;
+
+    margin-left: 5%;
+    margin-top: -39px;
+    border: 1px solid rgb(58, 137, 255);
+    border-radius: 50%;
+
+    padding: 1px;
+
+}
+
+#foto-perfil img{
+
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    margin: 0px;
+    
+}
+
+
+
+#seu-perfil{
+
+    position: relative;
+    display: block;
+
+}
+
+#seu-perfil .show{
+
+    position: relative;
+    display: block;
+
+}

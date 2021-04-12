@@ -1,0 +1,116 @@
+:root{
+
+    --cor-azul-txt: linear-gradient(to bottom right, rgb(24, 111, 211),rgb(0, 119, 255));
+    --cor-fundo: linear-gradient(to bottom right, rgb(22, 63, 110),rgb(53, 100, 155));
+    --cor-botao: rgb(0, 119, 255);
+    --cor-botao-borda: rgb(0, 119, 255);
+    --cor-letra-caixa: white;
+
+}
+
+#main-suporte h1{
+
+    position: unset;
+    text-align: center;
+
+    background: var(--cor-azul-txt);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-weight: 500;
+    font-size: 80px;
+
+}
+
+.container{
+
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    
+
+    
+}
+
+#guia{
+
+    color: var(--cor-letra-caixa);
+
+    margin-top: 2.5%;
+
+    text-align: center;
+    max-width: 15%;
+    height: 30%;
+
+    padding: 10px;
+    position: relative;
+
+    background-color: rgba(255, 255, 255, 0.205);
+    border: 1px solid rgb(151, 151, 151);
+    border-radius: 8px;
+
+
+}
+
+#text-area{
+
+    position: relative;
+    width: 60%;
+    margin-right: 20%;
+
+}
+
+textarea {
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  
+    resize: none;
+    width: 100%;
+    height: 350px;
+    border-radius: 6px;
+
+}
+
+#submit-btn input[id="submit-suporte"]{
+
+    width: 20%;
+    margin: 3% 40%;
+
+    border: 2px solid var(--cor-botao-borda);
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-size: 23px;
+
+    padding: 12px;
+    transition: 0.25s;
+
+}
+
+#submit-btn input[id="submit-suporte"]:hover{
+
+    color: rgb(255, 255, 255);
+    background: var(--cor-botao);
+    transition:0.5s;
+
+}
+
+textarea[placeholder]{
+
+    padding: 15px;
+
+}
+
+.color{
+
+    background-image: var(--cor-fundo);
+    margin-top: -20%;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 13%;
+    
+
+}
