@@ -15,8 +15,6 @@ const profile = {
     
 }
 
-const login = []
-
 const users = [
     {
 
@@ -69,7 +67,7 @@ routes.post('/home', (req, res) => {
     
     publi.push( req.body ) 
     console.log(publi[0])
-    return res.redirect('/')
+    return res.redirect('/home')
     
 
 })
@@ -77,7 +75,7 @@ routes.post('/home', (req, res) => {
 routes.post('/', (req, res) => { 
 
     login.push( req.body ) 
-    return res.redirect('/')
+    return res.redirect('/home')
 
 })
 
