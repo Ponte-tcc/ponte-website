@@ -1,7 +1,7 @@
 {
-  "name": "js",
+  "name": "ponte-website",
   "version": "1.0.0",
-  "description": "Forum final paper",
+  "description": "![GitHub](https://img.shields.io/github/license/ponte-tcc/ponte-website?style=for-the-badge)",
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon ."
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Ponte-tcc/ponte-website.git"
   },
-  "author": "Nicolas viana",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Ponte-tcc/ponte-website/issues"
@@ -18,7 +18,10 @@
   "homepage": "https://github.com/Ponte-tcc/ponte-website#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "router": "^1.3.5",
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

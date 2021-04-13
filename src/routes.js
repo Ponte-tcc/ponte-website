@@ -1,5 +1,4 @@
 const express = require('express')
-const { getDomainLocale } = require('next/dist/next-server/lib/router/router')
 const routes = express.Router()
 
 const views = __dirname + "/views/"
