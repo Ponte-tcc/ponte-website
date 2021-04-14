@@ -1,20 +1,16 @@
 const drop_btn = document.querySelector(".drop-btn span");
 const menu_wrapper = document.querySelector(".wrapper");
 
-drop_btn.onclick = (()=>{
-
-  menu_wrapper.classList.toggle("show")
-
-});
+drop_btn.onclick = () => {
+  menu_wrapper.classList.toggle("show");
+};
 
 const drop_btn_perfil = document.querySelector(".drop-btn-perfil span");
 const menu_wrapper_perfil = document.querySelector(".wrapper-perfil");
-      
-drop_btn_perfil.onclick = (()=>{
 
-  menu_wrapper_perfil.classList.toggle("show")
-
-});
+drop_btn_perfil.onclick = () => {
+  menu_wrapper_perfil.classList.toggle("show");
+};
 
 /*Maneira 2
 

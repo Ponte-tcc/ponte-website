@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
+  <!--Head-->
 
-    <!--Head-->
+  <%- include('parts/page-head', { title : 'Suporte', linkCss :
+  '/css/style-suporte.css', linkHeader : '/css/style-header.css'} ) %>
 
-    <%- include('parts/page-head', { title : 'Suporte', linkCss : '/css/style-suporte.css', linkHeader : '/css/style-header.css'} )  %>
+  <!--Head-->
 
-    <!--Head-->
+  <body>
+    <!--Header-->
 
-    <body>
-        
-        <!--Header-->
+    <%- include('parts/page-header', { title : ''}) %>
+    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
 
-        <%- include('parts/page-header', { title : ''})  %>
-        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+    <!--Header-->
 
-        <!--Header-->
-        
+    <main>
+      <div id="main-suporte">
+        <h1>Suporte</h1>
 
-        <main>
+        <div class="container">
+          <div id="guia">
+            <h3>
+              Aqui você pode relatar algum bug, ou algum outro problema técnico
+              que esteja tendo
+            </h3>
+          </div>
 
-            <div id="main-suporte">
-
-                <h1>Suporte</h1>
-
-                <div class="container">
-
-                    <div id="guia">
-
-                        <h3>Aqui você pode relatar algum bug, ou algum outro problema técnico que esteja tendo</h3>
-
-                    </div>
-
-                    <section id="text-area">
-
-                        <textarea placeholder="Digite aqui..."></textarea>
-                        <section id="submit-btn"><form method="POST" action="./"><input type="submit" name="submit-suporte" id="submit-suporte"></form></section>
-
-                    </section>
-
-                </div>
-
-            </div>
-
-        </main>
-
-        <div class="color">
+          <section id="text-area">
+            <textarea placeholder="Digite aqui..."></textarea>
+            <section id="submit-btn">
+              <form method="POST" action="./">
+                <input
+                  type="submit"
+                  name="submit-suporte"
+                  id="submit-suporte"
+                />
+              </form>
+            </section>
+          </section>
         </div>
+      </div>
+    </main>
 
-        <%- include ('parts/page-footer') %>
+    <div class="color"></div>
 
-    </body>
-
+    <%- include ('parts/page-footer') %>
+  </body>
 </html>

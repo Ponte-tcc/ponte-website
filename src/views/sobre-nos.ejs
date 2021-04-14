@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
+  <!--Head-->
 
-    <!--Head-->
+  <%- include('parts/page-head', { title : 'Sobre Nós', linkCss :
+  '/css/style-sobre-nos.css', linkHeader : '/css/style-header.css'} ) %>
 
-    <%- include('parts/page-head', { title : 'Sobre Nós', linkCss : '/css/style-sobre-nos.css', linkHeader : '/css/style-header.css'} )  %>
+  <!--Head-->
 
-    <!--Head-->
+  <body>
+    <!--Header-->
 
-    <body>
-        
-        <!--Header-->
+    <%- include('parts/page-header', { title : ''}) %>
+    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
 
-        <%- include('parts/page-header', { title : ''})  %>
-        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+    <!--Header-->
 
-        <!--Header-->
-        
+    <main>
+      <div id="container">
+        <h1>Sobre Nós</h1>
 
-        <main> 
+        <section id="content">
+          <p>
+            Nos desenvolvemos esse site para o nosso TCC, e além disso no
+            intuito de ganhar mais experiência e aprender mais sobre full stack.
+          </p>
+        </section>
 
-            <div id="container">
+        <h3>Acesse o Footer para ver nossos contatos</h3>
+      </div>
+    </main>
 
-                <h1>Sobre Nós</h1>
+    <div class="color"></div>
 
-                <section id="content"><p>Nos desenvolvemos esse site para o nosso TCC, e além disso
-                    no intuito de ganhar mais experiência e aprender mais sobre full stack.
-                </p></section>
-
-                <h3>Acesse o Footer para ver nossos contatos</h3>
-
-            </div>
-
-        </main>
-        
-        <div class="color"></div>        
-
-        <%- include ('parts/page-footer') %>
-        
-    </body>
-
+    <%- include ('parts/page-footer') %>
+  </body>
 </html>

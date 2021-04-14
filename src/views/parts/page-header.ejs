@@ -1,100 +1,95 @@
-<header>  
-             
-    <div class="ponte-img">
+<header>
+  <div class="ponte-img">
+    <a href="/home"><img alt="Logo-ponte" src="/img/Ponte-logo2.png" /></a>
+  </div>
 
-        <a href="/home"><img alt="Logo-ponte" src="/img/Ponte-logo2.png"></a>
+  <div class="busca">
+    <input type="text" id="busca-header" placeholder="Buscar..." />
+    <button id="btnBusca">
+      <i class="far fa-search" aria-hidden="true" name="user"></i>
+    </button>
+  </div>
 
-    </div>
+  <div id="nav">
+    <div id="nav-help">
+      <div class="box-suporte-txt">
+        <a id="suporte-txt" href="/suporte">Suporte</a>
+      </div>
 
-    <div class="busca">
-
-        <input type="text" id="busca-header" placeholder="Buscar...">
-        <button id="btnBusca">
-        <i class="far fa-search" aria-hidden="true" name="user"></i>
-        </button>
-
-    </div>
-
-    <div id="nav">
-
-        <div id="nav-help">
-
-            <div class="box-suporte-txt"><a id="suporte-txt" href="/suporte">Suporte</a></div>
-
-            <nav id="sobre">
-                    
-                <div class="drop-btn">
-
-                    Sobre <span class="fas fa-caret-down"></span>
-
-                </div>
-        
-                <div class="wrapper">
-        
-                    <ul id="drop-down" class="menu-bar">
-        
-                        <li><a href="/sobre-nos"><div class="icon">
-                            <span class="fas fa-user"></span></div>
-                            Sobre Nós </a></li>
-            
-                        <li><a href="/sobre-site"><div class="icon">
-                            <span class="fas fa-cog"></span></div>
-                            Sobre o Site</a></li>
-                    
-                    </ul>
-    
-                </div>
-                    
-            </nav>
-            
+      <nav id="sobre">
+        <div class="drop-btn">
+          Sobre <span class="fas fa-caret-down"></span>
         </div>
 
-        <div id="nav-login">
-    
-            <section class="box-login-txt"><a id="login-txt" href="/login">Login</a></section>
-    
-            <div id="seu-perfil">
+        <div class="wrapper">
+          <ul id="drop-down" class="menu-bar">
+            <li>
+              <a href="/sobre-nos"
+                ><div class="icon">
+                  <span class="fas fa-user"></span>
+                </div>
+                Sobre Nós
+              </a>
+            </li>
 
-                <div id="foto-perfil">
-                    <a href="/seu-perfil"><img src="<%= profile.avatar %>" alt="Sua foto"></a> 
-                </div> 
-
-                <!--drop down perfil-->
-                <nav id="perfil">
-        
-                    <div class="drop-btn-perfil">
-
-                        <%= profile.name %>  <span class="fas fa-caret-down"></span>
-
-                    </div>
-        
-                    <div class="tooltip-perfil">
-                    </div>
-            
-                    <div class="wrapper-perfil">
-            
-                        <ul id="drop-down-perfil" class="menu-bar-perfil">
-            
-                            <li><a href="/seu-perfil"><div class="icon">
-                                <span class="fas fa-user"></span></div>
-                                Seu Perfil </a></li>
-                
-                            <li><a href="/"><div class="icon">
-                                <span class="fas fa-door-open"></span></div>
-                                Sair</a></li>
-                        
-                        </ul>
-        
-                    </div>
-
-                </nav>
-
-            </div>
-            
+            <li>
+              <a href="/sobre-site"
+                ><div class="icon">
+                  <span class="fas fa-cog"></span>
+                </div>
+                Sobre o Site</a
+              >
+            </li>
+          </ul>
         </div>
-
+      </nav>
     </div>
 
-    <script src="/script/wrapper.js"></script>
+    <div id="nav-login">
+      <section class="box-login-txt">
+        <a id="login-txt" href="/login">Login</a>
+      </section>
 
+      <div id="seu-perfil">
+        <div id="foto-perfil">
+          <a href="/seu-perfil"
+            ><img src="<%= profile.avatar %>" alt="Sua foto"
+          /></a>
+        </div>
+
+        <!--drop down perfil-->
+        <nav id="perfil">
+          <div class="drop-btn-perfil">
+            <%= profile.name %> <span class="fas fa-caret-down"></span>
+          </div>
+
+          <div class="tooltip-perfil"></div>
+
+          <div class="wrapper-perfil">
+            <ul id="drop-down-perfil" class="menu-bar-perfil">
+              <li>
+                <a href="/seu-perfil"
+                  ><div class="icon">
+                    <span class="fas fa-user"></span>
+                  </div>
+                  Seu Perfil
+                </a>
+              </li>
+
+              <li>
+                <a href="/"
+                  ><div class="icon">
+                    <span class="fas fa-door-open"></span>
+                  </div>
+                  Sair</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script src="/script/wrapper.js"></script>
 </header>

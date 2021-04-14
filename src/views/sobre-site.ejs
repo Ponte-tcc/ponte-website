@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
+  <!--Head-->
 
-    <!--Head-->
+  <%- include('parts/page-head', { title : 'Sobre o Site', linkCss :
+  '/css/style-sobre-site.css', linkHeader : '/css/style-header.css'} ) %>
 
-    <%- include('parts/page-head', { title : 'Sobre o Site', linkCss : '/css/style-sobre-site.css', linkHeader : '/css/style-header.css'} )  %>
+  <!--Head-->
 
-    <!--Head-->
+  <body>
+    <!--Header-->
 
-    <body>
-        
-        <!--Header-->
+    <%- include('parts/page-header', { title : ''}) %>
+    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
 
-        <%- include('parts/page-header', { title : ''})  %>
-        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+    <!--Header-->
 
-        <!--Header-->
+    <main>
+      <div id="container">
+        <h1>Sobre o nosso site</h1>
 
-        <main> 
+        <section id="content">
+          <p>
+            A Ponte foi criada por nós no intúito de aprendizagem, tanto
+            front-end quanto back-end, <br />o que muitos conhecem por full
+            stack! <br />E aproveitando esse intúito inserimos nossa ideia no
+            nosso TCC (Informática para internet - EtecVAV). Tentamos adicionar
+            várias coisas legais ai nosso site para deixa-lo bem dinâmico e
+            amigável para todos, contando com uma estrutura de códigos bem
+            simples porém completa.
+          </p>
+        </section>
 
-            <div id="container">
+        <h3>Ferramentas e Linguagens</h3>
 
-                <h1>Sobre o nosso site</h1>
+        <img src="/img/features.png" alt="Ferramentas e Linguagens" />
+      </div>
+    </main>
 
-                <section id="content"><p>A Ponte foi criada por nós no intúito de aprendizagem, tanto front-end quanto back-end, <br/>o que muitos conhecem por full stack!
-                    <br/>E aproveitando esse intúito inserimos nossa ideia no nosso TCC (Informática para internet - EtecVAV). Tentamos
-                    adicionar várias coisas legais ai nosso site para deixa-lo bem dinâmico e amigável para todos, contando com uma
-                    estrutura de códigos bem simples porém completa.
-                </p></section>
+    <div class="color"></div>
 
-                <h3>Ferramentas e Linguagens</h3>
-
-                <img src="/img/features.png" alt="Ferramentas e Linguagens">
-
-            </div>
-
-        </main>
-        
-        <div class="color"></div>
-
-        <%- include ('parts/page-footer') %>
-        
-    </body>
-
+    <%- include ('parts/page-footer') %>
+  </body>
 </html>

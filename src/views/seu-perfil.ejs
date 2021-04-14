@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
+  <!--Head-->
 
-<!--Head-->
+  <%- include('parts/page-head', { title : 'Seu Perfil', linkCss :
+  '/css/style-seu-perfil.css', linkHeader : '/css/style-header.css'} ) %>
 
-<%- include('parts/page-head', { title : 'Seu Perfil', linkCss : '/css/style-seu-perfil.css', linkHeader : '/css/style-header.css'} )  %>
+  <!--Head-->
 
-<!--Head-->
+  <body>
+    <!--Header-->
 
-    <body>
-        
-        <!--Header-->
+    <%- include('parts/page-header', { title : ''}) %>
+    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
 
-        <%- include('parts/page-header', { title : ''})  %>
-        <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+    <!--Header-->
 
-        <!--Header-->
-        
-        <main>
+    <main>
+      <div id="content">
+        <div class="container-left">
+          <div id="avatar">
+            <img src="<%= profile.avatar %> " alt="Sua foto" />
+          </div>
 
-            <div id="content">
+          <button>Mudar Foto de Perfil</button>
+          <input type="file" name="imagem" id="imagem" />
+        </div>
 
-                <div class="container-left">
+        <div class="container-right">
+          <div class="nome">
+            <h3>Nome:</h3>
+            <a><%= profile.name %> </a> <button>Mudar Nome</button>
+          </div>
+          <div class="email">
+            <h3>E-mail:</h3>
+            <a><%= profile.email %> </a>
+          </div>
+        </div>
+      </div>
+    </main>
 
-                    <div id="avatar">
-                        <img src="<%= profile.avatar %> "  alt="Sua foto">
-                    </div>
-
-                    <button>Mudar Foto de Perfil</button>
-                    <input type="file" name="imagem" id="imagem">
-                </div>
-
-                <div class="container-right">
-
-                    
-                    <div class="nome"> <h3>Nome:</h3> <a><%= profile.name %> </a> <button>Mudar Nome</button> </div>
-                    <div class="email"> <h3>E-mail:</h3> <a><%= profile.email %> </a> </div>
-
-                </div>
-            </div>
-
-        </main>
-
-        <%- include ('parts/page-footer') %>
-        
-    </body>
-
+    <%- include ('parts/page-footer') %>
+  </body>
 </html>
