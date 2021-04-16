@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
+
   <!--Head-->
 
-  <%- include('parts/page-head', { title : 'Home', linkCss :
-  '/css/style-home.css', linkHeader : '/css/style-header.css'} ) %>
+  <%- include('parts/page-head', { title :'Home', linkCss:'/css/style-home.css', linkHeader :'/css/style-header.css'}) %> 
 
   <!--Head-->
 
   <body>
+
     <!--Header-->
 
-    <%- include('parts/page-header', { title : ''}) %>
     <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+    <%- include('parts/page-header', { title : ''}) %>
 
     <!--Header-->
 
     <div id="primary-content">
+
       <div class="container-topo">
         <div class="content-topo"></div>
       </div>
@@ -28,58 +29,75 @@
       <div class="container-right">
         <div class="content-right"></div>
       </div>
+
     </div>
 
     <main>
+
       <div class="container-principal">
-        <div class="content-principal">
-          <div class="publicacao">
-            <div class="caixa-perfil">
-              <div class="avatar-perfil">
-                <img src="<%= users[2].avatar %> " id="avatar-publi" />
-              </div>
-              <div class="nome-perfil"><h3><%= users[2].name %></h3></div>
-            </div>
+      <div class="content-principal">
 
-            <div class="publicar">
-              <textarea
-                maxlength="140"
-                form="publicar-btn"
-                name="text-publicar"
-                id="text-publicar"
-                placeholder="Escreva sua publicação aqui..."
-              ></textarea>
+        <div class="publicacao">
 
-              <form id="publicar-btn" action="/" method="post">
-                <input type="submit" />
-              </form>
+          <div class="caixa-perfil">
+            <div class="avatar-perfil">
+            <img src="" id="avatar-publi" />
             </div>
+            <div class="nome-perfil"><h3></h3></div>
           </div>
 
-          <% publi.forEach((publis) => { %>
+          <form action="/home" name="textPublicar" method="POST" class="publicar">
+            <textarea
+            maxlength="140"
+            name="conteudo"
+            placeholder="Escreva sua publicação aqui..."
+            ></textarea>
+
+            <button type="submit">Publicar</button>
+          </form>
+
+        </div>
+
+    
+        <% for(var i=0; i<posts.length; i++) {%>
 
           <div id="publicados">
-            <div class="container">
-              <div class="caixa-perfil">
-                <div class="avatar-perfil">
-                  <img src="<%= users.avatar %> " id="avatar-publi" />
-                </div>
-                <div class="nome-perfil"><h3><%= users.name %></h3></div>
-              </div>
 
-              <div class="publiGo">
-                <div class="publi-dado"><%= publi.publiGo %></div>
-              </div>
+          <div class="caixa-perfil">
+            <div class="avatar-perfil">
+            <img src="" id="avatar-publi" />
+            </div>
+            <div class="nome-perfil"><h3></h3></div>
             </div>
 
-            <div class="separator"></div>
+            <div class="publiGo">
+              <div class="publi-dados">
+                <%= posts[i].conteudo %>
+              </div>
+            
+            <small> <%=posts[i].createdAt%> </small>
           </div>
 
-          <% }) %>
+          
         </div>
+          <div class="separator"></div>
+          
+
+       <% } %>
+
+       
+ 
+ 
+
+        
+
       </div>
+      </div>
+      
     </main>
 
     <%- include ('parts/page-footer') %>
+
   </body>
+
 </html>

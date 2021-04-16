@@ -1,17 +1,20 @@
-const express = require("express");
-const server = express();
-const routes = require("./routes");
+const express = require("express")
+const server = express()
+const routes = require("./routes")
+const Post = require('./models/Post')
 
 //usando template engine
-server.set("view engine", "ejs");
+server.set("view engine", "ejs")
+
 
 //habilitar arquivos statics
-server.use(express.static("public"));
+server.use(express.static("public"))
+
 
 //usar o req.body
-server.use(express.urlencoded({ extended: true }));
+server.use(express.urlencoded({ extended: true }))
+
 
 //routes
-server.use(routes);
-
-server.listen(3000, () => console.log("Server Rodando!"));
+server.use(routes)
+server.listen(3000, () => console.log("Server Rodando!"))

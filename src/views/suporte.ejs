@@ -17,6 +17,7 @@
     <!--Header-->
 
     <main>
+
       <div id="main-suporte">
         <h1>Suporte</h1>
 
@@ -28,24 +29,26 @@
             </h3>
           </div>
 
+        <form method="POST" action="/suporte" name="suporteGo">
+
           <section id="text-area">
-            <textarea placeholder="Digite aqui..."></textarea>
-            <section id="submit-btn">
-              <form method="POST" action="./">
-                <input
-                  type="submit"
-                  name="submit-suporte"
-                  id="submit-suporte"
-                />
-              </form>
-            </section>
+            <textarea placeholder="Digite aqui..." name="conteudo"></textarea>
           </section>
+
+        <button type="submit">Enviar</button>
+
+        </form>
+
         </div>
+
       </div>
+
     </main>
 
     <div class="color"></div>
 
     <%- include ('parts/page-footer') %>
+
   </body>
+
 </html>
