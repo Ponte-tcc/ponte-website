@@ -7,12 +7,13 @@ const views = __dirname + "/views/"
 
   routes.get("/sobre-nos", (req, res) => res.render(views + "sobre-nos", {}))
 
+
   routes.get("/sobre-site", (req, res) => res.render(views + "sobre-site", {}))
 
-  routes.get(""/*Header*/, (req, res) => res.render(views + "parts/page-header", {}))
 
   routes.get("/", (req, res) => res.render(views + "index", {}))
   routes.post("/", (req, res) => res.render(views + "index", {}))
+
 
   routes.get("/cadastro", function(req, res){
     Sup.findAll().then(function(sups){
@@ -31,7 +32,9 @@ const views = __dirname + "/views/"
     })
   })
 
+
   routes.get("/seu-perfil", (req, res) => res.render(views + "seu-perfil", {}))
+
 
   routes.get("/suporte", function(req, res){
     Sup.findAll().then(function(sups){
@@ -48,8 +51,9 @@ const views = __dirname + "/views/"
     })
   })
 
+
   routes.get("/home", function(req, res){
-    Post.findAll().then(function(posts){
+    Post.findAll({order: [['id', 'DESC']]}).then(function(posts){
       res.render(views + "home", {posts: posts})
     })
   })
@@ -61,6 +65,12 @@ const views = __dirname + "/views/"
     }).catch(function(erro){
       res.send("Houve um erro:" + erro)
     })
+  })
+
+  routes.get("/deletar/:id", function(req, res){
+    Post.destroy({where: {'id': req.params.id}}).then(function(){
+      res.redirect('/home')
+    }).catch(function(erro){})
   })
 
 module.exports = routes;

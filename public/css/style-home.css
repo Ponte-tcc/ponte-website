@@ -1,11 +1,15 @@
+main{
+  background-color: rgb(236, 236, 236);
+}
+
 /*Delimitação de Conteúdo*/
 
 .content-topo,
 .content-left,
 .content-principal,
 .content-right {
-  background-color: rgb(231, 231, 231);
-  border: 1px solid rgb(202, 202, 202);
+  background-color: rgb(236, 236, 236);
+  border: 1px solid transparent;
   border-radius: 8px;
 }
 
@@ -41,6 +45,8 @@
   margin: 0;
   padding: 10px;
   height: 100vw;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .content-principal {
@@ -73,31 +79,40 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 200px;
+
+  padding: 10px;
 }
 
 .caixa-perfil {
-  width: 250px;
+  width: 200px;
   height: 300px;
-  background-color: rgb(231, 231, 231);
-}
-
-.publicar {
-  width: 1420px;
-  height: 350px;
-  border-radius: 8px;
+  background-color: rgb(236, 236, 236);
 }
 
 .avatar-perfil {
-  width: 150px;
-  height: 150px;
+  width: 90px;
+  height: 90px;
 
   border: 2px solid rgb(0, 132, 255);
   border-radius: 8px;
 
   padding: 1px;
 
-  margin: 35px auto 0 auto;
+  margin: auto;
 }
+
+.publicar {
+  width: 70%;
+  height: 350px;
+  border-radius: 8px;
+
+  margin-right: 100px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 #avatar-publi {
   width: 100%;
@@ -110,19 +125,40 @@
   text-align: center;
 }
 
+.publicar button[type="submit"] {
+  background-color: transparent;
+  border: 1px solid rgba(133, 133, 133, 0.171);
+  border-radius: 5px;
+
+  padding: 5px;
+
+  font-size: 15px;
+  color: rgb(53, 53, 53);
+
+  width: 85px;
+  margin-left: 59%;
+  margin-top: 5px;
+  outline: none;
+}
+
+.publicar button[type="submit"]:hover {
+  border: 1px solid rgb(133, 133, 133);
+  cursor: pointer;
+}
+
 textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 
   resize: none;
-  width: 90%;
-  height: 350px;
+  width: 100%;
+  height: 280px;
 
   border: 1px solid rgb(133, 133, 133);
   border-radius: 6px;
 
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(236, 236, 236);
 
   outline: none;
 
@@ -136,32 +172,6 @@ textarea:focus {
 textarea[placeholder="Escreva sua publicação aqui..."] {
   font-size: 20px;
 }
-
-.publicar button[type="submit"] {
-  background-color: transparent;
-  border: 1px solid rgb(133, 133, 133);
-  border-radius: 5px;
-
-  padding: 5px;
-
-  font-size: 20px;
-  color: rgb(53, 53, 53);
-
-  float: right;
-
-  margin-right: 10%;
-  margin-top: 1%;
-
-  width: 130px;
-
-  outline: none;
-}
-
-.publicar button[type="submit"]:hover {
-  border: 1px solid rgb(0, 0, 0);
-  cursor: pointer;
-}
-
 .separator {
   width: 93%;
   border-bottom: 1px solid rgba(131, 131, 131, 0.438);
@@ -194,7 +204,7 @@ textarea[placeholder="Escreva sua publicação aqui..."] {
   border: 1px solid rgb(133, 133, 133);
   border-radius: 6px;
 
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(236, 236, 236);
 
   padding: 15px;
 

@@ -18,9 +18,9 @@
 
     <div id="primary-content">
 
-      <div class="container-topo">
+      <!--<div class="container-topo">
         <div class="content-topo"></div>
-      </div>
+      </div>-->
 
       <div class="container-left">
         <div class="content-left"></div>
@@ -76,20 +76,15 @@
               </div>
             
             <small> <%=posts[i].createdAt%> </small>
+            <button>Editar</button>
+            <a href="/deletar/<%= posts[i].id %> "><button>Deletar</button></a>
           </div>
 
           
-        </div>
+          </div>
           <div class="separator"></div>
-          
 
        <% } %>
-
-       
- 
- 
-
-        
 
       </div>
       </div>
