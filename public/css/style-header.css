@@ -133,6 +133,7 @@ nav#sobre .drop-btn span {
 nav#sobre .drop-btn span:hover {
   transition: all 0.4s ease;
   background-color: var(--cor-hover);
+
 }
 
 nav#sobre .wrapper {
@@ -145,6 +146,7 @@ nav#sobre .wrapper {
   display: none;
   box-shadow: 0px 2px 8px var(--shadow-wrapper-color);
   transition: 0.3s;
+
 }
 
 nav#sobre .wrapper.show {

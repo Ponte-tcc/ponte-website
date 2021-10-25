@@ -17,12 +17,11 @@
   },
   "homepage": "https://github.com/Ponte-tcc/ponte-website#readme",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mongoose": "^5.12.5",
-    "mysql2": "^2.2.5",
-    "router": "^1.3.5",
-    "sequelize": "^6.6.2"
+    "express-session": "^1.17.2",
+    "mongoose": "^5.12.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

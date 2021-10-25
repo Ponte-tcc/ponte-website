@@ -41,7 +41,7 @@
 
           <div class="caixa-perfil">
             <div class="avatar-perfil">
-            <img src="" id="avatar-publi" />
+            <img src="" class="avatar-publi" />
             </div>
             <div class="nome-perfil"><h3></h3></div>
           </div>
@@ -57,41 +57,15 @@
           </form>
 
         </div>
-
-    
-        <% for(var i=0; i<posts.length; i++) {%>
-
-          <div id="publicados">
-
-          <div class="caixa-perfil">
-            <div class="avatar-perfil">
-            <img src="" id="avatar-publi" />
-            </div>
-            <div class="nome-perfil"><h3></h3></div>
-            </div>
-
-            <div class="publiGo">
-              <div class="publi-dados">
-                <%= posts[i].conteudo %>
-              </div>
-            
-            <small> <%=posts[i].createdAt%> </small>
-            <button>Editar</button>
-            <a href="/deletar/<%= posts[i].id %> "><button>Deletar</button></a>
-          </div>
-
-          
-          </div>
-          <div class="separator"></div>
-
-       <% } %>
-
+      
       </div>
       </div>
       
     </main>
 
     <%- include ('parts/page-footer') %>
+
+ 
 
   </body>
 
