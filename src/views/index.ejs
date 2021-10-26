@@ -22,18 +22,19 @@
       </div>
 
       <div class="box">
-        <form class="box-login" method="post" action="/home">
+        <form class="box-login" method="post" action="/">
           <h1>Login</h1>
-
+<% erros.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
           <div class="text-box">
+            
             <i class="far fa-user" aria-hidden="true" name="user-icon"> </i>
             <input
               type="text"
               id="user"
               maxlength="15"
               minlength="4"
-              name="login"
-              placeholder="Usuário ou email"
+              name="user"
+              placeholder="user ou email"
             />
           </div>
 
@@ -42,13 +43,12 @@
             <input
               type="password"
               id="senha"
-              maxlength="32"
-              minlength="8"
+              
               name="password"
               placeholder="Senha"
             />
           </div>
-          <button id="submit">Confirmar</button>
+          <button type='submit'id="submit">Confirmar</button>
         </form>
         
 

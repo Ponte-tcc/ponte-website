@@ -27,29 +27,45 @@
           <h1>cadastro</h1>
 
           <div class="display">
+            <div class="erros">
+
+            <% if(erros.length > 1){%> <a>* Preencha todos os campos</a> <%}
+            else if(erros.length == 1){erros.forEach(erro => { %><a>* <%= erro.txt %></a><% })} %>
+            </div>
             <div class="container-left">
               <div class="text-box">
                 <i class="far fa-user" aria-hidden="true" name="user"> </i
                 ><input
                   type="text"
-                  maxlength="15"
-                  minlength="4"
-                  name="nome"
+                  name="user"
                   id="user-cad"
-                  placeholder="Nome de usuário"
+                  placeholder="User"
                 />
+                <% errosUser.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+                 
+                 
+              </div>
+
+              <div class="text-box">
+                <i class="far fa-user" aria-hidden="true" name="user"> </i
+                ><input
+                  type="text"
+                  name="exibition"
+                  id="exibition-cad"
+                  placeholder="Nome de exibição"
+                />
+                <% errosEx.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
               </div>
 
               <div class="text-box">
                 <i class="far fa-envelope" aria-hidden="true" name="email"> </i
                 ><input
-                  type="email"
-                  maxlength="120"
-                  minlength="8"
+                  type="text"
                   name="email"
                   id="email-cad"
                   placeholder="Email"
                 />
+                <% errosEmail.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
               </div>
             </div>
 
@@ -58,14 +74,14 @@
                 <i class="far fa-lock" aria-hidden="true" name="password"></i>
                 <input
                   type="password"
-                  maxlength="16"
-                  minlength="6"
-                  name="senha"
+                  name="password"
                   id="senha-cad"
                   placeholder="Senha"
                 />
+                <% errosPass.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
               </div>
             </div>
+
           </div>
           <button id="submit">Cadastrar</button>
         </form>

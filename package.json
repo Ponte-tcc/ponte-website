@@ -2,7 +2,7 @@
   "name": "ponte-website",
   "version": "1.0.0",
   "description": "![GitHub](https://img.shields.io/github/license/ponte-tcc/ponte-website?style=for-the-badge)",
-  "main": "src/server.js",
+  "main": "./index.js",
   "scripts": {
     "dev": "nodemon ."
   },
@@ -17,11 +17,10 @@
   },
   "homepage": "https://github.com/Ponte-tcc/ponte-website#readme",
   "dependencies": {
-    "connect-flash": "^0.1.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "mongoose": "^5.12.5"
+    "mongoose": "^5.13.12"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

@@ -1,17 +1,10 @@
 const express = require("express")
 const server = express()
-const routes = require("./routes")
-const admin = require("./routes-adm")
-const session = require("express-session")
-const flash = require("connect-flash")
+const routes = require("./src/routes")
 
-//sessions
-server.use(session({
-    secret: "123321",
-    resave: true,
-    saveUninitialized: true
-}))
-server.use(flash())
+const uri = "mongodb+srv://nico:123321@cluster0.rtak1.mongodb.net/pontewebsiteDB?retryWrites=true&w=majority"
+
+
 
 //middleware
 server.use((req, res, next) => {
@@ -29,7 +22,7 @@ server.set("view engine", "ejs")
 const mongoose = require("mongoose")
 
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost/ponteweb2", {
+mongoose.connect(uri, {
 useNewUrlParser: true,
 useUnifiedTopology: true,
 }).then(() => {
@@ -47,8 +40,14 @@ server.use(express.static("public"))
 //usar o req.body
 server.use(express.urlencoded({ extended: true }))
 
+const session = require("express-session")
+//sessions
+server.use(session({
+    secret: "asjdnIAOJSNDOjansd1238192",
+    resave: true,
+    saveUninitialized: true
+}))
 
 //routes
 server.use(routes)
-server.use('/admin', admin)
 server.listen(3000, () => console.log("Server Rodando!"))

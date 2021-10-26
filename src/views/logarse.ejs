@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+  <!--Head-->
+
+  <%- include('parts/page-head', { title : 'Sobre o Site', linkCss :
+  '/css/style-sobre-site.css', linkHeader : '/css/style-header.css'} ) %>
+
+  <!--Head-->
+
+  <body>
+    <!--Header-->
+
+    <%- include('parts/page-header-login', { title : ''}) %>
+    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+
+    <!--Header-->
+
+    <main>
+     
+        <p>Faça o <a href="/">login</a> para continuar</p>
+        
+
+        
+    </main>
+
+
+    <%- include ('parts/page-footer') %>
+  </body>
+</html>
