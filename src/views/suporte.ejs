@@ -20,7 +20,11 @@
 
       <div id="main-suporte">
         <h1>Suporte</h1>
+<% erros.forEach(erro => { %>
+ <%= erro.txt %> 
+<% }) %>
 
+<% if(sucs === 'Suporte enviado!'){%><a><%= sucs %></a> <%} %> 
         <div class="container">
           <div id="guia">
             <h3>

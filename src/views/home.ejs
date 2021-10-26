@@ -36,7 +36,9 @@
 
       <div class="container-principal">
       <div class="content-principal">
-
+<% if(sucs === 'Publicado!'){%>
+  <a><%= sucs %></a> 
+  <%} %> 
         <div class="publicacao">
 
           <div class="caixa-perfil">
@@ -48,7 +50,6 @@
 
           <form action="/publicar" name="textPublicar" method="POST" class="publicar">
             <textarea
-            maxlength="140"
             name="conteudo"
             placeholder="Escreva sua publicação aqui..."
             ></textarea>
@@ -58,6 +59,40 @@
 
         </div>
       
+        <div class="publicados">
+
+          <%pubs.forEach(pub => {%>
+            <div class="publica">
+              <%= pub.userEx %> 
+              <a href="/seu-perfil"><small><%= pub.userUser %></small></a>
+              <%= pub.conteudo %>
+              <% var monthNames = [
+      'Janeiro', 'Fevereiro', 'Março',
+      'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro',
+      'Novembro', 'Dezembro'
+   ];
+ var d = pub.createdAt.getDate();
+ var m = monthNames[pub.createdAt.getMonth()];
+ var y = pub.createdAt.getFullYear();
+ var h = pub.createdAt.getHours()
+ var mi = pub.createdAt.getMinutes()%>
+ <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+<input type="hidden" name='pubId' value="<%=pub._id%>">
+ <%if(pub.idUser == sessionID){%>
+<a href="/deletar/<%=pub._id%>">Deletar</a>
+<%}%>
+
+
+
+  
+  
+              <hr>
+            </div>
+          <%}) %> 
+
+        </div>
+
       </div>
       </div>
       

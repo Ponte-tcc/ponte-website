@@ -4,14 +4,19 @@ const views = __dirname + "/views/"
 const mongoose = require("mongoose")
 require("./models/User")
 const User = mongoose.model("users")
+
 require("./models/Suporte")
-const Suporte = mongoose.model("suportes")
+const Sup = mongoose.model("suportes")
+
+require("./models/Publicado")
+const Pub = mongoose.model("publicados")
 
 var userUser
 var userEmail
-var userEx 
+var userEx
+var userID 
 
-
+var sucs
 const erros = []
 
 const errosUser = []
@@ -50,9 +55,16 @@ const userIf = req.body.user
        if(userExist.password == req.body.password){
         const user = userExist._id
         req.session.user = user
-        const userSession = req.session.user 
-        console.log(userSession)
-        res.redirect(307, '/home')
+        
+        User.findOne({_id:req.session.user}).then((user)=>{
+          userID = user._id
+          userUser = user.user
+          userEmail = user.email
+          userEx = user.exibition
+          res.redirect('/home')
+        })
+
+       
         
   
        }else{
@@ -84,12 +96,15 @@ const userIf = req.body.user
        if(userExist.password == req.body.password){
         const user = userExist._id
         req.session.user = user
-        const userSession = req.session.user 
-        console.log(userSession)
-        res.redirect(307, '/home')
-    
         
-  
+        User.findOne({_id:req.session.user}).then((user)=>{
+          userID = user._id
+          userUser = user.user
+          userEmail = user.email
+          userEx = user.exibition
+          res.redirect('/home')
+        })      
+          
        }else{
   
         res.redirect('/')
@@ -198,37 +213,147 @@ else if(req.body.password.length < 6){errosPass.push({txt: "Senha muito pequena,
 }
 })
 
-routes.post("/home", function(req, res){
-  User.findOne({_id:req.session.user}).then((user)=>{
-    userUser = user.user
-    userEmail = user.email
-    userEx = user.exibition
-  })
-
-    res.render(views + '/home',{userUser, userEmail, userEx})
-})
 
 routes.post("/logout", function(req, res){
   req.session.destroy()
   res.redirect('/')
-  })
+})
 
 
 routes.get("/home", (req, res) =>{
-  if(req.session.user){res.render(views + 'home', {userUser, userEmail, userEx})}else{res.render(views + 'logarse')}})
+
+  
+
+if(req.session.user){
+Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
+
+
+
+
+  var sessionID = req.session.user
+  
+  res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, sessionID})
+  sucs = ''
+
+})
+}
+else{res.render(views + 'logarse')}
+})
+
+
+routes.get("/suporte", function(req, res){
+  if(req.session.user){
+    res.render(views + 'suporte', {userUser, userEmail, userEx, userID, sucs, erros})
+    if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}}
+    sucs = ''
+  }else{
+    res.render(views + 'logarse')
+}})
+
+routes.post("/suporte",(req, res) =>{
+if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}};
+
+if(! req.body.conteudo || typeof req.body.conteudo == undefined || req.body.conteudo == null){
+erros.push({txt: "Preencha o campo suporte!"})
+}
+else if(req.body.conteudo.length < 11){
+erros.push({txt: "Mínimo de 10 caracteres!"})
+}
+
+if(erros.length >= 1){
+
+  res.redirect('/suporte')
+
+}else{
+
+  const newSup = {
+
+    conteudo: req.body.conteudo,
+    idUser: userID,
+
+  }
+
+  new Sup(newSup).save().then(() => {
+
+    console.log("Suporte cadastrado com sucesso!")
+    sucs = "Suporte enviado!"
+    res.redirect("/suporte")
+
+  })
+  .catch((erro) =>{
+
+    console.log("Erro ao cadastrar suporte:" + erro)
+    res.redirect("/suporte")
+
+  })
+}
+})
+
+
+routes.post("/publicar",(req, res) =>{
+  
+    const newPub = {
+  
+      userEx: userEx,
+      userUser: userUser,
+      conteudo: req.body.conteudo,
+      idUser: userID,
+  
+    }
+  
+    new Pub(newPub).save().then(() => {
+  
+      console.log("Publicado com sucesso!")
+      sucs = "Publicado!"
+      res.redirect("/home")
+  
+    })
+    .catch((erro) =>{
+  
+      console.log("Erro: " + erro)
+      res.redirect("/home")
+  
+    })
+  
+})
+
+routes.get("/deletar/:id",(req, res) =>{
+  
+  Pub.remove({_id:req.params.id}).then(()=>{
+    res.redirect('/home')
+    console.log('deletado')
+  }).catch((err)=>{console.log(err)})
+
+})
+
 
 routes.get("/sobre-nos", (req, res) => {
-  if(req.session.user){res.render(views + 'sobre-nos', {userUser, userEmail, userEx})}else{res.render(views + 'logarse')}})
+if(req.session.user){res.render(views + 'sobre-nos', {userUser, userEmail, userEx})}
+else{res.render(views + 'logarse')}
+})
+
 
 routes.get("/sobre-site", (req, res) => {
-  if(req.session.user){res.render(views + 'sobre-site', {userUser, userEmail, userEx})}else{res.render(views + 'logarse')}})
+if(req.session.user){res.render(views + 'sobre-site', {userUser, userEmail, userEx})}
+else{res.render(views + 'logarse')}
+})
  
 
 routes.get("/seu-perfil", (req, res) => {
-  if(req.session.user){res.render(views + 'seu-perfil', {userUser, userEmail, userEx})}else{res.render(views + 'logarse')}})
+if(req.session.user){
+  Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
 
-routes.get("/suporte", function(req, res){
-  if(req.session.user){res.render(views + 'suporte', {userUser, userEmail, userEx})}else{res.render(views + 'logarse')}})
+    var sessionID = req.session.user
+    
+    res.render(views + 'seu-perfil', {userUser, userEmail, userEx, pubs, sessionID})
+    
+  
+  })
+}
+else{res.render(views + 'logarse')}
+})
+
+
 
 
 

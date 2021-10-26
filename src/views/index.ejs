@@ -24,7 +24,10 @@
       <div class="box">
         <form class="box-login" method="post" action="/">
           <h1>Login</h1>
-<% erros.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+
+          <% if(erros.length > 1){erros.splice(-1,1)} %> 
+          <% erros.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+          
           <div class="text-box">
             
             <i class="far fa-user" aria-hidden="true" name="user-icon"> </i>

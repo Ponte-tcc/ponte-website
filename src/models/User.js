@@ -1,18 +1,5 @@
 const mongoose = require("mongoose")
 
-/*const uri = "mongodb+srv://nico:123321@cluster0.rtak1.mongodb.net/pontewebsiteDB?retryWrites=true&w=majority"
-
-mongoose.Promise = global.Promise
-mongoose.connect(uri, {
-useNewUrlParser: true,
-useUnifiedTopology: true,
-}).then(() => {
-console.log("MongoDB Conectado...")
-}).catch((erro) => {
-console.log("Houve um erro ao se conectar: " + erro)
-})*/
-
-
 const UserSchema = mongoose.Schema({
 
     user:{
@@ -54,27 +41,11 @@ const UserSchema = mongoose.Schema({
     }
 })
 
-
-
  mongoose.model('users', UserSchema)
 
 const User = mongoose.model('users', UserSchema)
 
 module.exports = User
-
-/*new User({
-
-    email: "alui@eu.com",
-    valida: 2,
-    perfil: "hist",
-    dest: "roma"
-
-}).save()
-.then(() => {
-    console.log("Pedido cadastrado")
-}).catch((erro) => {
-    console.log("Houve um erro " + erro)
-})*/
 
 
 

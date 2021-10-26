@@ -1,20 +1,27 @@
 const mongoose  = require("mongoose");
-const Schema = mongoose.Schema;
 
-const Suporte = new Schema({
+const SuporteSchema = new mongoose.Schema({
 
     conteudo: {
 
         type: String,
         required: true
     },
+    idUser: {
 
-    date: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        require: true,
+
+    },
+    createdAt:{ 
+        type: Date,  
+        default: Date.now 
     }
 
 })
 
-mongoose.model("suportes", Suporte)
+mongoose.model("suportes", SuporteSchema)
 
+const Sup = mongoose.model('suportes', SuporteSchema)
+
+module.exports = Sup

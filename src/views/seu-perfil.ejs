@@ -34,6 +34,36 @@
             
           </div>
         </div>
+        <div class="publicados">
+
+
+  <%pubs.forEach(pub => {
+    if(pub.idUser == sessionID){%>
+    <div class="publica">
+            <%= pub.userEx %> 
+            <small><%= pub.userUser %></small>
+            <%= pub.conteudo %>
+            <% var monthNames = [
+      'Janeiro', 'Fevereiro', 'Março',
+      'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro',
+      'Novembro', 'Dezembro'
+   ];
+ var d = pub.createdAt.getDate();
+ var m = monthNames[pub.createdAt.getMonth()];
+ var y = pub.createdAt.getFullYear();
+ var h = pub.createdAt.getHours()
+ var mi = pub.createdAt.getMinutes()%>
+ <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+<input type="hidden" name='pubId' value="<%=pub._id%>">
+ 
+<a href="/deletar/<%=pub._id%>">Deletar</a>
+<hr>
+<%}%>          
+          </div>
+          <%}) %> 
+
+        </div>
       </div>
     </main>
 
