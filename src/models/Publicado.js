@@ -25,6 +25,12 @@ const PublicadoSchema = new mongoose.Schema({
         require: true,
 
     },
+    curtidas: {
+
+        type: Number,
+        require: false,
+
+    },
     createdAt:{ 
         type: Date,  
         default: Date.now 

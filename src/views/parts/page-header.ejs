@@ -52,9 +52,20 @@
 
       <div id="seu-perfil">
         <div id="foto-perfil">
-          <a href="/seu-perfil"> <%= userEx %>  </a>
+          <a href="/perfil/<%= userUser %>"> <%= userEx %>  </a>
         </div>
+        <% if(userAdm == 1){%>
+          <form action="/publicacoes" method="post">
+          <button type="submit">Todas as publicações</button>
+          </form>  
+          
+          <form action="/perfis" method="post">
+            <button type="submit">Todos os perfis</button>
+            </form> 
 
+            
+                    
+        <%}%>
         <!--drop down perfil-->
         <nav id="perfil">
           <div class="drop-btn-perfil">
@@ -66,7 +77,7 @@
           <div class="wrapper-perfil">
             <ul id="drop-down-perfil" class="menu-bar-perfil">
               <li>
-                <a href="/seu-perfil"
+                <a href="/perfil/<%= userUser %>"
                   ><div class="icon">
                     <span class="fas fa-user"></span>
                   </div>

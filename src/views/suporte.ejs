@@ -17,8 +17,7 @@
     <!--Header-->
 
     <main>
-
-      <div id="main-suporte">
+<% if(userAdm == 0) {%><div id="main-suporte">
         <h1>Suporte</h1>
 <% erros.forEach(erro => { %>
  <%= erro.txt %> 
@@ -45,7 +44,22 @@
 
         </div>
 
-      </div>
+      </div><%}else{%>
+        
+        <% sups.forEach(sup => { %>
+         <%= sup.userUser %>
+         <%= sup._id %>
+         <%= sup.conteudo %>
+         <%= sup.createdAt %>
+         <form action="/deletar-sup-adm/<%= sup._id %>" method="post">
+          <button type="submit">Deletar</button>
+        </form>
+         <hr>
+         <br/>
+        <% }) %>
+        
+        <%}%> 
+      
 
     </main>
 

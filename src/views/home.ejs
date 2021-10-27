@@ -23,7 +23,10 @@
       </div>-->
 
       <div class="container-left">
-        <div class="content-left"></div>
+        <div class="content-left">
+
+          
+        </div>
       </div>
 
       <div class="container-right">
@@ -64,8 +67,13 @@
           <%pubs.forEach(pub => {%>
             <div class="publica">
               <%= pub.userEx %> 
-              <a href="/seu-perfil"><small><%= pub.userUser %></small></a>
+              <a href="/perfil/<%= pub.userUser %>"><small><%= pub.userUser %></small></a>
               <%= pub.conteudo %>
+              <form action="/curtir/<%=pub._id%>" method="post">
+                <%= pub.curtidas %>
+                <button type="submit">Curtir</button>
+              </form>
+              
               <% var monthNames = [
       'Janeiro', 'Fevereiro', 'Março',
       'Abril', 'Maio', 'Junho', 'Julho',
@@ -79,8 +87,19 @@
  var mi = pub.createdAt.getMinutes()%>
  <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
 <input type="hidden" name='pubId' value="<%=pub._id%>">
+<% if(userAdm == 1){%>
+  <form action="/deletar/<%=pub._id%>" method="post">
+    <button type="submit">Deletar</button>
+        
+    </form>         
+            
+<%}%>
+
  <%if(pub.idUser == sessionID){%>
-<a href="/deletar/<%=pub._id%>">Deletar</a>
+  <form action="/deletar/<%=pub._id%>" method="post">
+    <button type="submit">Deletar</button>
+        
+    </form> 
 <%}%>
 
 

@@ -7,7 +7,7 @@ const SuporteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    idUser: {
+    userUser: {
 
         type: String,
         require: true,

@@ -1,0 +1,11 @@
+<% users.forEach(user => { %>
+ <%= user._id %> 
+ <%= user.user %>
+ <%= user.exibition %>
+ <%= user.email %>
+ <%= user.createdAt %>
+
+ <form action="/deletar-user-adm/<%= user._id %> " method="post">
+  <button type="submit">Deletar</button>
+</form>
+<% }) %> 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+  <!--Head-->
+
+  <%- include('../parts/page-head', { title : 'Seu Perfil', linkCss :
+  '/css/style-seu-perfil.css', linkHeader : '/css/style-header.css'} ) %>
+
+  <!--Head-->
+
+  <body>
+    <!--Header-->
+
+    <%- include('../parts/page-header', { title : ''}) %>
+    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+
+    <!--Header-->
+
+    <main>
+      <div id="content">
+  
+<% if(sessionID === 'NOT'){%>
+        
+  <div class="container-right">
+    <div class="nome">
+      <h3>Nome: <%= perfilEx %>  </h3>
+       
+    </div>
+    <div class="user">
+      <h3>User: <%= perfilUser %>  </h3>
+      
+    </div>
+  </div>
+<div class="publicados">
+
+
+<%pubs.forEach(pub => {%>
+
+<div class="publica">
+  <%= pub.userEx %> 
+  <small><%= pub.userUser %></small>
+  <%= pub.conteudo %>
+  <% var monthNames = [
+'Janeiro', 'Fevereiro', 'Março',
+'Abril', 'Maio', 'Junho', 'Julho',
+'Agosto', 'Setembro', 'Outubro',
+'Novembro', 'Dezembro'
+];
+var d = pub.createdAt.getDate();
+var m = monthNames[pub.createdAt.getMonth()];
+var y = pub.createdAt.getFullYear();
+var h = pub.createdAt.getHours()
+var mi = pub.createdAt.getMinutes()%>
+<small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+<hr>
+         
+</div>
+<%}) %> 
+
+</div>
+        
+          
+          <%}else{%>
+
+            <div class="container-right">
+              <div class="nome">
+                <h3>Nome: <%= userEx %>  </h3>
+                 <button>Mudar Nome</button>
+              </div>
+              <div class="user">
+                <h3>User: <%= userUser %>  </h3>
+                
+              </div>
+              <div class="email">
+                <h3>E-mail: <%= userEmail %>  </h3>
+                
+              </div>
+            </div>
+        <div class="publicados">
+
+
+  <%pubs.forEach(pub => {
+    if(pub.idUser == sessionID){%>
+    <div class="publica">
+            <%= pub.userEx %> 
+            <small><%= pub.userUser %></small>
+            <%= pub.conteudo %>
+            <% var monthNames = [
+      'Janeiro', 'Fevereiro', 'Março',
+      'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro',
+      'Novembro', 'Dezembro'
+   ];
+ var d = pub.createdAt.getDate();
+ var m = monthNames[pub.createdAt.getMonth()];
+ var y = pub.createdAt.getFullYear();
+ var h = pub.createdAt.getHours()
+ var mi = pub.createdAt.getMinutes()%>
+ <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+<input type="hidden" name='pubId' value="<%=pub._id%>">
+ 
+<a href="/deletar/<%=pub._id%>">Deletar</a>
+<hr>
+<%}%>          
+          </div>
+          <%}) %> 
+
+        </div>
+<%} %> 
+      </div>
+    </main>
+
+    <%- include ('../parts/page-footer') %>
+  </body>
+</html>

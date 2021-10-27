@@ -34,7 +34,15 @@ const UserSchema = mongoose.Schema({
         null: false,
         lowercase: true,
 
-    },         
+    }, 
+    userAdm:{
+        type: Number,
+        require: true,
+        unique: false,
+        null: false,
+        lowercase: false,
+
+    },          
     createdAt:{ 
         type: Date,  
         default: Date.now 
