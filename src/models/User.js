@@ -42,6 +42,13 @@ const UserSchema = mongoose.Schema({
         null: false,
         lowercase: false,
 
+    }, 
+    curtidas:{
+        type: Array,
+        require: false,
+        unique: false,
+        null: false,
+
     },          
     createdAt:{ 
         type: Date,  

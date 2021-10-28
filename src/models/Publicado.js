@@ -27,7 +27,7 @@ const PublicadoSchema = new mongoose.Schema({
     },
     curtidas: {
 
-        type: Number,
+        type: String,
         require: false,
 
     },

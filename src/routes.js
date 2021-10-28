@@ -206,6 +206,7 @@ else if(req.body.password.length <= 5){errosPass.push({txt: "Senha muito pequena
     user: req.body.user,
     email: req.body.email,
     password: req.body.password,
+    curtidas: '617822683fd1ac46842d338e',
     userAdm: 0
 
   }
@@ -389,11 +390,52 @@ routes.post("/publicar",(req, res) =>{
   
 })
 
-routes.post("/curtir/:id",(req, res) =>{
-  var newCurtida
+routes.post("/descurtir/:id",(req, res) =>{
+  
 
   Pub.findOne({_id:req.params.id}).then((pub)=>{
 
+      pub.userEx = pub.userEx,
+      pub.userUser =  pub.userUser,
+      pub.conteudo = pub.conteudo,
+      pub.idUser = pub.idUser,
+      pub.curtidas = pub.curtidas - 1,
+
+    pub.save().then(() => {
+
+    
+      res.redirect("/home")
+  
+    })
+    .catch((erro) =>{
+  
+      console.log("Erro: " + erro)
+      res.redirect("/home")
+  
+    })
+
+  })
+  
+
+})
+
+routes.post("/curtir/:id",async (req, res, next) =>{
+  const id = req.session.user
+  const curtida = req.params.id
+  console.log(id)
+  console.log(curtida)
+  await User.findByIdAndUpdate({_id: id }, { $push: { curtidas: curtida } })
+    .then(x => {
+        console.log('salvo')
+    })
+    .catch(e => {
+      console.log('nao salvo')
+      })
+
+
+Pub.findOne({_id:curtida}).then((pub)=>{
+
+  
       pub.userEx = pub.userEx,
       pub.userUser =  pub.userUser,
       pub.conteudo = pub.conteudo,
@@ -415,8 +457,8 @@ routes.post("/curtir/:id",(req, res) =>{
 
   })
   
-
 })
+
 
 routes.post("/deletar/:id",(req, res) =>{
   

@@ -69,9 +69,14 @@
               <%= pub.userEx %> 
               <a href="/perfil/<%= pub.userUser %>"><small><%= pub.userUser %></small></a>
               <%= pub.conteudo %>
+              <%= pub.curtidas %>
               <form action="/curtir/<%=pub._id%>" method="post">
-                <%= pub.curtidas %>
+                
                 <button type="submit">Curtir</button>
+              </form>
+              <form action="/descurtir/<%=pub._id%>" method="post">
+                
+                <button type="submit">Descurtir</button>
               </form>
               
               <% var monthNames = [
