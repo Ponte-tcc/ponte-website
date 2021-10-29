@@ -63,21 +63,32 @@
         </div>
       
         <div class="publicados">
-
+        <%for(var i = 0; i < userCcLength; i++){%>
+          <%=userCurtidas[i]%>
+        <%}%> 
+         
           <%pubs.forEach(pub => {%>
             <div class="publica">
               <%= pub.userEx %> 
               <a href="/perfil/<%= pub.userUser %>"><small><%= pub.userUser %></small></a>
               <%= pub.conteudo %>
-              <%= pub.curtidas %>
+              <%= pub.publiCurtidas %>
+              <% console.log(userCurtidas.indexOf(pub.ValiaID))
+              console.log(pub.ValiaID)
+              console.log(userCurtidas) %> 
+
+              <% if(userCurtidas.indexOf(pub.ValiaID)>=0){%>
+                <form action="/descurtir/<%=pub._id%>" method="post">
+                
+                <button type="submit">Descurtir</button>
+              </form>
+                
+                <%}else{%> 
               <form action="/curtir/<%=pub._id%>" method="post">
                 
                 <button type="submit">Curtir</button>
               </form>
-              <form action="/descurtir/<%=pub._id%>" method="post">
-                
-                <button type="submit">Descurtir</button>
-              </form>
+              <%}%>
               
               <% var monthNames = [
       'Janeiro', 'Fevereiro', 'Março',

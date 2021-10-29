@@ -15,6 +15,7 @@ var userUser
 var userEmail
 var userEx
 var userID 
+var userCcLength
 
 var perfilUser
 var perfilEx
@@ -29,6 +30,9 @@ const errosEx = []
 const errosEmail = []
 const errosPass = []
 
+var idPubli
+var userCurtidas = []
+
 const regexOne = /^[a-z0-9]+([_ -.]?[a-z0-9])*$/
 const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/
 
@@ -39,6 +43,7 @@ routes.get("/", (req, res) => {
 })
 routes.post("/", (req, res) => { 
 if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}}
+if(userCurtidas.length >= 1){for(var i = 0; i = userCurtidas.length; i++){userCurtidas.shift()}}
 
 
 if(! req.body.user || typeof req.body.user == undefined || req.body.user == null ||
@@ -69,6 +74,14 @@ const userIf = req.body.user
           userUser = user.user
           userEmail = user.email
           userEx = user.exibition
+          userAdm = user.userAdm
+          userCcLength = user.curtidas.length
+          console.log(userCcLength)
+          for(var i = 0; i < userCcLength; i++){
+            userCurtidas.push(user.curtidas[i])
+            console.log(userCurtidas)
+          }
+          
           res.redirect('/home')
         })
 
@@ -110,6 +123,14 @@ const userIf = req.body.user
           userUser = user.user
           userEmail = user.email
           userEx = user.exibition
+          userAdm = user.userAdm
+          userCcLength = user.curtidas.length
+          console.log(userCcLength)
+          for(var i = 0; i < userCcLength; i++){
+            userCurtidas.push(user.curtidas[i])
+            console.log(userCurtidas)
+          }
+          
           res.redirect('/home')
         })      
           
@@ -281,16 +302,8 @@ routes.post("/perfis", (req, res)=>{
 
 routes.get("/home", (req, res) =>{
 
-  
 
 if(req.session.user){
-
-  User.findOne({_id:req.session.user}).then((userExist)=>{
-
-    userAdm = userExist.userAdm
-
-
-  })
 
 Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
 
@@ -298,8 +311,8 @@ Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
 
 
   var sessionID = req.session.user
-  
-  res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, sessionID, userAdm})
+  res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, sessionID, 
+    userAdm, idPubli, userCurtidas, userCcLength})
   sucs = ''
 
 })
@@ -370,7 +383,8 @@ routes.post("/publicar",(req, res) =>{
       userUser: userUser,
       conteudo: req.body.conteudo,
       idUser: userID,
-      curtidas: 0,
+      ValiaID: '617bf397fdbffc1434b952ba',
+      publiCurtidas: 0,
   
     }
   
@@ -391,73 +405,78 @@ routes.post("/publicar",(req, res) =>{
 })
 
 routes.post("/descurtir/:id",(req, res) =>{
-  
+  idPubli = req.params.id
+  const idUser = req.session.user
 
-  Pub.findOne({_id:req.params.id}).then((pub)=>{
+  userCcLength --
+        userCurtidas.pull(idPubli)
 
-      pub.userEx = pub.userEx,
-      pub.userUser =  pub.userUser,
-      pub.conteudo = pub.conteudo,
-      pub.idUser = pub.idUser,
-      pub.curtidas = pub.curtidas - 1,
-
-    pub.save().then(() => {
-
-    
-      res.redirect("/home")
-  
+  User.findByIdAndUpdate({_id: idUser }, { $pull: { curtidas: idPubli } })
+    .then(x => {
+      
+      
+        
+        
     })
-    .catch((erro) =>{
-  
-      console.log("Erro: " + erro)
-      res.redirect("/home")
-  
-    })
+    .catch(e => {
+      console.log(e+ ' nao salvo')
+      })
 
-  })
+      Pub.findById({_id:idPubli}).then((pubs)=>{
+
+        descurtiu =  pubs.publiCurtidas
+        
+        descurtiu--
+        
+        Pub.findByIdAndUpdate({_id:idPubli}, {publiCurtidas: descurtiu})
+        .then(x => {
+          res.redirect('/home')
+          
+        })
+        .catch(e => {
+        console.log('nao salvo publi')
+        })
+        })
   
 
 })
 
 routes.post("/curtir/:id",async (req, res, next) =>{
-  const id = req.session.user
-  const curtida = req.params.id
-  console.log(id)
-  console.log(curtida)
-  await User.findByIdAndUpdate({_id: id }, { $push: { curtidas: curtida } })
+  const idUser = req.session.user
+  idPubli = req.params.id
+
+  await User.findByIdAndUpdate({_id: idUser }, { $push: { curtidas: idPubli } })
     .then(x => {
-        console.log('salvo')
+      
+      userCcLength ++
+        userCurtidas.push(idPubli)
+        
+        
     })
     .catch(e => {
       console.log('nao salvo')
       })
 
+var curtiu
 
-Pub.findOne({_id:curtida}).then((pub)=>{
+Pub.findById({_id:idPubli}).then((pubs)=>{
 
-  
-      pub.userEx = pub.userEx,
-      pub.userUser =  pub.userUser,
-      pub.conteudo = pub.conteudo,
-      pub.idUser = pub.idUser,
-      pub.curtidas = pub.curtidas + 1,
+curtiu =  pubs.publiCurtidas
 
-    pub.save().then(() => {
+curtiu++
 
-    
-      res.redirect("/home")
-  
-    })
-    .catch((erro) =>{
-  
-      console.log("Erro: " + erro)
-      res.redirect("/home")
-  
-    })
-
-  })
+Pub.findByIdAndUpdate({_id:idPubli}, {publiCurtidas: curtiu})
+.then(x => {
+  res.redirect('/home')
   
 })
+.catch(e => {
+console.log('nao salvo')
+})
+})
+})
+  
+
 
 
 routes.post("/deletar/:id",(req, res) =>{

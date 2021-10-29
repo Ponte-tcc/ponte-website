@@ -7,6 +7,12 @@ const PublicadoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    ValiaID:{
+
+        type: String,
+        require: true,
+
+    },
     userEx:{
 
         type: String,
@@ -25,9 +31,9 @@ const PublicadoSchema = new mongoose.Schema({
         require: true,
 
     },
-    curtidas: {
+    publiCurtidas: {
 
-        type: String,
+        type: Number,
         require: false,
 
     },
