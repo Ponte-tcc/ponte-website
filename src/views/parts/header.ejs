@@ -1,0 +1,90 @@
+<header>
+
+<div class="container header">
+
+  <div class="ponteImg">
+    <a href="/home"><img alt="Home" src="/img/Ponte-logo2.png" title="Home" /></a>
+  </div>
+
+<div id="nav-login">
+      
+        <div id="foto-perfil">
+          <a href="/perfil/<%= userUser %>"> <%= userEx %>  </a>
+        </div>
+
+        <% if(userAdm == 1){%>
+          <form action="/publicacoes" method="post">
+          <button type="submit">Todas as publicações</button>
+          </form>  
+          
+          <form action="/perfis" method="post">
+            <button type="submit">Todos os perfis</button>
+            </form> 
+        <%}%>
+
+        <!--drop down perfil
+        <nav id="perfil">
+          <div class="drop-btn-perfil">
+             <span class="down">#</span>
+          </div>
+
+          <div class="wrapper-perfil">
+            <ul id="drop-down-perfil" class="menu-bar-perfil">
+              <li>
+                <a href="/perfil/<%= //userUser %>"
+                  ><div class="icon">
+                    <span class="fas fa-user"></span>
+                  </div>
+                  Seu Perfil
+                </a>
+              </li>
+
+              <li>
+                <form action="/logout" method="post"><button type="submit">Logout</button></form>
+              </li>
+            </ul>
+          </div>
+        </nav>-->
+      
+</div>
+ 
+    <div id="nav-help">
+      <div class="box-suporte-txt">
+        <a id="suporte-txt" href="/suporte">Suporte</a>
+      </div>
+
+      <nav id="sobre">
+        <div class="drop-btn">
+          Sobre <span class="fas fa-caret-down"></span>
+        </div>
+
+        <div class="wrapper">
+          <ul id="drop-down" class="menu-bar">
+            <li>
+              <a href="/sobre-nos"
+                ><div class="icon">
+                  <span class="fas fa-user"></span>
+                </div>
+                Sobre Nós
+              </a>
+            </li>
+
+            <li>
+              <a href="/sobre-site"
+                ><div class="icon">
+                  <span class="fas fa-cog"></span>
+                </div>
+                Sobre o Site</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    
+
+</div>
+
+  <script src="/script/wrapper.js"></script>
+</header>

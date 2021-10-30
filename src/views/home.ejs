@@ -3,7 +3,7 @@
 
   <!--Head-->
 
-  <%- include('parts/page-head', { title :'Home', linkCss:'/css/style-home.css', linkHeader :'/css/style-header.css'}) %> 
+  <%- include('parts/page-head', { title :'Home', linkCss:'/css/home.css'}) %> 
 
   <!--Head-->
 
@@ -12,7 +12,7 @@
     <!--Header-->
 
     <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
-    <%- include('parts/page-header', { title : ''}) %>
+    <%- include('parts/header', { title : ''}) %>
 
     <!--Header-->
 
@@ -63,9 +63,8 @@
         </div>
       
         <div class="publicados">
-        <%for(var i = 0; i < userCcLength; i++){%>
-          <%=userCurtidas[i]%>
-        <%}%> 
+        
+        <%console.log(userCurtidas)%> 
          
           <%pubs.forEach(pub => {%>
             <div class="publica">
@@ -73,11 +72,10 @@
               <a href="/perfil/<%= pub.userUser %>"><small><%= pub.userUser %></small></a>
               <%= pub.conteudo %>
               <%= pub.publiCurtidas %>
-              <% console.log(userCurtidas.indexOf(pub.ValiaID))
-              console.log(pub.ValiaID)
-              console.log(userCurtidas) %> 
+              <% var visao = String(pub._id)
+               %> 
 
-              <% if(userCurtidas.indexOf(pub.ValiaID)>=0){%>
+              <% if(userCurtidas.indexOf(visao)>=0){%>
                 <form action="/descurtir/<%=pub._id%>" method="post">
                 
                 <button type="submit">Descurtir</button>

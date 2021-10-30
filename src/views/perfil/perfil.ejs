@@ -99,8 +99,10 @@ var mi = pub.createdAt.getMinutes()%>
  <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
 <input type="hidden" name='pubId' value="<%=pub._id%>">
  
-<a href="/deletar/<%=pub._id%>">Deletar</a>
-<hr>
+<form action="/deletar/<%=pub._id%>" method="post">
+    <button type="submit">Deletar</button>
+        
+    </form> 
 <%}%>          
           </div>
           <%}) %> 

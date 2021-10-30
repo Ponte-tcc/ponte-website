@@ -43,7 +43,7 @@ routes.get("/", (req, res) => {
 })
 routes.post("/", (req, res) => { 
 if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}}
-if(userCurtidas.length >= 1){for(var i = 0; i = userCurtidas.length; i++){userCurtidas.shift()}}
+if(userCurtidas.length >= 0){for(var i = 0; i = userCurtidas.length; i++){userCurtidas.shift()}}
 
 
 if(! req.body.user || typeof req.body.user == undefined || req.body.user == null ||
@@ -173,6 +173,7 @@ routes.post("/cadastro", (req, res) => {
   if(errosEx.length >= 1){for(var i = 0; i = errosEx.length; i++){errosEx.shift()}}
   if(errosEmail.length >= 1){for(var i = 0; i = errosEmail.length; i++){errosEmail.shift()}}
   if(errosPass.length >= 1){for(var i = 0; i = errosPass.length; i++){errosPass.shift()}}
+  if(userCurtidas.length >= 0){for(var i = 0; i = userCurtidas.length; i++){userCurtidas.shift()}}
 
   
      
@@ -282,7 +283,7 @@ routes.post("/logout", function(req, res){
 routes.post("/publicacoes", (req, res)=>{
   
   Pub.find({}).then((pubs)=>{
-
+    
     res.render(views + 'adm/publicacoes', {pubs})
 
   })
@@ -305,7 +306,7 @@ routes.get("/home", (req, res) =>{
 
 if(req.session.user){
 
-Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
+Pub.find({}).sort({publiCurtidas: 'desc'}).then((pubs)=>{
 
 
 
@@ -388,8 +389,8 @@ routes.post("/publicar",(req, res) =>{
   
     }
   
-    new Pub(newPub).save().then(() => {
-  
+    new Pub(newPub).save().then((pubs) => {
+
       console.log("Publicado com sucesso!")
       sucs = "Publicado!"
       res.redirect("/home")
@@ -408,20 +409,24 @@ routes.post("/descurtir/:id",(req, res) =>{
   idPubli = req.params.id
   const idUser = req.session.user
 
-  userCcLength --
-        userCurtidas.pull(idPubli)
+  var index = userCurtidas.indexOf(String(idPubli))
+  if (index > -1) {
+
+    userCurtidas.splice(index, 1)
+
+  }
 
   User.findByIdAndUpdate({_id: idUser }, { $pull: { curtidas: idPubli } })
-    .then(x => {
+  .then(x => {
+    
+    
+      console.log('salvo descurtida')
       
-      
-        
-        
+  })
+  .catch(e => {
+    console.log(e+ ' nao salvo')
     })
-    .catch(e => {
-      console.log(e+ ' nao salvo')
-      })
-
+  
       Pub.findById({_id:idPubli}).then((pubs)=>{
 
         descurtiu =  pubs.publiCurtidas
