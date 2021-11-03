@@ -3,7 +3,7 @@
 
   <!--Head-->
 
-  <%- include('parts/page-head', { title :'Home', linkCss:'/css/home.css'}) %> 
+  <%- include('parts/head', { title :'Home', linkCss:'/css/home.css'}) %> 
 
   <!--Head-->
 
@@ -15,30 +15,12 @@
     <%- include('parts/header', { title : ''}) %>
 
     <!--Header-->
+    <main class="mainHome">
 
-    <div id="primary-content">
-
-      <!--<div class="container-topo">
-        <div class="content-topo"></div>
-      </div>-->
-
-      <div class="container-left">
-        <div class="content-left">
-
-          
-        </div>
-      </div>
-
-      <div class="container-right">
-        <div class="content-right"></div>
-      </div>
-
-    </div>
-
-    <main>
-
-      <div class="container-principal">
-      <div class="content-principal">
+      <img class="logo" src="img/ponte-logo.png" alt="">
+      
+      <div class="hr"></div>
+      
 <% if(sucs === 'Publicado!'){%>
   <a><%= sucs %></a> 
   <%} %> 
@@ -126,11 +108,13 @@
 
         </div>
 
-      </div>
-      </div>
+      
+      
       
     </main>
-
+    <div class="noticias">
+      noticias
+</div>
     <%- include ('parts/page-footer') %>
 
  

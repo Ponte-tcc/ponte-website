@@ -1,32 +1,16 @@
-const drop_btn = document.querySelector(".drop-btn span");
-const menu_wrapper = document.querySelector(".wrapper");
+const btn = document.getElementById("drop");
+const warp = document.querySelector(".warp");
 
-const drop_btn_perfil = document.querySelector(".drop-btn-perfil span");
-const menu_wrapper_perfil = document.querySelector(".wrapper-perfil");
 
-drop_btn.onclick = () => {
-  menu_wrapper.classList.toggle("show");
-};
-
-drop_btn_perfil.onclick = () => {
-  menu_wrapper_perfil.classList.toggle("show");
-};
-
-//Maneira 2
-
-/*const drop_btn = document.querySelector(".drop-btn span")
-const menu_wrapper = document.querySelector(".wrapper")
-const drop_btn_perfil = document.querySelector(".drop-btn-perfil span")
-menu_wrapper.style.display = 'none'
-
-drop_btn.addEventListener("click", (event) =>{
-
-  if(menu_wrapper.style.display == 'none'){
-
-    menu_wrapper.style.display = 'block'
-
+document.addEventListener('click', function(event) {
+  var isClickInsideElement = btn.contains(event.target);
+  if (isClickInsideElement) {
+      //Do something click is outside specified element
+      warp.classList.toggle('hide')
   }else{
+    warp.classList.add('hide')
+  }
+});
 
-    menu_wrapper.style.display = 'none'
 
-}})*/
+

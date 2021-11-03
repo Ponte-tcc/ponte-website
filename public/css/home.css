@@ -1,0 +1,21 @@
+.mainHome{
+
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+   
+   
+
+}
+
+.noticias{
+
+    width: 25%;
+
+}
+
+img.logo{
+
+    width: 20%;
+
+}
