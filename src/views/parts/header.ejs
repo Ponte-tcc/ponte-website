@@ -1,21 +1,21 @@
 <header>
-
+<script src="script/logout.js"></script>
 <div class="container header">
 
-  <div class="ponteImg">
-    <a href="/home"><img alt="Home" src="/img/Ponte-log.png" title="Home" /></a>
+  <div class="ponteHome">
+    <a href="/home"><img src="img/home.png" alt="Homepage" title="Homepage"></a>
   </div>
 
 <div id="nav-login">
       
-        <a class="seuPerfil" href="/perfil/<%= userUser %>">
+        <a class="seuPerfil" href="perfil/<%= userUser %>">
           
-            <img src="" alt="O" title="O">   
+            <img src="img/user.png" alt="" title="">   
         
           <div class="userPerfil">
            
             <%= userEx %> 
-            <small><%= userUser %></small> 
+            <small>@<%= userUser %></small> 
           </div>
         </a>
        
@@ -39,7 +39,7 @@
 <div class="btn-help">
   
 
-<button><img src="img/eng.png" alt="" id="drop"></button>
+<button><img src="img/gear.png" alt="" id="drop"></button>
 
 
   
@@ -49,8 +49,10 @@
       <div class="warp hide">
         <ul>
           <li><a href="/suporte">Suporte</a> </li>
-          <li><a href="/sobre-nos">Sobre</a> </li>
-          <li><a href="/logout">Logout</a> </li>
+          <li><a href="/sobre">Sobre</a> </li>
+          <li>Darkmode </li>
+          <li><form action="/logout" method="post"><button>Logout</button></form></a> 
+          </li>
 
         </ul>
 

@@ -11,13 +11,14 @@
 
    
     <%- include('parts/header', { title : ''}) %>
-<div class="contentHome">
-  <div class="headerFix"></div>
+  <script src="script/curtir.js"></script>
+<div class="container home">
+  
     <main class="mainHome">
-<div class="imgHome"><img class="logo" src="img/ponte-logo.png" alt=""></div>
+<div class="imgHome"><img class="logo" src="img/icoPonte.png" alt=""></div>
       
       
-      <hr>
+    
       
 <% if(sucs === 'aPublicado!'){%>
   <a><%= sucs %></a> 
@@ -34,14 +35,15 @@
           <form action="/publicar" name="textPublicar" method="POST" class="publicar">
             <div class="publi1">
               
+              <textarea name="conteudo" id="" 
+              placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
+              maxlength="200" wrap="hard"></textarea>
 
-            <input type="text" name="conteudo" autocomplete="off" autocapitalize="off"
-            placeholder="Oi <%= userEx %>, troca uma ideia ai... "
-            maxlength="118">
+            
           
           </div>
             
-<div class="publi2"><button type="submit">Publicar</button></div>
+<div class="publi2"><button type="submit" class="estrelar btSubmit">Estrelar</button></div>
             
           </form>
 <div class="hr inicial"></div>
@@ -54,13 +56,13 @@
           <%pubs.forEach(pub => {%>
             <div class="publica">
 
-              <div class="p0">O</div>
+              <div class="p0"><img src="img/user.png" alt="" title=""></div>
 
               <div class="p1">
               <div class="p2"><%= pub.userEx %> 
               <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
               </div>
-              <%= pub.conteudo %>
+              <textarea class="textCont" readonly><%= pub.conteudo %></textarea>
               
             </div>
               
@@ -74,22 +76,24 @@
 
             <div class="publicaTwo">
               <div class="p11">
-            <%= pub.publiCurtidas %>
+            
               <% var visao = String(pub._id)
                %> 
 
               <% if(userCurtidas.indexOf(visao)>=0){%>
                 <form action="/descurtir/<%=pub._id%>" method="post">
                 
-                <button type="submit">Descurtir</button>
+                <button type="submit"><img src="img/star.png" alt="Tirar estrela"></button>
               </form>
                 
                 <%}else{%> 
+                  <button onClick="curtir('User', '123',  'pub._id' )">cc</button>
               <form action="/curtir/<%=pub._id%>" method="post">
                 
-                <button type="submit">Curtir</button>
+                <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
               </form>
-              <%}%>
+              
+              <%}%><%= pub.publiCurtidas %>
             </div>
               <div class="p12">
               <% var monthNames = [
@@ -114,10 +118,10 @@
 <%}%>
 
  <%if(pub.idUser == sessionID){%>
-  <form action="/deletar/<%=pub._id%>" method="post">
+  <!--<form action="/deletar/<%=pub._id%>" method="post">
     <button type="submit">Deletar</button>
         
-    </form> 
+    </form> -->
 <%}%>
 </div>
 </div>
@@ -135,8 +139,8 @@
     
       
 </div>
-    </div>
-    
+</div>
+<script src="script/autoResize.js"></script>
     <%- include ('parts/page-footer') %>
 
  

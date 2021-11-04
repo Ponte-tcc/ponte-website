@@ -38,6 +38,11 @@ const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/
 
 
 routes.get("/", (req, res) => {
+  if(req.session.user){
+
+    res.redirect('/home')
+
+  }
   res.render(views + "index", {erros})
   if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}}
 })
@@ -158,7 +163,11 @@ const userIf = req.body.user
 
 
 routes.get("/cadastro", function(req, res){
- 
+  if(req.session.user){
+
+    res.redirect('/home')
+
+  }
   res.render(views + "cadastro", {erros, errosUser, errosPass, errosEx, errosEmail})
 
   if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}};
@@ -313,7 +322,7 @@ Pub.find({}).sort({publiCurtidas: 'desc'}).then((pubs)=>{
 
   var sessionID = req.session.user
   res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, sessionID, 
-    userAdm, idPubli, userCurtidas, userCcLength})
+    userAdm, idPubli, userCurtidas, userCcLength, User})
   sucs = ''
 
 })
@@ -521,14 +530,8 @@ routes.post("/deletar-sup-adm/:id",(req, res) =>{
 })
 
 
-routes.get("/sobre-nos", (req, res) => {
-if(req.session.user){res.render(views + 'sobre-nos', {userUser, userEmail, userEx, userAdm})}
-else{res.render(views + 'logarse')}
-})
-
-
-routes.get("/sobre-site", (req, res) => {
-if(req.session.user){res.render(views + 'sobre-site', {userUser, userEmail, userEx, userAdm})}
+routes.get("/sobre", (req, res) => {
+if(req.session.user){res.render(views + 'sobre', {userUser, userEmail, userEx, userAdm})}
 else{res.render(views + 'logarse')}
 })
  
@@ -547,7 +550,7 @@ if(req.session.user == userExist._id){
 
     var sessionID = req.session.user
     
-    res.render(views + 'perfil/perfil', {userUser, userEmail, userEx, pubs, 
+    res.render(views + 'perfil', {userUser, userEmail, userEx, pubs, 
       sessionID, perfilEx, perfilUser, userAdm})
     
   
@@ -557,7 +560,7 @@ if(req.session.user == userExist._id){
     
     var sessionID = "NOT"
 
-    res.render(views + 'perfil/perfil', {userUser, userEmail, userEx, pubs, 
+    res.render(views + 'perfil', {userUser, userEmail, userEx, pubs, 
       sessionID, perfilEx, perfilUser, userAdm})
     
   

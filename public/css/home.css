@@ -1,30 +1,34 @@
+.container.home{
+
+   
+    justify-content: flex-end;
+    
+
+}
+
 .mainHome{
 
-    width: 55%;
+    width: 60%;
     display: flex;
     flex-direction: column;
-   
-   
+   padding-top: 12px;
+   border-left: 1px solid var(--color-border);
 
 }
 
-.headerFix{
 
-    width: 25%;
 
-}
+.partHeader{
 
-.contentHome{
-
-    display: flex;
     width: 100%;
 
 }
 
 
-img.logo{
+.imgHome img{
 
-    width: 15%;
+    width: 90px;
+    height: 90px;
 
 }
 
@@ -34,7 +38,13 @@ img.logo{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    
+
+}
+
+.publicacao{
+
+    border-top: 1px solid var(--color-border);
 
 }
 
@@ -49,6 +59,15 @@ form.publicar textarea{
 textarea:focus{
 
  outline: none;
+
+}
+
+.textCont{
+
+    resize: none;
+    border: 0;
+    width: 100%;
+    height: 100%;
 
 }
 
@@ -67,9 +86,17 @@ textarea:focus{
     justify-content: flex-end;
 }
 
+.estrelar{
+
+margin-right: 1vh;
+   
+
+}
+
+
 .hr.inicial{
 
-    margin: 2vh auto 6vh auto;
+    margin: 1vh auto 6vh auto;
 
 }
 
@@ -132,6 +159,7 @@ form.publicar button{
 
 .publica .p1{
 
+    width: 100%;
     display: flex;
     flex-direction: column;
 
@@ -172,6 +200,7 @@ margin: 0 auto;
 
     border-left: 1px solid var(--color-border);
     width: 25%;
+    padding-top: 12px;
     
 
 }

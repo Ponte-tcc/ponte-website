@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
-  <!--Head-->
+  
 
-  <%- include('parts/page-head', { title : 'Suporte', linkCss :
-  '/css/style-suporte.css', linkHeader : '/css/style-header.css'} ) %>
+  <%- include('parts/head', { title : 'Suporte', linkCss :
+  '/css/suporte.css'} ) %>
 
-  <!--Head-->
+  
 
   <body>
-    <!--Header-->
+   
 
-    <%- include('parts/page-header', { title : ''}) %>
-    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
-
-    <!--Header-->
-
-    <main>
-<% if(userAdm == 0) {%><div id="main-suporte">
+    <%- include('parts/header', { title : ''}) %>
+    
+<div class="container suporte">
+    
+<% if(userAdm == 0) {%>
+  
+  <div class="mainSuporte">
         <h1>Suporte</h1>
 <% erros.forEach(erro => { %>
  <%= erro.txt %> 
 <% }) %>
 
 <% if(sucs === 'Suporte enviado!'){%><a><%= sucs %></a> <%} %> 
-        <div class="container">
+        
           <div id="guia">
             <h3>
               Aqui você pode relatar algum bug, ou algum outro problema técnico
-              que esteja tendo
+              que esteja tendo.
             </h3>
           </div>
+          
 
-        <form method="POST" action="/suporte" name="suporteGo">
+        <form method="POST" action="/suporte" name="suporteGo" class="formSup">
 
-          <section id="text-area">
-            <textarea placeholder="Digite aqui..." name="conteudo"></textarea>
-          </section>
+          
+            <textarea placeholder="Digite aqui..." name="conteudo" 
+            class="contSup" wrap="hard" maxlength="300"></textarea>
+          
 
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btSubmit">Enviar</button>
 
         </form>
 
         </div>
 
-      </div><%}else{%>
+
+      
+      
+      
+      
+      
+      <%}else{%>
         
         <% sups.forEach(sup => { %>
          <%= sup.userUser %>
@@ -61,10 +69,9 @@
         <%}%> 
       
 
-    </main>
 
-    <div class="color"></div>
-
+</div>    
+<script src="script/autoResize.js"></script>
     <%- include ('parts/page-footer') %>
 
   </body>

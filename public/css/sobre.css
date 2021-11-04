@@ -1,0 +1,22 @@
+.container.sobre{
+
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.sobreC{
+
+    margin-top: 12px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sobreC img{
+
+    width: 800px;
+    height: 170px;
+
+}

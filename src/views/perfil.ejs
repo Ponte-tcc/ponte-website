@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
-  <!--Head-->
 
-  <%- include('../parts/page-head', { title : 'Seu Perfil', linkCss :
-  '/css/style-seu-perfil.css', linkHeader : '/css/style-header.css'} ) %>
-
-  <!--Head-->
+  <%- include('parts/head', { title : 'Perfil', linkCss :
+  '/css/perfil.css'} ) %>
 
   <body>
-    <!--Header-->
-
-    <%- include('../parts/page-header', { title : ''}) %>
-    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
-
-    <!--Header-->
-
-    <main>
+    
+    <%- include('parts/header', { title : ''}) %>
+    
+    <div class="container perfil">
       <div id="content">
   
 <% if(sessionID === 'NOT'){%>
         
-  <div class="container-right">
+  
     <div class="nome">
       <h3>Nome: <%= perfilEx %>  </h3>
        
@@ -30,7 +23,7 @@
       <h3>User: <%= perfilUser %>  </h3>
       
     </div>
-  </div>
+  
 <div class="publicados">
 
 
@@ -60,7 +53,7 @@ var mi = pub.createdAt.getMinutes()%>
 </div>
         
           
-          <%}else{%>
+<%}else{%>
 
             <div class="container-right">
               <div class="nome">
@@ -103,15 +96,17 @@ var mi = pub.createdAt.getMinutes()%>
     <button type="submit">Deletar</button>
         
     </form> 
-<%}%>          
+<%}%>  
+<div class="hr"></div>        
           </div>
           <%}) %> 
 
         </div>
+        
 <%} %> 
       </div>
-    </main>
+    </div>
 
-    <%- include ('../parts/page-footer') %>
+    <%- include ('parts/page-footer') %>
   </body>
 </html>

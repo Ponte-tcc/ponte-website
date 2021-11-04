@@ -3,24 +3,38 @@
 <html lang="pt-br">
   <!--Head-->
 
-  <%- include('parts/page-head', { title : 'Sobre o Site', linkCss :
-  '/css/style-sobre-site.css', linkHeader : '/css/style-header.css'} ) %>
+  <%- include('parts/head', { title : 'Sobre Nós', linkCss :
+  '/css/sobre.css'} ) %>
 
   <!--Head-->
 
   <body>
     <!--Header-->
 
-    <%- include('parts/page-header', { title : ''}) %>
+    <%- include('parts/header', { title : ''}) %>
     <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
 
     <!--Header-->
 
-    <main>
-      <div id="container">
+    
+      <div class="container sobre">
+        <div class="sobreC nos">
+        <h1>Sobre Nós</h1>
+
+        <section class="content">
+          <p>
+            Nos desenvolvemos esse site para o nosso TCC, e além disso no
+            intuito de ganhar mais experiência e aprender mais sobre full stack.
+          </p>
+        </section>
+
+        <h3>Acesse o Footer para ver nossos contatos</h3>
+      </div>
+      <div class="hr"></div>
+      <div class="sobreC site">
         <h1>Sobre o nosso site</h1>
 
-        <section id="content">
+        <section class="content">
           <p>
             A Ponte foi criada por nós no intúito de aprendizagem, tanto
             front-end quanto back-end, <br />o que muitos conhecem por full
@@ -34,11 +48,13 @@
 
         <h3>Ferramentas e Linguagens</h3>
 
-        <img src="/img/features.png" alt="Ferramentas e Linguagens" />
+        <img src="/img/features1.png" alt="Ferramentas e Linguagens" />
       </div>
-    </main>
+    
+</div>
+      
 
-    <div class="color"></div>
+    
 
     <%- include ('parts/page-footer') %>
   </body>
