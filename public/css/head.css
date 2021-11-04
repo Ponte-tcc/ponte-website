@@ -9,7 +9,7 @@
 
 html{
 
-
+--bg: rgb(250, 247, 253);
   --color-border:  rgb(121, 121, 121);
 
 
@@ -23,11 +23,10 @@ body{
     
     max-width: 1100px;
 
-    padding: 2vh;
-    box-sizing: border-box;
+   
 
-    background-color: rgb(250, 247, 253);
-    height: 100vh;
+    background-color: var(--bg);
+    height: fit-content;
 
 }
 

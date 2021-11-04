@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <!--Head-->
+
 
   <%- include('parts/head', { title :'Home', linkCss:'/css/home.css'}) %> 
 
-  <!--Head-->
+
 
   <body>
 
-    <!--Header-->
-
-    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+   
     <%- include('parts/header', { title : ''}) %>
-
-    <!--Header-->
+<div class="contentHome">
+  <div class="headerFix"></div>
     <main class="mainHome">
-
-      <img class="logo" src="img/ponte-logo.png" alt="">
+<div class="imgHome"><img class="logo" src="img/ponte-logo.png" alt=""></div>
       
-      <div class="hr"></div>
       
-<% if(sucs === 'Publicado!'){%>
+      <hr>
+      
+<% if(sucs === 'aPublicado!'){%>
   <a><%= sucs %></a> 
   <%} %> 
         <div class="publicacao">
@@ -34,26 +32,49 @@
           </div>
 
           <form action="/publicar" name="textPublicar" method="POST" class="publicar">
-            <textarea
-            name="conteudo"
-            placeholder="Escreva sua publicação aqui..."
-            ></textarea>
+            <div class="publi1">
+              
 
-            <button type="submit">Publicar</button>
+            <input type="text" name="conteudo" autocomplete="off" autocapitalize="off"
+            placeholder="Oi <%= userEx %>, troca uma ideia ai... "
+            maxlength="118">
+          
+          </div>
+            
+<div class="publi2"><button type="submit">Publicar</button></div>
+            
           </form>
-
+<div class="hr inicial"></div>
         </div>
       
         <div class="publicados">
         
-        <%console.log(userCurtidas)%> 
+        
          
           <%pubs.forEach(pub => {%>
             <div class="publica">
-              <%= pub.userEx %> 
-              <a href="/perfil/<%= pub.userUser %>"><small><%= pub.userUser %></small></a>
+
+              <div class="p0">O</div>
+
+              <div class="p1">
+              <div class="p2"><%= pub.userEx %> 
+              <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
+              </div>
               <%= pub.conteudo %>
-              <%= pub.publiCurtidas %>
+              
+            </div>
+              
+              
+
+
+  
+  
+              
+            </div>
+
+            <div class="publicaTwo">
+              <div class="p11">
+            <%= pub.publiCurtidas %>
               <% var visao = String(pub._id)
                %> 
 
@@ -69,7 +90,8 @@
                 <button type="submit">Curtir</button>
               </form>
               <%}%>
-              
+            </div>
+              <div class="p12">
               <% var monthNames = [
       'Janeiro', 'Fevereiro', 'Março',
       'Abril', 'Maio', 'Junho', 'Julho',
@@ -97,13 +119,9 @@
         
     </form> 
 <%}%>
-
-
-
-  
-  
-              <hr>
-            </div>
+</div>
+</div>
+            <div class="hr"></div>
           <%}) %> 
 
         </div>
@@ -113,8 +131,12 @@
       
     </main>
     <div class="noticias">
-      noticias
+      <div class="notiTitle">Notícias</div>
+    
+      
 </div>
+    </div>
+    
     <%- include ('parts/page-footer') %>
 
  
