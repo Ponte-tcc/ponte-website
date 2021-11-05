@@ -33,6 +33,8 @@ const errosPass = []
 var idPubli
 var userCurtidas = []
 
+var naoLogado
+
 const regexOne = /^[a-z0-9]+([_ -.]?[a-z0-9])*$/
 const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/
 
@@ -43,7 +45,8 @@ routes.get("/", (req, res) => {
     res.redirect('/home')
 
   }
-  res.render(views + "index", {erros})
+  naoLogado = 1
+  res.render(views + "index", {erros, naoLogado})
   if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}}
 })
 routes.post("/", (req, res) => { 
@@ -168,7 +171,8 @@ routes.get("/cadastro", function(req, res){
     res.redirect('/home')
 
   }
-  res.render(views + "cadastro", {erros, errosUser, errosPass, errosEx, errosEmail})
+  naoLogado = 1
+  res.render(views + "cadastro", {erros, errosUser, errosPass, errosEx, errosEmail, naoLogado})
 
   if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}};
   if(errosUser.length >= 1){for(var i = 0; i = errosUser.length; i++){errosUser.shift()}}
@@ -312,7 +316,7 @@ routes.post("/perfis", (req, res)=>{
 
 routes.get("/home", (req, res) =>{
 
-
+  naoLogado = 0
 if(req.session.user){
 
 Pub.find({}).sort({publiCurtidas: 'desc'}).then((pubs)=>{
@@ -322,27 +326,28 @@ Pub.find({}).sort({publiCurtidas: 'desc'}).then((pubs)=>{
 
   var sessionID = req.session.user
   res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, sessionID, 
-    userAdm, idPubli, userCurtidas, userCcLength, User})
+    userAdm, idPubli, userCurtidas, userCcLength, User, naoLogado})
   sucs = ''
 
 })
 }
-else{res.render(views + 'logarse')}
+else{res.render(views + 'logarse', {naoLogado})}
 })
 
 
 routes.get("/suporte", function(req, res){
+  naoLogado = 0
   if(req.session.user){
 Sup.find({}).sort({createdAt: 'desc'}).then((sups)=>{
 
-res.render(views + 'suporte', {userUser, userEmail, userEx, userID, sucs, erros, userAdm, sups})
+res.render(views + 'suporte', {userUser, userEmail, userEx, userID, sucs, erros, userAdm, sups, naoLogado})
     if(erros.length >= 1){for(var i = 0; i = erros.length; i++){erros.shift()}}
     sucs = ''
 
 })
     
   }else{
-    res.render(views + 'logarse')
+    res.render(views + 'logarse', {naoLogado})
 }})
 
 routes.post("/suporte",(req, res) =>{
@@ -531,13 +536,14 @@ routes.post("/deletar-sup-adm/:id",(req, res) =>{
 
 
 routes.get("/sobre", (req, res) => {
-if(req.session.user){res.render(views + 'sobre', {userUser, userEmail, userEx, userAdm})}
-else{res.render(views + 'logarse')}
+  naoLogado = 0
+if(req.session.user){res.render(views + 'sobre', {userUser, userEmail, userEx, userAdm, naoLogado})}
+else{res.render(views + 'logarse', {naoLogado})}
 })
  
 
 routes.get("/perfil/:user", (req, res) => {
-
+  naoLogado = 0
 User.findOne({user:req.params.user}).then((userExist)=>{
 if(req.session.user){
 
@@ -551,7 +557,7 @@ if(req.session.user == userExist._id){
     var sessionID = req.session.user
     
     res.render(views + 'perfil', {userUser, userEmail, userEx, pubs, 
-      sessionID, perfilEx, perfilUser, userAdm})
+      sessionID, perfilEx, perfilUser, userAdm, naoLogado})
     
   
   })
@@ -561,7 +567,7 @@ if(req.session.user == userExist._id){
     var sessionID = "NOT"
 
     res.render(views + 'perfil', {userUser, userEmail, userEx, pubs, 
-      sessionID, perfilEx, perfilUser, userAdm})
+      sessionID, perfilEx, perfilUser, userAdm, naoLogado})
     
   
   })
@@ -569,7 +575,7 @@ if(req.session.user == userExist._id){
 
 }
 
-}else{res.render(views + 'logarse')}
+}else{res.render(views + 'logarse', {naoLogado})}
 
 })
 })

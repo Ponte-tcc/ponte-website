@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
-  <!--Head-->
 
-  <%- include('parts/head', { title : 'Login', linkCss:'/css/style-index.css', linkHeader : '/css/style-header-login.css'} ) %>
 
-  <!--Head-->
+  <%- include('parts/head', { title : 'Login', linkCss:'/css/index.css'} ) %>
+
+ 
 
   <body>
-    <!--Header-->
+  
 
-    <%- //include('parts/header', { title : ''}) %>
-    <!--no title vai uma variável string que sera mostrada diferente para cada pagina-->
+    <%- include('parts/header', { title : 'Login'}) %>
+   
 
-    <!--Header-->
-
-    <main>
-      <div class="content">
+    <div class="container index">
+      <div class="contentIndex">
         <h1>Bem Vindo</h1>
-        <p>Vamos codar juntos :D</p>
+        <p>Seja legal com as pessoas :)</p>
       </div>
 
       <div class="box">
+        <h1>Login</h1>
         <form class="box-login" method="post" action="/">
-          <h1>Login</h1>
+          
 
           <% if(erros.length > 1){erros.splice(-1,1)} %> 
           <% erros.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
@@ -52,21 +51,17 @@
             />
           </div>
           <button type='submit'id="submit">Confirmar</button>
+          <a href="/cadastro" id="cadastro-btn">Se não tem um login, Cadastre-se</a>
         </form>
         
 
-        <div id="cadastro-btn-delim">
-          <a href="/cadastro" id="cadastro-btn"
-            ><input
-              type="submit"
-              name="se-nao-tem-login"
-              value="Se não tem um login, Cadastre-se"
-          /></a>
-        </div>
+        
+          
+        
       </div>
-    </main>
+    </div>
 
-    <div class="color"></div>
+   
 
     <%- include ('parts/page-footer') %>
   </body>
