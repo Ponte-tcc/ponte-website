@@ -7,6 +7,37 @@ const PublicadoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    comentarios:[{ 
+        comentario:[{
+contComent: {
+
+            null: false,
+            type: String,
+            require: true,
+    
+        }, 
+        userEx: {
+
+            null: false,
+            type: String,
+            require: true,
+    
+        },
+        userUser: {
+
+            null: false,
+            type: String,
+            require: true,
+    
+        },
+        createdAt:{ 
+            type: Date,  
+            default: Date.now 
+        }
+
+        }],
+            
+    }], 
     ValiaID:{
 
         type: String,

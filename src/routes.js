@@ -319,7 +319,7 @@ routes.get("/home", (req, res) =>{
   naoLogado = 0
 if(req.session.user){
 
-Pub.find({}).sort({publiCurtidas: 'desc'}).then((pubs)=>{
+Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
 
 
 
@@ -495,6 +495,38 @@ console.log('nao salvo')
 })
 })
   
+
+routes.post("/comentar/:id",(req, res) =>{
+  if(!req.body.contComent || typeof req.body.contComent == 'undefined' || req.body.contComent == null ){
+
+    console.log('digita alguma coisa meo')
+    res.redirect('/home')
+
+  }else{
+
+
+
+  
+  var comment = {
+
+    contComent: req.body.contComent,
+    userEx: userEx,
+    userUser: userUser,
+
+
+
+  }
+    
+    Pub.findByIdAndUpdate({_id:req.params.id}, {$push: {comentarios: { comentario: comment }}})
+    .then(x => {
+      res.redirect('/home')
+      
+    })
+    .catch(e => {
+    console.log('nao salvo')
+    })
+   }
+})
 
 
 

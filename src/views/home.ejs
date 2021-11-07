@@ -11,7 +11,7 @@
 
    
     <%- include('parts/header', { title : ''}) %>
-  <script src="script/curtir.js"></script>
+  
 <div class="container home">
   
     <main class="mainHome">
@@ -35,7 +35,7 @@
           <form action="/publicar" name="textPublicar" method="POST" class="publicar">
             <div class="publi1">
               
-              <textarea name="conteudo" id="" 
+              <textarea class="textInput" name="conteudo" id="" 
               placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
               maxlength="200" wrap="hard"></textarea>
 
@@ -76,7 +76,8 @@
 
             <div class="publicaTwo">
               <div class="p11">
-            
+             <button class="comentPart"><img src="img/ballon.png" alt=""></button>
+             <%=pub.comentarios.length%>
               <% var visao = String(pub._id)
                %> 
 
@@ -93,7 +94,9 @@
                 <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
               </form>
               
-              <%}%><%= pub.publiCurtidas %>
+              <%}%>
+             
+              <%= pub.publiCurtidas %>
             </div>
               <div class="p12">
               <% var monthNames = [
@@ -108,6 +111,7 @@
  var h = pub.createdAt.getHours()
  var mi = pub.createdAt.getMinutes()%>
  <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+ 
 <input type="hidden" name='pubId' value="<%=pub._id%>">
 <% if(userAdm == 1){%>
   <form action="/deletar/<%=pub._id%>" method="post">
@@ -124,11 +128,50 @@
     </form> -->
 <%}%>
 </div>
-</div>
-            <div class="hr"></div>
-          <%}) %> 
+            </div> 
 
-        </div>
+<div class="comentarios">
+  <form action="/comentar/<%=pub._id%>" name="textPublicar" method="POST" class="publicar">
+            <div class="publi1">
+              
+              <textarea class="textInput" name="contComent" id="" 
+              placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
+              maxlength="200" wrap="hard"></textarea>
+
+            
+          
+          </div>
+            
+<div class="publi2"><button type="submit" class="estrelar btSubmit small">Comentar</button></div>
+            
+          </form>
+  
+  
+  <%pub.comentarios.forEach(coment => {
+    
+    coment.comentario.forEach(comment => {%>
+      <div class="hr"></div>
+      <div class="publica">
+
+<div class="p0"><img src="img/user.png" alt="" title=""></div>
+
+<div class="p1">
+<div class="p2"><%= comment.userEx %> 
+<a href="/perfil/<%= comment.userUser %>"><small>  @<%= comment.userUser %></small></a>
+</div>
+<textarea class="textCont" readonly><%= comment.contComent %></textarea>
+</div>
+</div>
+
+        
+      <%});});%>
+  </div>
+  
+            <div class="hr"></div>
+           
+          <%}) %> 
+</div>
+        
 
       
       
@@ -141,6 +184,8 @@
 </div>
 </div>
 <script src="script/autoResize.js"></script>
+<script src="script/curtir.js"></script>
+  <script src="script/coment.js"></script>
     <%- include ('parts/page-footer') %>
 
  

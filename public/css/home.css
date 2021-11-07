@@ -48,7 +48,13 @@
 
 }
 
-form.publicar textarea{
+.comentText{
+width: 100%;
+    margin: 0 auto;
+
+}
+
+textarea {
 
     width: 90%;
  box-sizing: border-box;
@@ -187,6 +193,23 @@ margin: 0 auto;
 
     align-items: center;
     display: flex;
+
+}
+
+.comentarios{
+transition: 0.5s;
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    border: 1px solid var(--color-border);
+
+}
+
+.comentarios.hide{
+    transition: 0.5s;
+    border: 0;
+    height: 0;
+    overflow: hidden;
 
 }
 
