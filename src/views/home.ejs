@@ -53,7 +53,9 @@
         
         
          
-          <%pubs.forEach(pub => {%>
+          <% var i = 0
+          pubs.forEach(pub => {%>
+            <%=i%>
             <div class="publica">
 
               <div class="p0"><img src="img/user.png" alt="" title=""></div>
@@ -76,7 +78,7 @@
 
             <div class="publicaTwo">
               <div class="p11">
-             <button class="comentPart"><img src="img/ballon.png" alt=""></button>
+             <button class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
              <%=pub.comentarios.length%>
               <% var visao = String(pub._id)
                %> 
@@ -130,7 +132,11 @@
 </div>
             </div> 
 
-<div class="comentarios">
+
+ <div class="comentarios <%=i%>">
+  
+
+
   <form action="/comentar/<%=pub._id%>" name="textPublicar" method="POST" class="publicar">
             <div class="publi1">
               
@@ -168,7 +174,7 @@
   </div>
   
             <div class="hr"></div>
-           
+            <%i++%>
           <%}) %> 
 </div>
         
@@ -182,10 +188,12 @@
     
       
 </div>
-</div>
+</div> 
+<script src="script/coment.js"></script>
 <script src="script/autoResize.js"></script>
 <script src="script/curtir.js"></script>
-  <script src="script/coment.js"></script>
+ 
+
     <%- include ('parts/page-footer') %>
 
  
