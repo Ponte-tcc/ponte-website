@@ -8,12 +8,13 @@
 
 
   <body>
-
+    
    
-    <%- include('parts/header', { title : ''}) %>
+  <%- include('parts/header', { title : ''}) %>
   
-<div class="container home">
-  
+
+  <div class="container home">
+ 
     <main class="mainHome">
 <div class="imgHome"><img class="logo" src="img/icoPonte.png" alt=""></div>
       
@@ -54,7 +55,7 @@
         
          
           <% var i = 0
-          pubs.forEach(pub => {%>
+pubs.forEach(pub => {%>
             <%=i%>
             <div class="publica">
 
@@ -75,10 +76,25 @@
   
               
             </div>
+ 
+   <%pub.comentarios.forEach(coment => {%>
+    
+           
+  <div class="modal" id="modal<%=i%>">
+    <div class="modal-header">
+      <div class="title">Example Modal</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, perferendis similique? Illo error necessitatibus esse repudiandae, facere autem natus fuga molestias voluptate at debitis, est ea nobis, provident dolore ducimus.
+    </div>
+  </div>
 
+  <div id="overlay"></div>
+<%});%>
             <div class="publicaTwo">
               <div class="p11">
-             <button class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
+             <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
              <%=pub.comentarios.length%>
               <% var visao = String(pub._id)
                %> 
@@ -133,45 +149,7 @@
             </div> 
 
 
- <div class="comentarios <%=i%>">
-  
-
-
-  <form action="/comentar/<%=pub._id%>" name="textPublicar" method="POST" class="publicar">
-            <div class="publi1">
-              
-              <textarea class="textInput" name="contComent" id="" 
-              placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
-              maxlength="200" wrap="hard"></textarea>
-
-            
-          
-          </div>
-            
-<div class="publi2"><button type="submit" class="estrelar btSubmit small">Comentar</button></div>
-            
-          </form>
-  
-  
-  <%pub.comentarios.forEach(coment => {
-    
-    coment.comentario.forEach(comment => {%>
-      <div class="hr"></div>
-      <div class="publica">
-
-<div class="p0"><img src="img/user.png" alt="" title=""></div>
-
-<div class="p1">
-<div class="p2"><%= comment.userEx %> 
-<a href="/perfil/<%= comment.userUser %>"><small>  @<%= comment.userUser %></small></a>
-</div>
-<textarea class="textCont" readonly><%= comment.contComent %></textarea>
-</div>
-</div>
-
-        
-      <%});});%>
-  </div>
+ 
   
             <div class="hr"></div>
             <%i++%>
@@ -189,12 +167,13 @@
       
 </div>
 </div> 
-<script src="script/coment.js"></script>
+
+<script src="script/oment.js"></script>
 <script src="script/autoResize.js"></script>
 <script src="script/curtir.js"></script>
  
 
-    <%- include ('parts/page-footer') %>
+<%- include ('parts/page-footer') %>
 
  
 

@@ -1,0 +1,16 @@
+<!--<div class="publica">
+
+<div class="p0"><img src="img/user.png" alt="" title=""></div>
+
+<div class="p1">
+  
+    
+  
+<div class="p2">
+  <%= comment.userEx %> 
+<a href="/perfil/<%= comment.userUser %>"><small>  @<%= comment.userUser %></small></a>
+</div>
+
+<textarea class="textCont" readonly><%= comment.contComent %></textarea>
+</div>
+</div>-->
