@@ -21,9 +21,9 @@
       
     
       
-<% if(sucs === 'aPublicado!'){%>
-  <a><%= sucs %></a> 
-  <%} %> 
+<% if(sucs === 'aPublicado!'){%><a><%= sucs %></a> <%} %>
+  
+   
         <div class="publicacao">
 
           <div class="caixa-perfil">
@@ -51,110 +51,176 @@
         </div>
       
         <div class="publicados">
-        
-        
          
-          <% var i = 0
-pubs.forEach(pub => {%>
-            <%=i%>
-            <div class="publica">
+          <% var i = 0; pubs.forEach(pub => {%>
 
-              <div class="p0"><img src="img/user.png" alt="" title=""></div>
+          
 
-              <div class="p1">
-              <div class="p2"><%= pub.userEx %> 
-              <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
-              </div>
-              <textarea class="textCont" readonly><%= pub.conteudo %></textarea>
-              
+          <div class="publica">
+
+            <div class="p0"><img src="img/user.png" alt="" title=""></div>
+
+            <div class="p1">
+            <div class="p2"><%= pub.userEx %> 
+            <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
             </div>
-              
-              
+            <textarea class="textCont" readonly><%= pub.conteudo %></textarea>
 
-
-  
-  
-              
             </div>
- 
-   <%pub.comentarios.forEach(coment => {%>
-    
-           
-  <div class="modal" id="modal<%=i%>">
-    <div class="modal-header">
-      <div class="title">Example Modal</div>
-      <button data-close-button class="close-button">&times;</button>
-    </div>
-    <div class="modal-body">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, perferendis similique? Illo error necessitatibus esse repudiandae, facere autem natus fuga molestias voluptate at debitis, est ea nobis, provident dolore ducimus.
-    </div>
-  </div>
 
-  <div id="overlay"></div>
-<%});%>
-            <div class="publicaTwo">
-              <div class="p11">
-             <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
-             <%=pub.comentarios.length%>
-              <% var visao = String(pub._id)
-               %> 
+          </div>
 
-              <% if(userCurtidas.indexOf(visao)>=0){%>
-                <form action="/descurtir/<%=pub._id%>" method="post">
-                
-                <button type="submit"><img src="img/star.png" alt="Tirar estrela"></button>
-              </form>
-                
-                <%}else{%> 
-                  <button onClick="curtir('User', '123',  'pub._id' )">cc</button>
-              <form action="/curtir/<%=pub._id%>" method="post">
-                
-                <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
-              </form>
-              
-              <%}%>
-             
-              <%= pub.publiCurtidas %>
-            </div>
-              <div class="p12">
-              <% var monthNames = [
-      'Janeiro', 'Fevereiro', 'Março',
-      'Abril', 'Maio', 'Junho', 'Julho',
-      'Agosto', 'Setembro', 'Outubro',
-      'Novembro', 'Dezembro'
-   ];
- var d = pub.createdAt.getDate();
- var m = monthNames[pub.createdAt.getMonth()];
- var y = pub.createdAt.getFullYear();
- var h = pub.createdAt.getHours()
- var mi = pub.createdAt.getMinutes()%>
- <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
- 
-<input type="hidden" name='pubId' value="<%=pub._id%>">
-<% if(userAdm == 1){%>
-  <form action="/deletar/<%=pub._id%>" method="post">
-    <button type="submit">Deletar</button>
-        
-    </form>         
+         
+
+            <div class="modal" id="modal<%=i%>">
+
             
-<%}%>
 
- <%if(pub.idUser == sessionID){%>
-  <!--<form action="/deletar/<%=pub._id%>" method="post">
-    <button type="submit">Deletar</button>
+              <div class="modal-header">
+              <div class="title">PONTE</div>
+              <button data-close-button class="close-button">&times;</button>
+              
+              </div>
+
+              <div class="modal-init">
+                <div class="publica">
+
+                  <div class="p0"><img src="img/user.png" alt="" title=""></div>
+      
+                  <div class="p1">
+                  <div class="p2"><%= pub.userEx %> 
+                  <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
+                  </div>
+                  <textarea class="textCont" readonly><%= pub.conteudo %></textarea>
+      
+                  </div>
+      
+                </div>
+                <div class="publicacao">
+
+                  <div class="caixa-perfil">
+                    <div class="avatar-perfil">
+                    <img src="" class="avatar-publi" />
+                    </div>
+                    <div class="nome-perfil"><h3></h3></div>
+                  </div>
         
-    </form> -->
-<%}%>
-</div>
-            </div> 
+                  <form action="/comentar/<%=pub._id%> " name="textPublicar" method="POST" class="publicar">
+                    <div class="publi1">
+                      
+                      <textarea class="textInput" name="contComent" id="" 
+                      placeholder="<%= userEx %>, estrele seu comentário!! " 
+                      maxlength="200" wrap="hard"></textarea>
+        
+                    
+                  
+                  </div>
+                    
+        <div class="publi2"><button type="submit" class="estrelar btSubmit">Comentar</button></div>
+                    
+                  </form>
+        <div class="hr inicial"></div>
+                </div>
 
+              </div>
 
- 
-  
-            <div class="hr"></div>
-            <%i++%>
+              <%pub.comentarios.forEach(coment => {%>
+            <%coment.comentario.forEach(comentario => {%> 
+              
+                     
+                <div class="modal-body">
+              <div class="p0"><img src="img/user.png" alt="" title=""></div>
+            
+              <div class="p1">
+                
+              <div class="p2">
+                <%= comentario.userEx %> 
+              <a href="/perfil/<%= comentario.userUser %>"><small>  @<%= comentario.userUser %></small></a>
+              </div>
+              
+              <textarea class="textCont" readonly><%= comentario.contComent %></textarea>
+              </div>   
+                
+               </div>
+               <div class="hr"></div>
+                <%})%>
+            
+            
+               
+            
+             <%})%> 
+                
+            </div>
+                
+            <div id="overlay"></div>
+
+          
+
+          <div class="publicaTwo">
+
+            <div class="p11">
+            <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
+            <%=pub.comentarios.length%>
+            <% var visao = String(pub._id)
+              %> 
+
+            <% if(userCurtidas.indexOf(visao)>=0){%>
+              <form action="/descurtir/<%=pub._id%>" method="post">
+              
+              <button type="submit"><img src="img/star.png" alt="Tirar estrela"></button>
+            </form>
+              
+              <%}else{%> 
+                <button>cc</button>
+            <form action="/curtir/<%=pub._id%>" method="post">
+              
+              <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
+            </form>
+
+            <%}%>
+
+            <%= pub.publiCurtidas %>
+            </div>
+            <div class="p12">
+            <% var monthNames = [
+            'Janeiro', 'Fevereiro', 'Março',
+            'Abril', 'Maio', 'Junho', 'Julho',
+            'Agosto', 'Setembro', 'Outubro',
+            'Novembro', 'Dezembro'
+            ];
+            var d = pub.createdAt.getDate();
+            var m = monthNames[pub.createdAt.getMonth()];
+            var y = pub.createdAt.getFullYear();
+            var h = pub.createdAt.getHours()
+            var mi = pub.createdAt.getMinutes()%>
+            <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+
+            <input type="hidden" name='pubId' value="<%=pub._id%>">
+            <% if(userAdm == 1){%>
+            <form action="/deletar/<%=pub._id%>" method="post">
+            <button type="submit">Deletar</button>
+
+            </form>         
+
+            <%}%>
+
+            <%if(pub.idUser == sessionID){%>
+            <!--<form action="/deletar/<%=pub._id%>" method="post">
+            <button type="submit">Deletar</button>
+
+            </form> -->
+            <%}%>
+            </div>
+
+          </div> 
+
+          <div class="hr"></div>
+
+          <%i++%>
+
           <%}) %> 
-</div>
+
+      </div>
         
 
       
@@ -165,10 +231,11 @@ pubs.forEach(pub => {%>
       <div class="notiTitle">Notícias</div>
     
       
-</div>
+  </div>
+
 </div> 
 
-<script src="script/oment.js"></script>
+<script src="script/coment.js"></script>
 <script src="script/autoResize.js"></script>
 <script src="script/curtir.js"></script>
  

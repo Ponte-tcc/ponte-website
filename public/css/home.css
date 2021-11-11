@@ -10,6 +10,9 @@
     background-color: white;
     width: 500px;
     max-width: 80%;
+
+    overflow: auto;
+      max-height: 80%;
 }
   
   .modal.active {
@@ -39,6 +42,9 @@
   }
   
   .modal-body {
+      display: flex;
+      flex-direction: column;
+      
     padding: 10px 15px;
   }
   
@@ -58,6 +64,7 @@
     opacity: 1;
     pointer-events: all;
   }
+
 
 .container.home{
 
