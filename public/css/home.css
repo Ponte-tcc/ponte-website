@@ -70,6 +70,7 @@
 
    
     justify-content: flex-end;
+    gap: 20px;
     
 
 }
@@ -80,7 +81,8 @@
     display: flex;
     flex-direction: column;
    padding-top: 12px;
-   border-left: 1px solid var(--color-border);
+   border: 1px solid var(--color-border);
+   
 
 }
 
@@ -124,7 +126,7 @@ width: 100%;
 
 textarea {
 
-    width: 90%;
+width: 90%;
  box-sizing: border-box;
  border: 0;
  resize: none;
@@ -289,9 +291,13 @@ transition: 0.5s;
 
 .noticias{
 
-    border-left: 1px solid var(--color-border);
+    
     width: 25%;
     padding-top: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     
 
 }
@@ -302,5 +308,78 @@ transition: 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
+
+}
+
+.noticia{
+
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+
+    
+}
+
+
+
+.manchete{
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+
+}
+
+.contNoti{
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.dataNoti, .categoriaNoti{
+
+    font-style: italic;
+
+}
+
+.formNoti .inp{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.formNoti input{
+
+    order: 1px solid var(--color-border);
+    border-radius: 3px;
+    outline: none;
+
+}
+
+.formNoti button{
+
+    width: fit-content;
+    float: right;
+
+   
+
+}
+
+.formNoti .btnSubNoti{
+
+    margin-top: 10px;
+
+    width: 100%;
+
+}
+
+.contNoti{
+
+    
 
 }

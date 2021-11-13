@@ -2,6 +2,7 @@ const express = require("express")
 const routes = express.Router()
 const views = __dirname + "/views/"
 const mongoose = require("mongoose")
+
 require("./models/User")
 const User = mongoose.model("users")
 
@@ -10,6 +11,9 @@ const Sup = mongoose.model("suportes")
 
 require("./models/Publicado")
 const Pub = mongoose.model("publicados")
+
+require("./models/Noticia")
+const Noti = mongoose.model("noticias")
 
 var userUser
 var userEmail
@@ -84,10 +88,10 @@ const userIf = req.body.user
           userEx = user.exibition
           userAdm = user.userAdm
           userCcLength = user.curtidas.length
-          console.log(userCcLength)
+          
           for(var i = 0; i < userCcLength; i++){
             userCurtidas.push(user.curtidas[i])
-            console.log(userCurtidas)
+            
           }
           
           res.redirect('/home')
@@ -133,10 +137,10 @@ const userIf = req.body.user
           userEx = user.exibition
           userAdm = user.userAdm
           userCcLength = user.curtidas.length
-          console.log(userCcLength)
+          
           for(var i = 0; i < userCcLength; i++){
             userCurtidas.push(user.curtidas[i])
-            console.log(userCurtidas)
+            
           }
           
           res.redirect('/home')
@@ -318,18 +322,28 @@ routes.get("/home", (req, res) =>{
 
   naoLogado = 0
 if(req.session.user){
+var sessionID = req.session.user
 
 Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
 
+ 
 
 
 
-  var sessionID = req.session.user
-  res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, sessionID, 
+Noti.find({}).sort({createdAt: 'asc'}).then((nots)=>{
+
+  
+ 
+
+  
+  res.render(views + 'home', {userUser, userEmail, userEx, sucs, pubs, nots, sessionID, 
     userAdm, idPubli, userCurtidas, userCcLength, User, naoLogado})
-  sucs = ''
+
+  sucs = '' 
 
 })
+})
+
 }
 else{res.render(views + 'logarse', {naoLogado})}
 })
@@ -417,6 +431,33 @@ routes.post("/publicar",(req, res) =>{
   
     })
   
+})
+
+routes.post("/publiNoticia",(req, res) =>{
+  
+  const newNoti = {
+
+    titulo: req.body.inputTitleNoti,
+    categoria: req.body.inputCatNoti,
+    conteudo: req.body.inputContNoti,
+
+  }
+
+  new Noti(newNoti).save().then((nots) => {
+
+    console.log("Publicado com sucesso!")
+    res.redirect('/home')
+    sucs = "Publicado!"
+    
+
+  })
+  .catch((erro) =>{
+
+    console.log("Erro: " + erro)
+    res.redirect("/home")
+
+  })
+
 })
 
 routes.post("/descurtir/:id",(req, res) =>{

@@ -1,3 +1,7 @@
+require("./models/Publicado")
+const Pub = mongoose.model("publicados")
+
+console.log('a')
 
 async function  curtir(user, idUser, idPubli){
 
