@@ -490,7 +490,8 @@ routes.post("/descurtir/:id",(req, res) =>{
         
         Pub.findByIdAndUpdate({_id:idPubli}, {publiCurtidas: descurtiu})
         .then(x => {
-          res.redirect('/home')
+          if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+    else{res.redirect('/home')}
           
         })
         .catch(e => {
@@ -500,6 +501,7 @@ routes.post("/descurtir/:id",(req, res) =>{
   
 
 })
+
 
 routes.post("/curtir/:id",async (req, res, next) =>{
   const idUser = req.session.user
@@ -527,7 +529,8 @@ curtiu++
 
 Pub.findByIdAndUpdate({_id:idPubli}, {publiCurtidas: curtiu})
 .then(x => {
-  res.redirect('/home')
+  if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+    else{res.redirect('/home')}
   
 })
 .catch(e => {
@@ -541,7 +544,8 @@ routes.post("/comentar/:id",(req, res) =>{
   if(!req.body.contComent || typeof req.body.contComent == 'undefined' || req.body.contComent == null ){
 
     console.log('digita alguma coisa meo')
-    res.redirect('/home')
+    if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+    else{res.redirect('/home')}
 
   }else{
 
@@ -560,7 +564,8 @@ routes.post("/comentar/:id",(req, res) =>{
     
     Pub.findByIdAndUpdate({_id:req.params.id}, {$push: {comentarios: { comentario: comment }}})
     .then(x => {
-      res.redirect('/home')
+      if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+    else{res.redirect('/home')}
       
     })
     .catch(e => {
@@ -574,6 +579,17 @@ routes.post("/comentar/:id",(req, res) =>{
 routes.post("/deletar/:id",(req, res) =>{
   
   Pub.remove({_id:req.params.id}).then(()=>{
+    if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+    else{res.redirect('/home')}
+    
+    console.log('deletado')
+  }).catch((err)=>{console.log(err)})
+
+})
+
+routes.post("/deletar-noti-adm/:id",(req, res) =>{
+  
+  Noti.remove({_id:req.params.id}).then(()=>{
     res.redirect('/home')
     console.log('deletado')
   }).catch((err)=>{console.log(err)})
@@ -616,7 +632,7 @@ else{res.render(views + 'logarse', {naoLogado})}
  
 
 routes.get("/perfil/:user", (req, res) => {
-  naoLogado = 0
+  naoLogado = 2
 User.findOne({user:req.params.user}).then((userExist)=>{
 if(req.session.user){
 
@@ -625,12 +641,12 @@ if(req.session.user){
 
 
 if(req.session.user == userExist._id){
-  Pub.find({}).sort({createdAt: 'desc'}).then((pubs)=>{
+  Pub.find({userUser: userExist.user}).sort({createdAt: 'desc'}).then((pubs)=>{
 
     var sessionID = req.session.user
     
-    res.render(views + 'perfil', {userUser, userEmail, userEx, pubs, 
-      sessionID, perfilEx, perfilUser, userAdm, naoLogado})
+    res.render(views + 'perfil', {perfilEx, perfilUser, userUser, userEmail, userEx, sucs, pubs, sessionID, 
+      userAdm, idPubli, userCurtidas, userCcLength, User, naoLogado})
     
   
   })
@@ -639,8 +655,8 @@ if(req.session.user == userExist._id){
     
     var sessionID = "NOT"
 
-    res.render(views + 'perfil', {userUser, userEmail, userEx, pubs, 
-      sessionID, perfilEx, perfilUser, userAdm, naoLogado})
+    res.render(views + 'perfil', {perfilEx, perfilUser, userUser, userEmail, userEx, sucs, pubs, sessionID, 
+      userAdm, idPubli, userCurtidas, userCcLength, User, naoLogado})
     
   
   })

@@ -37,7 +37,74 @@
       <script src="/script/wrapper.js"></script>
     </header>
 
- <%}else{%>
+ <%}else if(naoLogado == 2){%>
+
+  <header>
+    <script src="../script/logout.js"></script>
+    <div class="container header">
+    
+      <div class="ponteHome">
+        <a href="/home"><img src="../img/home.png" alt="Homepage" title="Homepage"></a>
+      </div>
+    
+    <div id="nav-login">
+          
+            <a class="seuPerfil" href="../perfil/<%= userUser %>">
+              
+                <img src="../img/user.png" alt="" title="">   
+            
+              <div class="userPerfil">
+               
+                <%= userEx %> 
+                <small>@<%= userUser %></small> 
+              </div>
+            </a>
+           
+    
+            <% if(userAdm == 1){%>
+              <!--<form action="/publicacoes" method="post">
+              <button type="submit">Todas as publicações</button>
+              </form>  -->
+              
+              <form action="/perfis" method="post">
+                <button type="submit"><p>Todos os perfis</p> </button>
+                </form> 
+            <%}%>
+    
+        
+          
+    </div>
+     
+    <div id="nav-help">
+    
+    <div class="btn-help">
+      
+    
+    <button><img src="../img/gear.png" alt="" id="drop"></button>
+    
+    
+      
+    
+    
+    </div>
+          <div class="warp hide">
+            <ul>
+              <li><a href="/suporte">Suporte</a> </li>
+              <li><a href="/sobre">Sobre</a> </li>
+              <li>Darkmode </li>
+              <li><form action="/logout" method="post"><button>Logout</button></form></a> 
+              </li>
+    
+            </ul>
+    
+          </div>  
+    
+    </div>
+    
+      <script src="..//script/wrapper.js"></script>
+    </header>
+
+ <%} else{%>
   
   <header>
     <script src="script/logout.js"></script>
@@ -62,12 +129,12 @@
            
     
             <% if(userAdm == 1){%>
-              <form action="/publicacoes" method="post">
+              <!--<form action="/publicacoes" method="post">
               <button type="submit">Todas as publicações</button>
-              </form>  
+              </form>  -->
               
               <form action="/perfis" method="post">
-                <button type="submit">Todos os perfis</button>
+                <button type="submit"><p>Todos os perfis</p> </button>
                 </form> 
             <%}%>
     

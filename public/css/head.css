@@ -11,6 +11,7 @@ html{
 
 --bg: rgb(250, 247, 253);
 --color-border:  rgba(0, 0, 0, 0.199);
+--color-borderf: rgba(0, 0, 0, 0.801);
 
 
 }
@@ -36,14 +37,16 @@ body{
     width: 100%;
     margin: 0 auto;
     max-width: 1200px;
-
-    padding-top: 70px;
+padding: 70px 2vw 0 2vw;
+box-sizing: border-box;
+    
 
 }
 
 textarea{
 
     overflow: hidden;
+    resize: none;
 
 }
 

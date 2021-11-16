@@ -1,0 +1,11 @@
+<% var monthNames = [
+      'Janeiro', 'Fevereiro', 'Março',
+      'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro',
+      'Novembro', 'Dezembro'
+   ];
+ var d = <%=pub%>.createdAt.getDate();
+ var m = monthNames[<%=pub%>.createdAt.getMonth()];
+ var y = <%=pub%>.createdAt.getFullYear();
+ var h = <%=pub%>.createdAt.getHours()
+ var mi = <%=pub%>.createdAt.getMinutes()%>

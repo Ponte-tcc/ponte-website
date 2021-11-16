@@ -10,20 +10,16 @@
     <%- include('parts/header', { title : ''}) %>
     
     <div class="container perfil">
-      <div id="content">
+      <div class="mainPerfil">
   
 <% if(sessionID === 'NOT'){%>
-        
-  
+        <div class="partPerfil">
+  <div class="avatar"></div>
     <div class="nome">
-      <h3>Nome: <%= perfilEx %>  </h3>
-       
+      <h3><%= perfilEx %>  </h3>
+       <h3><%= perfilUser %>  </h3>
     </div>
-    <div class="user">
-      <h3>User: <%= perfilUser %>  </h3>
-      
     </div>
-  
 <div class="publicados">
 
 
@@ -48,6 +44,7 @@ var mi = pub.createdAt.getMinutes()%>
 <hr>
          
 </div>
+<div class="hr"></div>
 <%}) %> 
 
 </div>
@@ -55,53 +52,172 @@ var mi = pub.createdAt.getMinutes()%>
           
 <%}else{%>
 
-            <div class="container-right">
-              <div class="nome">
-                <h3>Nome: <%= userEx %>  </h3>
-                 <button>Mudar Nome</button>
-              </div>
-              <div class="user">
-                <h3>User: <%= userUser %>  </h3>
-                
-              </div>
-              <div class="email">
-                <h3>E-mail: <%= userEmail %>  </h3>
-                
-              </div>
-            </div>
+  <div class="partPerfil">
+  <div class="avatar"><img src="../img/userM.png" alt=""></div>
+    <div class="nome">
+      <h2><%= perfilEx %>  </h2>
+       <small>@<%= perfilUser %>  </small>
+    </div>
+    </div>
+
         <div class="publicados">
 
 
-  <%pubs.forEach(pub => {
-    if(pub.idUser == sessionID){%>
+  <%var i = 0; pubs.forEach(pub =>{%>
+    
     <div class="publica">
-            <%= pub.userEx %> 
-            <small><%= pub.userUser %></small>
-            <%= pub.conteudo %>
-            <% var monthNames = [
-      'Janeiro', 'Fevereiro', 'Março',
-      'Abril', 'Maio', 'Junho', 'Julho',
-      'Agosto', 'Setembro', 'Outubro',
-      'Novembro', 'Dezembro'
-   ];
- var d = pub.createdAt.getDate();
- var m = monthNames[pub.createdAt.getMonth()];
- var y = pub.createdAt.getFullYear();
- var h = pub.createdAt.getHours()
- var mi = pub.createdAt.getMinutes()%>
- <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
-<input type="hidden" name='pubId' value="<%=pub._id%>">
- 
-<form action="/deletar/<%=pub._id%>" method="post">
-    <button type="submit">Deletar</button>
-        
-    </form> 
-<%}%>  
-<div class="hr"></div>        
-          </div>
-          <%}) %> 
 
+<div class="p0"><img src="../img/user.png" alt="" title=""></div>
+
+<div class="p1">
+<div class="p2"><%= pub.userEx %> 
+<a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
+</div>
+<textarea class="textCont" readonly><%= pub.conteudo %></textarea>
+
+</div>
+
+</div>
+<div class="modal" id="modal<%=i%>">
+
+            
+
+<div class="modal-header">
+<div class="title">PONTE</div>
+<button data-close-button class="close-button">&times;</button>
+
+</div>
+
+<div class="modal-init">
+  <div class="publica">
+
+    <div class="p0"><img src="../img/user.png" alt="" title=""></div>
+
+    <div class="p1">
+    <div class="p2"><%= pub.userEx %> 
+    <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
+    </div>
+    <textarea class="textCont" readonly><%= pub.conteudo %></textarea>
+
+    </div>
+
+  </div>
+  <div class="publicacao">
+
+    <div class="caixa-perfil">
+      <div class="avatar-perfil">
+      <img src="" class="avatar-publi" />
+      </div>
+      <div class="nome-perfil"><h3></h3></div>
+    </div>
+
+    <form action="/comentar/<%=pub._id%> " name="textPublicar" method="POST" class="publicar">
+      <div class="publi1">
+        
+        <textarea class="textInput" name="contComent" id="" 
+        placeholder="<%= userEx %>, estrele seu comentário!! " 
+        maxlength="200" wrap="hard"></textarea>
+
+      
+    
+    </div>
+      
+<div class="publi2"><button type="submit" class="estrelar btSubmit">Comentar</button></div>
+      
+    </form>
+<div class="hr inicial"></div>
+  </div>
+
+</div>
+
+<%pub.comentarios.forEach(coment => {%>
+<%coment.comentario.forEach(comentario => {%> 
+
+       
+  <div class="modal-body">
+<div class="p0"><img src="../img/user.png" alt="" title=""></div>
+
+<div class="p1">
+  
+<div class="p2">
+  <%= comentario.userEx %> 
+<a href="/perfil/<%= comentario.userUser %>"><small>  @<%= comentario.userUser %></small></a>
+</div>
+
+<textarea class="textCont" readonly><%= comentario.contComent %></textarea>
+</div>   
+  
+ </div>
+ <div class="hr"></div>
+  <%})%>
+
+
+ 
+
+<%})%> 
+  
+</div>
+  
+<div id="overlay"></div>
+<div class="publicaTwo">
+
+<div class="p11">
+<button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="../img/ballon.png" alt=""></button>
+<%=pub.comentarios.length%>
+<% var visao = String(pub._id)
+  %> 
+
+<% if(userCurtidas.indexOf(visao)>=0){%>
+  <form action="/descurtir/<%=pub._id%>" method="post">
+  
+  <button type="submit"><img src="../img/star.png" alt="Tirar estrela"></button>
+</form>
+  
+  <%}else{%> 
+    
+<form action="/curtir/<%=pub._id%>" method="post">
+  
+  <button type="submit"><img src="../img/starun.png" alt="Dar uma estrela"></button>
+</form>
+
+<%}%>
+
+<%= pub.publiCurtidas %>
+</div>
+<div class="p12">
+<% var monthNames = [
+'Janeiro', 'Fevereiro', 'Março',
+'Abril', 'Maio', 'Junho', 'Julho',
+'Agosto', 'Setembro', 'Outubro',
+'Novembro', 'Dezembro'
+];
+var d = pub.createdAt.getDate();
+var m = monthNames[pub.createdAt.getMonth()];
+var y = pub.createdAt.getFullYear();
+var h = pub.createdAt.getHours()
+var mi = pub.createdAt.getMinutes()%>
+<small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
+
+<input type="hidden" name='pubId' value="<%=pub._id%>">
+
+        
+
+
+
+</div>
+<form action="/deletar/<%=pub._id%>" method="post">
+<button type="submit">Deletar</button>
+
+</form> 
+</div> 
+
+       
+<div class="hr"></div>
+          
+          
+          <%}) %> 
         </div>
+        
         
 <%} %> 
       </div>

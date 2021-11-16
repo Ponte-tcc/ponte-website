@@ -127,6 +127,7 @@ width: 100%;
 textarea {
 
 width: 90%;
+height: fit-content;
  box-sizing: border-box;
  border: 0;
  resize: none;
@@ -211,15 +212,6 @@ form.publicar button{
     align-items: center;
 
 }
-
-.publicados .hr{
-
-    width: 100%;
-    
-    margin: 1vh auto 4vh auto;
-
-}
-
 .publica{
 
     align-items: center;
@@ -266,27 +258,24 @@ margin: 0 auto;
 
 }
 
-.comentarios{
-transition: 0.5s;
-    width: 80%;
-    margin: 0 auto;
-    height: 100%;
-    border: 1px solid var(--color-border);
+
+.footer-noti{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
 }
 
-.comentarios.hide{
-    transition: 0.5s;
-    border: 0;
-    height: 0;
-    overflow: hidden;
+.noticia textarea{
+
+
+    width: 100%;
+    height: 13vh;
+    align-items: center;
+
 
 }
-
-
-
-
-
 
 
 .noticias{
@@ -340,46 +329,3 @@ transition: 0.5s;
 
 }
 
-.dataNoti, .categoriaNoti{
-
-    font-style: italic;
-
-}
-
-.formNoti .inp{
-
-    display: flex;
-    flex-direction: column;
-
-}
-
-.formNoti input{
-
-    order: 1px solid var(--color-border);
-    border-radius: 3px;
-    outline: none;
-
-}
-
-.formNoti button{
-
-    width: fit-content;
-    float: right;
-
-   
-
-}
-
-.formNoti .btnSubNoti{
-
-    margin-top: 10px;
-
-    width: 100%;
-
-}
-
-.contNoti{
-
-    
-
-}

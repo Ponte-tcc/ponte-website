@@ -171,7 +171,7 @@
             </form>
               
               <%}else{%> 
-                <button onClick="curtir()">cc</button>
+                
             <form action="/curtir/<%=pub._id%>" method="post">
               
               <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
@@ -234,9 +234,9 @@
     <div class="noticia">
 
       <div class="manchete">
-      <h4><%=noti.titulo%> </h4>
+      <h4><%=noti.titulo%></h4>
       
-      <small class="categoriaNoti"> - <%=noti.categoria%></small>
+      <small class="categoriaNoti">- <%=noti.categoria%></small>
       </div>
 
       <div class="contNoti">
@@ -253,8 +253,11 @@
             var y = noti.createdAt.getFullYear();
             var h = noti.createdAt.getHours()
             var mi = noti.createdAt.getMinutes()%>
+            <div class="footer-noti">
             <small class="dataNoti"><%= d + ' ' +m + ' de ' +y %></small>
-
+            <form action="/deletar-noti-adm/<%=noti._id%>" method="post">
+            <button type="submit">Deletar</button>
+            </div>
         
       </div>
     
@@ -276,19 +279,19 @@
 
 <div class="inp">
 <label for="inputTitleNoti">Título</label>
-<input type="text" name="inputTitleNoti" id="inputTitleNoti">
+<input type="text" name="inputTitleNoti" id="inputTitleNoti" maxlength="14">
 </div>
 
 <div class="inp">
 <label for="inputCatNoti">Categoria</label>
-<input type="text" name="inputCatNoti" id="inputCatNoti">
+<input type="text" name="inputCatNoti" id="inputCatNoti" maxlength="10">
 </div>
 
 <div class="inp">
 <label for="inputContNoti">Conteúdo</label>
 <textarea class="textInput" name="inputContNoti" id="" 
-              placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
-              maxlength="200" wrap="hard"></textarea>
+              placeholder="" 
+              maxlength="120" wrap="hard"></textarea>
 
 </div>
 
