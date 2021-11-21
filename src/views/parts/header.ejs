@@ -9,32 +9,9 @@
     
     
      
-    <div id="nav-help">
     
-    <div class="btn-help">
+    </div>
       
-    
-    <button><img src="img/gear.png" alt="" id="drop"></button>
-    
-    
-      
-    
-    
-    </div>
-          <div class="warp hide">
-            <ul>
-              
-              <li>Darkmode </li>
-              
-              </li>
-    
-            </ul>
-    
-          </div>  
-    
-    </div>
-    </div>
-      <script src="/script/wrapper.js"></script>
     </header>
 
  <%}else if(naoLogado == 2){%>
@@ -44,7 +21,7 @@
     <div class="container header">
     
       <div class="ponteHome">
-        <a href="/home"><img src="../img/home.png" alt="Homepage" title="Homepage"></a>
+        <button id="btnTop" onClick="topFunction()"><a href="/home"><img src="../img/home.png" alt="Homepage" title="Homepage"></a></button>
       </div>
     
     <div id="nav-login">
@@ -91,7 +68,7 @@
             <ul>
               <li><a href="/suporte">Suporte</a> </li>
               <li><a href="/sobre">Sobre</a> </li>
-              <li>Darkmode </li>
+              
               <li><form action="/logout" method="post"><button>Logout</button></form></a> 
               </li>
     
@@ -111,7 +88,7 @@
     <div class="container header">
     
       <div class="ponteHome">
-        <a href="/home"><img src="img/home.png" alt="Homepage" title="Homepage"></a>
+        <button id="btnTop" onClick="topFunction()"><a href="/home"><img src="img/home.png" alt="Homepage" title="Homepage"></a></button>
       </div>
     
     <div id="nav-login">
@@ -158,7 +135,7 @@
             <ul>
               <li><a href="/suporte">Suporte</a> </li>
               <li><a href="/sobre">Sobre</a> </li>
-              <li>Darkmode </li>
+              
               <li><form action="/logout" method="post"><button>Logout</button></form></a> 
               </li>
     

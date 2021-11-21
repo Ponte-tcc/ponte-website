@@ -38,6 +38,7 @@ var idPubli
 var userCurtidas = []
 
 var naoLogado
+var sessionID
 
 const regexOne = /^[a-z0-9]+([_ -.]?[a-z0-9])*$/
 const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/
@@ -311,7 +312,8 @@ routes.post("/perfis", (req, res)=>{
   
   User.find({userAdm:0}).then((users)=>{
 
-    res.render(views + 'adm/perfis', {users})
+    res.render(views + 'adm/perfis', {users, userUser, userEmail, userEx, sucs, sessionID, 
+      userAdm, idPubli, userCurtidas, userCcLength, naoLogado})
 
   })
 
@@ -412,7 +414,6 @@ routes.post("/publicar",(req, res) =>{
       userUser: userUser,
       conteudo: req.body.conteudo,
       idUser: userID,
-      ValiaID: '617bf397fdbffc1434b952ba',
       publiCurtidas: 0,
   
     }
@@ -490,7 +491,7 @@ routes.post("/descurtir/:id",(req, res) =>{
         
         Pub.findByIdAndUpdate({_id:idPubli}, {publiCurtidas: descurtiu})
         .then(x => {
-          if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+          if(naoLogado == 2){res.redirect('/perfil/' + perfilUser)}
     else{res.redirect('/home')}
           
         })
@@ -529,7 +530,7 @@ curtiu++
 
 Pub.findByIdAndUpdate({_id:idPubli}, {publiCurtidas: curtiu})
 .then(x => {
-  if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+  if(naoLogado == 2){res.redirect('/perfil/' + perfilUser)}
     else{res.redirect('/home')}
   
 })
@@ -564,7 +565,7 @@ routes.post("/comentar/:id",(req, res) =>{
     
     Pub.findByIdAndUpdate({_id:req.params.id}, {$push: {comentarios: { comentario: comment }}})
     .then(x => {
-      if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+      if(naoLogado == 2){res.redirect('/perfil/' + perfilUser)}
     else{res.redirect('/home')}
       
     })
@@ -579,7 +580,9 @@ routes.post("/comentar/:id",(req, res) =>{
 routes.post("/deletar/:id",(req, res) =>{
   
   Pub.remove({_id:req.params.id}).then(()=>{
-    if(naoLogado == 2){res.redirect('/perfil/' + userUser)}
+    if(naoLogado == 2){
+      res.redirect('/perfil/' + userUser)
+    }
     else{res.redirect('/home')}
     
     console.log('deletado')
@@ -633,17 +636,21 @@ else{res.render(views + 'logarse', {naoLogado})}
 
 routes.get("/perfil/:user", (req, res) => {
   naoLogado = 2
-User.findOne({user:req.params.user}).then((userExist)=>{
+
 if(req.session.user){
 
-  perfilUser = userExist.user
-  perfilEx = userExist.exibition
+User.findOne({user:req.params.user}).then((userExist)=>{
+  
 
 
 if(req.session.user == userExist._id){
+  sessionID = "YES"
+  perfilUser = userExist.user
+  perfilEx = userExist.exibition
+
   Pub.find({userUser: userExist.user}).sort({createdAt: 'desc'}).then((pubs)=>{
 
-    var sessionID = req.session.user
+    sessionID = req.session.user
     
     res.render(views + 'perfil', {perfilEx, perfilUser, userUser, userEmail, userEx, sucs, pubs, sessionID, 
       userAdm, idPubli, userCurtidas, userCcLength, User, naoLogado})
@@ -651,9 +658,15 @@ if(req.session.user == userExist._id){
   
   })
 }else{
+
+  sessionID = "NOT"
+  perfilUser = userExist.user
+  perfilEx = userExist.exibition
+
   Pub.find({userUser:perfilUser}).sort({createdAt: 'desc'}).then((pubs)=>{
     
-    var sessionID = "NOT"
+    
+
 
     res.render(views + 'perfil', {perfilEx, perfilUser, userUser, userEmail, userEx, sucs, pubs, sessionID, 
       userAdm, idPubli, userCurtidas, userCcLength, User, naoLogado})
@@ -663,10 +676,10 @@ if(req.session.user == userExist._id){
 
 
 }
-
+})
 }else{res.render(views + 'logarse', {naoLogado})}
 
-})
+
 })
 
 

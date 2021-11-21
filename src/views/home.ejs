@@ -5,7 +5,26 @@
 
   <%- include('parts/head', { title :'Home', linkCss:'/css/home.css'}) %> 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
 
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
+
+<script>
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+</script>
 
   <body>
     
@@ -26,17 +45,11 @@
    
         <div class="publicacao">
 
-          <div class="caixa-perfil">
-            <div class="avatar-perfil">
-            <img src="" class="avatar-publi" />
-            </div>
-            <div class="nome-perfil"><h3></h3></div>
-          </div>
-
-          <form action="/publicar" name="textPublicar" method="POST" class="publicar">
+          <form action="/publicar" name="textPublicar" method="post" class="publicar">
+            
             <div class="publi1">
               
-              <textarea class="textInput" name="conteudo" id="" 
+              <textarea class="textInput est" row='1' name="conteudo" id="" 
               placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
               maxlength="200" wrap="hard"></textarea>
 
@@ -47,7 +60,7 @@
 <div class="publi2"><button type="submit" class="estrelar btSubmit">Estrelar</button></div>
             
           </form>
-<div class="hr inicial"></div>
+
         </div>
       
         <div class="publicados">
@@ -64,13 +77,45 @@
             <div class="p2"><%= pub.userEx %> 
             <a href="/perfil/<%= pub.userUser %>"><small>  @<%= pub.userUser %></small></a>
             </div>
-            <textarea class="textCont" readonly><%= pub.conteudo %></textarea>
+           
+            <span class="input" role="textbox"> <%=pub.conteudo%> </span>
 
             </div>
 
           </div>
 
-         
+          <div class="modal" id="modal<%=pub._id%>">
+
+            
+
+            <div class="modal-header">
+            <div class="title">PONTE</div>
+            <button data-close-button class="close-button">&times;</button>
+            
+            </div>
+      
+            <div class="modal-body">
+              <h3>Certeza que deseja deletar esta publicação?</h3>
+              <span class="input" role="textbox"> <%= pub.conteudo %> </span> 
+              <div class="delete">
+               
+              <form action="/deletar/<%=pub._id%>" method="post">
+      
+                <button type="submit" class="sim">Sim</button>
+                
+              </form>
+      <button data-close-button class="nao">Não</button>
+      </div>
+            </div>
+      
+            
+              
+              
+          </div>
+              
+          
+      
+          
 
             <div class="modal" id="modal<%=i%>">
 
@@ -119,7 +164,7 @@
         <div class="publi2"><button type="submit" class="estrelar btSubmit">Comentar</button></div>
                     
                   </form>
-        <div class="hr inicial"></div>
+        
                 </div>
 
               </div>
@@ -196,22 +241,13 @@
             <small><%= d + ' ' +m + ' ' +y + ' ás: '+ h + ':'+ mi%></small>
 
             <input type="hidden" name='pubId' value="<%=pub._id%>">
-            <% if(userAdm == 1){%>
-            <form action="/deletar/<%=pub._id%>" method="post">
-            <button type="submit">Deletar</button>
+            
 
-            </form>         
-
-            <%}%>
-
-            <%if(pub.idUser == sessionID){%>
-            <!--<form action="/deletar/<%=pub._id%>" method="post">
-            <button type="submit">Deletar</button>
-
-            </form> -->
-            <%}%>
+           
             </div>
-
+            <%if(userAdm == 1){%>
+<button data-modal-target="#modal<%=pub._id%>" class="btnDelete">Deletar</button>
+<%}%>
           </div> 
 
           <div class="hr"></div>
@@ -240,7 +276,8 @@
       </div>
 
       <div class="contNoti">
-        <textarea  readonly><%= noti.conteudo %></textarea>
+        
+        <span class="input" role="textbox"> <%= noti.conteudo %> </span>
 
         <% var monthNames = [
             'Janeiro', 'Fevereiro', 'Março',
@@ -255,16 +292,46 @@
             var mi = noti.createdAt.getMinutes()%>
             <div class="footer-noti">
             <small class="dataNoti"><%= d + ' ' +m + ' de ' +y %></small>
-            <form action="/deletar-noti-adm/<%=noti._id%>" method="post">
-            <button type="submit">Deletar</button>
-            </div>
-        
+            <%if(userAdm == 1){%>
+            <button data-modal-target="#modal<%=noti._id%>" class="btnDelete">Deletar</button>
+            <%}%>
+        </div>
       </div>
     
     </div>
 
- <%})%>   
-<div class="modal" id="modalNoti">
+   
+
+ <div class="modal" id="modal<%=noti._id%>">
+
+            
+
+<div class="modal-header">
+<div class="title">PONTE</div>
+<button data-close-button class="close-button">&times;</button>
+
+</div>
+
+<div class="modal-body">
+  <h3>Certeza que deseja deletar esta notícia?</h3>
+  <span class="input" role="textbox"> <%= noti.conteudo %> </span> 
+  <div class="delete">
+   
+  <form action="/deletar-noti-adm/<%=noti._id%>" method="post">
+
+    <button type="submit" class="sim">Sim</button>
+    
+  </form>
+<button data-close-button class="nao">Não</button>
+</div>
+</div>
+
+
+  
+  
+</div>
+ <%})%>
+<div class="modal noti" id="modalNoti">
 
             
 
@@ -310,7 +377,7 @@
   
 
 <div>
-<div><button data-modal-target="#modalNoti" class="modalNoti">&#x2B;</button></div>
+<button data-modal-target="#modalNoti" class="modalNoti">&#x2B;</button>
 </div>
     
 

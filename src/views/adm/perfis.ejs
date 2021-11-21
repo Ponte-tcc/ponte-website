@@ -1,11 +1,67 @@
-<% users.forEach(user => { %>
- <%= user._id %> 
- <%= user.user %>
- <%= user.exibition %>
- <%= user.email %>
- <%= user.createdAt %>
+<!DOCTYPE html>
 
- <form action="/deletar-user-adm/<%= user._id %> " method="post">
-  <button type="submit">Deletar</button>
-</form>
+<html lang="pt-br">
+
+<%- include('../parts/head', { title :'Perfis', linkCss:'../css/perfis.css'}) %> 
+
+
+
+  <body>
+    <%- include('../parts/header', { title : ''}) %>
+   <div class="container perfis">
+   <div class="mainPerfis">
+
+    
+
+<% users.forEach(user => { %>
+  <div class="modal" id="modal<%=user._id%>">
+
+            
+
+      <div class="modal-header">
+      <div class="title">PONTE</div>
+      <button data-close-button class="close-button">&times;</button>
+      
+      </div>
+
+      <div class="modal-body">
+        <h3>Certeza que deseja deletar este perfil?</h3>
+        <p><%= user.user %></p>
+        <div class="delete">
+         
+        <form action="/deletar-user-adm/<%= user._id %>" method="post">
+
+          <button type="submit" class="sim">Sim</button>
+          
+        </form>
+<button data-close-button class="nao">Não</button>
+</div>
+      </div>
+
+      
+        
+        
+    </div>
+        
+    <div id="overlay"></div>
+
+    
+  <ul>
+
+  <li><h4>ID  </h4> <%= user._id %> </li>
+  <li><h4>User </h4> <%= user.user %></li>
+  <li><h4>Nome de Exibição</h4> <%= user.exibition %></li>
+  <li><h4>Email</h4><%= user.email %></li>
+  <li><h4>Criado em</h4>  <%= user.createdAt %></li>
+
+
+  <button data-modal-target="#modal<%=user._id%>" class="btnDelete">Deletar</button>
+
+</ul>
+<div class="hr"></div>
 <% }) %> 
+
+</div>
+</div>
+  </body>
+</html>
