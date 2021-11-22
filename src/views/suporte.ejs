@@ -14,7 +14,7 @@
     <%- include('parts/header', { title : ''}) %>
     
 <div class="container suporte">
-    
+  <div id="overlay"></div>
 <% if(userAdm == 0) {%>
   
   <div class="mainSuporte">
@@ -45,33 +45,62 @@
         </form>
 
         </div>
-
-
-      
-      
-      
       
       
       <%}else{%>
-        
+        <div class="mainSuporte adm">
         <% sups.forEach(sup => { %>
-         <%= sup.userUser %>
-         <%= sup._id %>
-         <%= sup.conteudo %>
-         <%= sup.createdAt %>
-         <form action="/deletar-sup-adm/<%= sup._id %>" method="post">
-          <button type="submit">Deletar</button>
-        </form>
-         <hr>
-         <br/>
+          <div class="modal" id="modal<%=sup._id%>">
+
+            
+
+            <div class="modal-header">
+            <div class="title">PONTE</div>
+            <button data-close-button class="close-button">&times;</button>
+            
+            </div>
+            
+            <div class="modal-body">
+              <h3>Certeza que deseja deletar este suporte?</h3>
+              <span class="input" role="textbox"> <%= sup.conteudo %> </span> 
+              <div class="delete">
+               
+              <form action="/deletar-sup-adm/<%=sup._id%>" method="post">
+            
+                <button type="submit" class="sim">Sim</button>
+                
+              </form>
+            <button data-close-button class="nao">Não</button>
+            </div>
+            </div>
+            
+            
+              
+              
+            </div>
+
+        <ul>
+          <li><h4>User</h4><%= sup.userUser %></li>
+          <li><h4>ID do Suporte</h4><%= sup._id %></li>
+          <li><h4>Conteúdo</h4><span><%= sup.conteudo %></span></li>
+          <li><h4>Criado em </h4><%= sup.createdAt %></li>
+        </ul>
+         
+        <button data-modal-target="#modal<%=sup._id%>" class="btnDelete">Deletar</button>
+         
+         
+      
+         
+         <div class="hr"></div>
+       
         <% }) %>
         
         <%}%> 
       
-
+</div>
 
 </div>    
-<script src="script/autoResize.js"></script>
+
     <%- include ('parts/page-footer') %>
 
   </body>

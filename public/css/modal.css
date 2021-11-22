@@ -1,0 +1,143 @@
+.delete{
+
+    justify-content: center;
+display: flex;
+gap: 30px;
+
+}
+
+.modal-body  button.sim{
+    transition: .25s;
+    font-size: 15px;
+    color: rgba(0, 211, 11, 0.795);
+    font-weight: 500;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 7px;
+
+}
+
+.modal-body  button.sim:hover{
+
+    transition: .25s;
+    background-color: rgba(38, 192, 17, 0.76);
+    color: rgb(248, 245, 245);
+
+}
+
+.modal-body  button.nao{
+    transition: .25s;
+    font-size: 15px;
+    color: rgba(231, 6, 6, 0.795);
+    font-weight: 500;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 7px;
+
+}
+
+.modal-body  button.nao:hover{
+
+    transition: .25s;
+    background-color: rgba(255, 55, 55, 0.863);
+    color: rgb(240, 240, 240);
+
+}
+
+span{
+    font-size: 15px;
+    
+    word-break: break-all;
+    overflow: auto;
+    max-width: 100%;
+
+}
+
+
+.btnDelete{
+    transition: .25s;
+    font-size: 15px;
+    color: rgba(231, 6, 6, 0.795);
+    font-weight: 500;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 7px;
+
+}
+
+.btnDelete:hover{
+
+    transition: .25s;
+    background-color: rgba(255, 55, 55, 0.863);
+    color: rgb(240, 240, 240);
+
+}
+
+
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+
+    overflow: auto;
+      max-height: 80%;
+}
+  
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+  
+  .modal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .modal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .modal-body {
+      display: flex;
+      flex-direction: column;
+      
+    padding: 10px 15px;
+  }
+  
+  #overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+  }
+  
+  #overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }

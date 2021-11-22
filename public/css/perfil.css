@@ -103,16 +103,22 @@ margin-top: 5vh;
 }
 
 
-.publica{
 
-    align-items: center;
-    width: 95%;
-    gap: 4px;
-    margin: 0 auto;
-    display: flex;
+
+.publica {
+        align-items: center;
+        width: 95%;
+        gap: 4px;
+        margin: 0 auto;
+        display: flex;
+        padding: 2vh;
+        box-sizing: border-box;
+}
+
+
     
 
-}
+
 
 
 
@@ -290,21 +296,77 @@ margin: 0 auto;
 
 }
 
+.delete{
 
-.footer-noti{
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+display: flex;
+gap: 30px;
 
 }
 
-.noticia textarea{
+.modal-body  button.sim{
+    transition: .25s;
+    font-size: 15px;
+    color: rgba(0, 211, 11, 0.795);
+    font-weight: 500;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 7px;
+
+}
+
+.modal-body  button.sim:hover{
+
+    transition: .25s;
+    background-color: rgba(38, 192, 17, 0.76);
+    color: rgb(248, 245, 245);
+
+}
+
+.modal-body  button.nao{
+    transition: .25s;
+    font-size: 15px;
+    color: rgba(231, 6, 6, 0.795);
+    font-weight: 500;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 7px;
+
+}
+
+.modal-body  button.nao:hover{
+
+    transition: .25s;
+    background-color: rgba(255, 55, 55, 0.863);
+    color: rgb(240, 240, 240);
+
+}
+
+span{
+    font-size: 15px;
+    
+    word-break: break-all;
+    overflow: auto;
+    max-width: 100%;
+
+}
 
 
-    width: 100%;
-    height: 13vh;
-    align-items: center;
+.btnDelete{
+    transition: .25s;
+    font-size: 15px;
+    color: rgba(231, 6, 6, 0.795);
+    font-weight: 500;
+    padding: 7px;
+    box-sizing: border-box;
+    border-radius: 7px;
 
+}
+
+.btnDelete:hover{
+
+    transition: .25s;
+    background-color: rgba(255, 55, 55, 0.863);
+    color: rgb(240, 240, 240);
 
 }

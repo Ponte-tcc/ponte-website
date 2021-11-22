@@ -36,3 +36,62 @@ height: fit-content;
 
     resize: none;
 }
+
+.mainSuporte.adm{
+
+    border: 1px solid var(--color-border);
+    border-top: 0;
+    border-bottom: 0;
+    width: 70%;
+    margin: 0 auto;
+
+    padding: 25px;
+    box-sizing: border-box;
+
+}
+
+.mainSuporte.adm h4{
+
+    margin: 0;
+    
+
+
+}
+span{
+
+    word-break: break-all;
+    overflow: auto;
+    max-width: 100%;
+
+}
+
+.mainSuporte ul{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+    gap: 7px;
+
+
+
+}
+
+.mainSuporte li{
+
+    gap: 10px;
+   width: 90%;
+   display: flex;
+   align-items: center;
+
+}
+
+
+
+
+
+
+
+

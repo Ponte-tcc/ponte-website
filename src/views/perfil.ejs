@@ -11,7 +11,9 @@
     
     <div class="container perfil">
       <div class="mainPerfil">
-  
+        
+       
+
 <% if(sessionID === 'NOT'){%>
 <div class="partPerfil">
   <div class="avatar"><img src="../img/userM.png" alt=""></div>
@@ -20,12 +22,41 @@
        <small>@<%= perfilUser %>  </small>
     </div>
     </div>
-
+    <h4>Todas as publicações de @<%= perfilUser %></h4>
         <div class="publicados">
 
 
   <%var i = 0; pubs.forEach(pub =>{%>
-    
+
+    <div class="modal" id="modal<%=pub._id%>">
+
+            
+
+      <div class="modal-header">
+      <div class="title">PONTE</div>
+      <button data-close-button class="close-button">&times;</button>
+      
+      </div>
+      
+      <div class="modal-body">
+        <h3>Certeza que deseja deletar esta publicação?</h3>
+        <span class="input" role="textbox"> <%= pub.conteudo %> </span> 
+        <div class="delete">
+         
+        <form action="/deletar/<%=pub._id%>" method="post">
+      
+          <button type="submit" class="sim">Sim</button>
+          
+        </form>
+      <button data-close-button class="nao">Não</button>
+      </div>
+      </div>
+      
+      
+        
+        
+      </div>
+
     <div class="publica">
 
 <div class="p0"><img src="../img/user.png" alt="" title=""></div>
@@ -166,9 +197,10 @@ var mi = pub.createdAt.getMinutes()%>
 
 
 </div>
-<form action="/deletar/<%=pub._id%>" method="post">
-
-</form> 
+<%if(userAdm == 1){%>
+  <button data-modal-target="#modal<%=pub._id%>" class="btnDelete">Deletar</button>
+  
+  <%}%>
 </div> 
 
        
@@ -188,12 +220,39 @@ var mi = pub.createdAt.getMinutes()%>
        <small>@<%= perfilUser %>  </small>
     </div>
     </div>
-
+<h4>Todas as publicações de @<%= perfilUser %></h4>
         <div class="publicados">
 
 
   <%var i = 0; pubs.forEach(pub =>{%>
+    <div class="modal" id="modal<%=pub._id%>">
+
+            
+
+<div class="modal-header">
+<div class="title">PONTE</div>
+<button data-close-button class="close-button">&times;</button>
+
+</div>
+
+<div class="modal-body">
+  <h3>Certeza que deseja deletar esta publicação?</h3>
+  <span class="input" role="textbox"> <%= pub.conteudo %> </span> 
+  <div class="delete">
+   
+  <form action="/deletar/<%=pub._id%>" method="post">
+
+    <button type="submit" class="sim">Sim</button>
     
+  </form>
+<button data-close-button class="nao">Não</button>
+</div>
+</div>
+
+
+  
+  
+</div>
     <div class="publica">
 
 <div class="p0"><img src="../img/user.png" alt="" title=""></div>
@@ -334,8 +393,8 @@ var mi = pub.createdAt.getMinutes()%>
 
 
 </div>
-<form action="/deletar/<%=pub._id%>" method="post">
-<button type="submit">Deletar</button>
+<button data-modal-target="#modal<%=pub._id%>" class="btnDelete">Deletar</button>
+
 
 </form> 
 </div> 
