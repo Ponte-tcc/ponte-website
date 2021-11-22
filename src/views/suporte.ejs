@@ -14,7 +14,7 @@
     <%- include('parts/header', { title : ''}) %>
     
 <div class="container suporte">
-  <div id="overlay"></div>
+  
 <% if(userAdm == 0) {%>
   
   <div class="mainSuporte">
@@ -48,7 +48,9 @@
       
       
       <%}else{%>
+
         <div class="mainSuporte adm">
+
         <% sups.forEach(sup => { %>
           <div class="modal" id="modal<%=sup._id%>">
 
@@ -78,17 +80,17 @@
               
               
             </div>
-
+<div id="overlay"></div>
         <ul>
           <li><h4>User</h4><%= sup.userUser %></li>
           <li><h4>ID do Suporte</h4><%= sup._id %></li>
           <li><h4>Conteúdo</h4><span><%= sup.conteudo %></span></li>
           <li><h4>Criado em </h4><%= sup.createdAt %></li>
-        </ul>
-         
+        
+         <div class="ulBtnDelete">
         <button data-modal-target="#modal<%=sup._id%>" class="btnDelete">Deletar</button>
-         
-         
+         </div>
+         </ul>
       
          
          <div class="hr"></div>

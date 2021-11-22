@@ -159,7 +159,7 @@ routes.post("/", (req, res) => {
 routes.get("/cadastro", function (req, res) {
   if (req.session.user) {
     res.redirect("/home");
-  }
+  }else{
   naoLogado = 1;
   res.render(views + "cadastro", {
     erros,
@@ -195,6 +195,7 @@ routes.get("/cadastro", function (req, res) {
       errosPass.shift();
     }
   }
+}
 });
 routes.post("/cadastro", (req, res) => {
   if (erros.length >= 1) {

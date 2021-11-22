@@ -54,14 +54,25 @@ span{
 }
 
 
+.ulBtnDelete{
+
+  width: 100%;
+  display: flex;
+ justify-content: flex-end;
+
+}
+
 .btnDelete{
     transition: .25s;
     font-size: 15px;
     color: rgba(231, 6, 6, 0.795);
     font-weight: 500;
-    padding: 7px;
+    padding: 7px 20px;
     box-sizing: border-box;
     border-radius: 7px;
+margin:10px 0;
+    width: fit-content;
+    
 
 }
 

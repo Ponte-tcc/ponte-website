@@ -30,7 +30,7 @@
             
             <div class="publi1">
               
-              <textarea class="textInput est" row='1' name="conteudo" id="" 
+              <textarea class="textInput est" row='1' name="conteudo" id="area" 
               placeholder="Oi <%= userEx %>, troca uma ideia ai  :) " 
               maxlength="200" wrap="hard"></textarea>
 
@@ -372,7 +372,19 @@
 <script src="script/coment.js"></script>
 <script src="script/autoResize.js"></script>
 <script src="script/curtir.js"></script>
- 
+<script>
+  $("textarea").keydown(function(e){
+// Enter was pressed without shift key
+if (e.keyCode == 13 && !e.shiftKey)
+{
+    // prevent default behavior
+    e.preventDefault();
+    $(this).closest("form").submit();
+
+}
+});
+
+</script>
 
 <%- include ('parts/page-footer') %>
 
