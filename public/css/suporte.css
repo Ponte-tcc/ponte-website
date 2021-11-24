@@ -36,3 +36,66 @@ height: fit-content;
 
     resize: none;
 }
+
+.mainSuporte.adm{
+
+    border: 1px solid var(--color-border);
+    border-top: 0;
+    border-bottom: 0;
+    width: 70%;
+    margin: 0 auto;
+
+    padding: 25px;
+    box-sizing: border-box;
+
+}
+
+.mainSuporte.adm h4{
+
+    margin: 0;
+    
+
+
+}
+span{
+
+    word-break: break-all;
+    overflow: auto;
+    max-width: 100%;
+
+}
+
+.mainSuporte ul{
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+
+
+
+}
+
+.mainSuporte li{
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+
+}
+
+.hr{
+
+    margin: 10px 0;
+
+}
+
+
+
+
+
+
+
+
+

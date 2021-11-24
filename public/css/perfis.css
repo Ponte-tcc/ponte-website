@@ -1,0 +1,52 @@
+.mainPerfis{
+
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+    padding: 25px;
+    box-sizing: border-box;
+
+}
+
+.mainPerfis li{
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+}
+
+.hr{
+
+    margin: 10px 0;
+
+}
+
+.mainPerfis h4{
+
+    margin: 0;
+
+}
+
+.mainPerfis ul{
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+}
+
+.mainPerfis ul form{
+
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+
+
+
