@@ -35,7 +35,7 @@ useFindAndModify: true,
 
 
 //habilitar arquivos statics
-server.use(express.static("public"))
+server.use(express.static(__dirname + '/public'))
 
 
 //usar o req.body
