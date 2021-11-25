@@ -1,6 +1,8 @@
 const express = require("express");
 const server = express();
 const routes = require("./src/routes");
+var cookieParser = require("cookie-parser");
+const MongoStore = require('connect-mongo')
 
 const uri =
   "mongodb+srv://nico:123321@cluster0.rtak1.mongodb.net/pontewebsiteDB?retryWrites=true&w=majority";
@@ -11,6 +13,8 @@ server.use((req, res, next) => {
   //req.locals.error_msg = req.flash("error_msg")
   next();
 });
+
+server.use(cookieParser());
 
 //usando template engine
 server.set("view engine", "ejs");
@@ -42,9 +46,19 @@ const session = require("express-session");
 //sessions
 server.use(
   session({
-    secret: "asjdnIAOJSNDOjansd1238192",
-    resave: true,
-    saveUninitialized: true,
+    key: 'user_sid',
+    secret: "somerandonstuffs",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 600000,
+    },
+    
+    store: MongoStore.create({
+      mongoUrl: uri,
+      ttl: 14 * 24 * 60 * 60,
+      autoRemove: 'native' 
+  })
   })
 );
 

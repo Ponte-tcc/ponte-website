@@ -3,6 +3,7 @@ const routes = express.Router();
 const views = __dirname + "/views/";
 const mongoose = require("mongoose");
 
+
 require("./models/User");
 const User = mongoose.model("users");
 
@@ -43,10 +44,34 @@ var sessionID;
 const regexOne = /^[a-z0-9]+([_ -.]?[a-z0-9])*$/;
 const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/;
 
-routes.get("/", (req, res) => {
-  if (req.session.user) {
-    res.redirect("/home");
+
+
+var sessionChecker = (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+    console.log('logado')
+    
+    
+    res.redirect('/home')
+  } else {
+    
+    next();
   }
+};
+
+
+routes.use((req, res, next) => {
+  if (!req.session.user) {
+    res.clearCookie('user_sid');
+  } if (sessionID){
+
+    console.log('username yes')
+
+  }
+  next();
+});
+
+routes.get("/", sessionChecker, (req, res) => {
+  
   naoLogado = 1;
   res.render(views + "index", { erros, naoLogado });
   if (erros.length >= 1) {
@@ -104,7 +129,7 @@ routes.post("/", (req, res) => {
                 for (var i = 0; i < userCcLength; i++) {
                   userCurtidas.push(user.curtidas[i]);
                 }
-
+                req.session.user = userExist
                 res.redirect("/home");
               });
             } else {
@@ -139,6 +164,8 @@ routes.post("/", (req, res) => {
                   userCurtidas.push(user.curtidas[i]);
                 }
 
+                req.session.user = userExist
+
                 res.redirect("/home");
               });
             } else {
@@ -156,10 +183,8 @@ routes.post("/", (req, res) => {
   }
 });
 
-routes.get("/cadastro", function (req, res) {
-  if (req.session.user) {
-    res.redirect("/home");
-  }else{
+routes.get("/cadastro", sessionChecker, function (req, res) {
+  
   naoLogado = 1;
   res.render(views + "cadastro", {
     erros,
@@ -195,7 +220,7 @@ routes.get("/cadastro", function (req, res) {
       errosPass.shift();
     }
   }
-}
+
 });
 routes.post("/cadastro", (req, res) => {
   if (erros.length >= 1) {
@@ -314,7 +339,6 @@ routes.post("/cadastro", (req, res) => {
       user: req.body.user,
       email: req.body.email,
       password: req.body.password,
-      curtidas: "617822683fd1ac46842d338e",
       userAdm: 0,
     };
 
@@ -336,9 +360,9 @@ routes.post("/cadastroRedirect", (req, res) => {
   User.findOne({ email: userEmail })
     .then((userExist) => {
       console.log(userEmail);
-      req.session.user = userExist._id;
+      req.session.user = userExist;
 
-      User.findOne({ _id: req.session.user }).then((user) => {
+      User.findOne({ _id: req.session.user._id }).then((user) => {
         userID = user._id;
         userUser = user.user;
         userEmail = user.email;
@@ -384,8 +408,9 @@ routes.post("/perfis", (req, res) => {
 
 routes.get("/home", (req, res) => {
   naoLogado = 0;
+  console.log(req.session.user)
   if (req.session.user) {
-    var sessionID = req.session.user;
+    var sessionID = req.session.user._id;
 
     Pub.find({})
       .sort({ createdAt: "desc" })
