@@ -564,7 +564,7 @@ routes.post("/descurtir/:id", (req, res) => {
     userCurtidas.splice(index, 1);
   }
 
-  User.findByIdAndUpdate({ _id: userID }, { $pull: { curtidas: idPubli } })
+  User.findByIdAndUpdate({ _id: userID }, { $pull: { curtidas: userCurtidas } })
     .then((x) => {
       console.log("salvo descurtida");
       Pub.findById({ _id: idPubli }).then((pubs) => {
