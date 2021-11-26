@@ -60,11 +60,23 @@ var sessionChecker = (req, res, next) => {
 
 
 routes.use((req, res, next) => {
+  console.log(req.session.user)
   if (!req.session.user) {
     res.clearCookie('user_sid');
-  } if (sessionID){
+  }else{
 
-    console.log('username yes')
+    
+    userID = req.session.user._id;
+    userUser = req.session.user.user;
+    userEmail = req.session.user.email;
+    userEx = req.session.user.exibition;
+    userAdm = req.session.user.userAdm;
+    userCcLength = req.session.user.curtidas.length;
+
+    for (var i = 0; i < userCcLength; i++) {
+      userCurtidas.push(req.session.user.curtidas[i]);
+    }
+
 
   }
   next();
@@ -150,21 +162,12 @@ routes.post("/", (req, res) => {
           if (userExist) {
             if (userExist.password == req.body.password) {
               const user = userExist._id;
-              req.session.user = user;
+             
 
-              User.findOne({ _id: req.session.user }).then((user) => {
-                userID = user._id;
-                userUser = user.user;
-                userEmail = user.email;
-                userEx = user.exibition;
-                userAdm = user.userAdm;
-                userCcLength = user.curtidas.length;
-
-                for (var i = 0; i < userCcLength; i++) {
-                  userCurtidas.push(user.curtidas[i]);
-                }
-
-                req.session.user = userExist
+              User.findOne({ _id:user }).then((userFind) => {
+                
+                req.session.user = userFind
+               
 
                 res.redirect("/home");
               });
@@ -408,7 +411,7 @@ routes.post("/perfis", (req, res) => {
 
 routes.get("/home", (req, res) => {
   naoLogado = 0;
-  console.log(req.session.user)
+  
   if (req.session.user) {
     var sessionID = req.session.user._id;
 
@@ -588,41 +591,45 @@ routes.post("/descurtir/:id", (req, res) => {
   });
 });
 
-routes.post("/curtir/:id", async (req, res, next) => {
-  const idUser = req.session.user;
+routes.post("/curtir/:id", async (req, res) => {
+  
   idPubli = req.params.id;
+  var curtiu;
 
   await User.findByIdAndUpdate(
-    { _id: idUser },
+    { _id: userID },
     { $push: { curtidas: idPubli } }
   )
     .then((x) => {
       userCcLength++;
       userCurtidas.push(idPubli);
+
+      Pub.findById({ _id: idPubli }).then((pubs) => {
+        curtiu = pubs.publiCurtidas;
+    
+        curtiu++;
+    
+        Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: curtiu })
+          .then((x) => {
+            if (naoLogado == 2) {
+              res.redirect("/perfil/" + perfilUser);
+            } else {
+              res.redirect("/home");
+            }
+          })
+          .catch((e) => {
+            console.log("nao salvo");
+          });
+      });
+
     })
     .catch((e) => {
       console.log("nao salvo");
     });
 
-  var curtiu;
+  
 
-  Pub.findById({ _id: idPubli }).then((pubs) => {
-    curtiu = pubs.publiCurtidas;
-
-    curtiu++;
-
-    Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: curtiu })
-      .then((x) => {
-        if (naoLogado == 2) {
-          res.redirect("/perfil/" + perfilUser);
-        } else {
-          res.redirect("/home");
-        }
-      })
-      .catch((e) => {
-        console.log("nao salvo");
-      });
-  });
+  
 });
 
 routes.post("/comentar/:id", (req, res) => {
