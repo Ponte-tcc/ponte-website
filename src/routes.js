@@ -557,38 +557,39 @@ routes.post("/publiNoticia", (req, res) => {
 
 routes.post("/descurtir/:id", (req, res) => {
   idPubli = req.params.id;
-  const idUser = req.session.user;
+  
 
   var index = userCurtidas.indexOf(String(idPubli));
   if (index > -1) {
     userCurtidas.splice(index, 1);
   }
 
-  User.findByIdAndUpdate({ _id: idUser }, { $pull: { curtidas: idPubli } })
+  User.findByIdAndUpdate({ _id: userID }, { $pull: { curtidas: idPubli } })
     .then((x) => {
       console.log("salvo descurtida");
+      Pub.findById({ _id: idPubli }).then((pubs) => {
+        descurtiu = pubs.publiCurtidas;
+    
+        descurtiu--;
+    
+        Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: descurtiu })
+          .then((x) => {
+            if (naoLogado == 2) {
+              res.redirect("/perfil/" + x.userUser);
+            } else {
+              res.redirect("/home");
+            }
+          })
+          .catch((e) => {
+            console.log("nao salvo publi");
+          });
+      });
     })
     .catch((e) => {
       console.log(e + " nao salvo");
     });
 
-  Pub.findById({ _id: idPubli }).then((pubs) => {
-    descurtiu = pubs.publiCurtidas;
-
-    descurtiu--;
-
-    Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: descurtiu })
-      .then((x) => {
-        if (naoLogado == 2) {
-          res.redirect("/perfil/" + perfilUser);
-        } else {
-          res.redirect("/home");
-        }
-      })
-      .catch((e) => {
-        console.log("nao salvo publi");
-      });
-  });
+  
 });
 
 routes.post("/curtir/:id", async (req, res) => {
@@ -612,7 +613,7 @@ routes.post("/curtir/:id", async (req, res) => {
         Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: curtiu })
           .then((x) => {
             if (naoLogado == 2) {
-              res.redirect("/perfil/" + perfilUser);
+              res.redirect("/perfil/" + x.userUser);
             } else {
               res.redirect("/home");
             }
