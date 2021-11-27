@@ -43,7 +43,7 @@ const UserSchema = mongoose.Schema({
         lowercase: false,
 
     }, 
-    curtidas:{
+    publiCurtidas:{
         type: Array,
         require: false,
         unique: false,

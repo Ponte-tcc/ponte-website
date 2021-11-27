@@ -11,7 +11,7 @@ require("./models/Suporte");
 const Sup = mongoose.model("suportes");
 
 require("./models/Publicado");
-const Pub = mongoose.model("publicados");
+const Pub = mongoose.model("publicacoes");
 
 require("./models/Noticia");
 const Noti = mongoose.model("noticias");
@@ -46,22 +46,11 @@ const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/;
 
 
 
-var sessionChecker = (req, res, next) => {
-  if (req.session.user && req.cookies.user_sid) {
-    console.log('logado')
-    
-    
-    res.redirect('/home')
-  } else {
-    
-    next();
-  }
-};
-
+//MIDDLEWARES
 
 routes.use((req, res, next) => {
   console.log(req.session.user)
-  if (!req.session.user) {
+  if (!req.session.user ) {
     res.clearCookie('user_sid');
   }else{
 
@@ -71,10 +60,9 @@ routes.use((req, res, next) => {
     userEmail = req.session.user.email;
     userEx = req.session.user.exibition;
     userAdm = req.session.user.userAdm;
-    userCcLength = req.session.user.curtidas.length;
 
-    for (var i = 0; i < userCcLength; i++) {
-      userCurtidas.push(req.session.user.curtidas[i]);
+    for (var i = 0; i < req.session.user.publiCurtidas.length; i++) {
+      userCurtidas.push(req.session.user.publiCurtidas[i]);
     }
 
 
@@ -82,9 +70,37 @@ routes.use((req, res, next) => {
   next();
 });
 
+var sessionChecker = (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+
+    res.redirect('/home')
+
+  } else {
+    
+    next();
+  }
+};
+
+var logadoChecker = (req, res, next) => {
+  if (naoLogado == 1) {
+    
+    res.render(views + 'logarse', {naoLogado})
+
+  } else {
+    
+    next();
+  }
+};
+
+
+
+
+//GET
+
 routes.get("/", sessionChecker, (req, res) => {
   
   naoLogado = 1;
+
   res.render(views + "index", { erros, naoLogado });
   if (erros.length >= 1) {
     for (var i = 0; (i = erros.length); i++) {
@@ -92,103 +108,84 @@ routes.get("/", sessionChecker, (req, res) => {
     }
   }
 });
-routes.post("/", (req, res) => {
-  if (erros.length >= 1) {
-    for (var i = 0; (i = erros.length); i++) {
-      erros.shift();
-    }
-  }
-  if (userCurtidas.length >= 0) {
-    for (var i = 0; (i = userCurtidas.length); i++) {
-      userCurtidas.shift();
-    }
-  }
 
-  if (
-    !req.body.user ||
-    typeof req.body.user == undefined ||
-    req.body.user == null ||
-    !req.body.password ||
-    typeof req.body.password == undefined ||
-    req.body.password == null
-  ) {
-    erros.push({ txt: "Preencha todos os campos!" });
-  }
+routes.get("/home", logadoChecker, (req, res) => {
 
-  if (erros.length > 1) {
-    console.log("erros");
-    erros.forEach((erro) => {
-      console.log(erro.txt);
-    });
-  } else {
-    const userIf = req.body.user;
-    if (userIf.includes("@")) {
-      User.findOne({ email: req.body.user })
-        .then((userExist) => {
-          if (userExist) {
-            if (userExist.password == req.body.password) {
-              const user = userExist._id;
-              req.session.user = user;
+  
+  
+  if (req.session.user) {
+    var sessionID = req.session.user._id;
+var curtida
+    Pub.find({})
+      .sort({ createdAt: "desc" })
+      .then((pubs) => {
 
-              User.findOne({ _id: req.session.user }).then((user) => {
-                userID = user._id;
-                userUser = user.user;
-                userEmail = user.email;
-                userEx = user.exibition;
-                userAdm = user.userAdm;
-                userCcLength = user.curtidas.length;
+      Pub.findOne({userCurtidas: userUser}).then((x) => {
 
-                for (var i = 0; i < userCcLength; i++) {
-                  userCurtidas.push(user.curtidas[i]);
-                }
-                req.session.user = userExist
-                res.redirect("/home");
-              });
-            } else {
-              res.redirect("/");
-              erros.push({ txt: "Usuário ou senha incorretos!" });
-            }
-          } else {
-            res.redirect("/");
-            erros.push({ txt: "Usuário ou senha incorretos!" });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else
-      User.findOne({ user: req.body.user })
-        .then((userExist) => {
-          if (userExist) {
-            if (userExist.password == req.body.password) {
-              const user = userExist._id;
-             
+        console.log(x)
 
-              User.findOne({ _id:user }).then((userFind) => {
-                
-                req.session.user = userFind
-               
+      })
 
-                res.redirect("/home");
-              });
-            } else {
-              res.redirect("/");
-              erros.push({ txt: "Usuário ou senha incorretos!" });
-            }
-          } else {
-            res.redirect("/");
-            erros.push({ txt: "Usuário ou senha incorretos!" });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        Noti.find({})
+          .sort({ createdAt: "asc" })
+          .then((nots) => {
+
+            
+
+            res.render(views + "home", {
+              userUser,
+              userEmail,
+              userEx,
+              sucs,
+              pubs,
+              nots,
+              sessionID,
+              userAdm,
+              idPubli,
+              userCurtidas,
+              userCcLength,
+              User,
+              naoLogado,
+            });
+
+            sucs = "";
+          });
+      });
   }
 });
 
-routes.get("/cadastro", sessionChecker, function (req, res) {
+routes.get("/suporte", logadoChecker, (req, res) => {
+  naoLogado = 0;
+
+  if (req.session.user) {
+    Sup.find({})
+      .sort({ createdAt: "desc" })
+      .then((sups) => {
+        res.render(views + "suporte", {
+          userUser,
+          userEmail,
+          userEx,
+          userID,
+          sucs,
+          erros,
+          userAdm,
+          sups,
+          naoLogado,
+        });
+        if (erros.length >= 1) {
+          for (var i = 0; (i = erros.length); i++) {
+            erros.shift();
+          }
+        }
+        sucs = "";
+      });
+  }
+});
+
+routes.get("/cadastro", sessionChecker,  (req, res)=> {
   
   naoLogado = 1;
+
   res.render(views + "cadastro", {
     erros,
     errosUser,
@@ -225,6 +222,175 @@ routes.get("/cadastro", sessionChecker, function (req, res) {
   }
 
 });
+
+routes.get("/sobre", logadoChecker, (req, res) => {
+  naoLogado = 0;
+
+  if (req.session.user) {
+    res.render(views + "sobre", {
+      userUser,
+      userEmail,
+      userEx,
+      userAdm,
+      naoLogado,
+    });
+  }
+});
+
+routes.get("/perfil/:user", logadoChecker, (req, res) => {
+  naoLogado = 2;
+
+  if (req.session.user) {
+    User.findOne({ user: req.params.user }).then((userExist) => {
+      if (req.session.user == userExist._id) {
+        sessionID = "YES";
+        perfilUser = userExist.user;
+        perfilEx = userExist.exibition;
+
+        Pub.find({ userUser: userExist.user })
+          .sort({ createdAt: "desc" })
+          .then((pubs) => {
+            sessionID = req.session.user;
+
+            res.render(views + "perfil", {
+              perfilEx,
+              perfilUser,
+              userUser,
+              userEmail,
+              userEx,
+              sucs,
+              pubs,
+              sessionID,
+              userAdm,
+              idPubli,
+              userCurtidas,
+              userCcLength,
+              User,
+              naoLogado,
+            });
+          });
+      } else {
+        sessionID = "NOT";
+        perfilUser = userExist.user;
+        perfilEx = userExist.exibition;
+
+        Pub.find({ userUser: perfilUser })
+          .sort({ createdAt: "desc" })
+          .then((pubs) => {
+            res.render(views + "perfil", {
+              perfilEx,
+              perfilUser,
+              userUser,
+              userEmail,
+              userEx,
+              sucs,
+              pubs,
+              sessionID,
+              userAdm,
+              idPubli,
+              userCurtidas,
+              userCcLength,
+              User,
+              naoLogado,
+            });
+          });
+      }
+    });
+  } else {
+    res.render(views + "logarse", { naoLogado });
+  }
+});
+
+
+
+// POST
+
+routes.post("/", (req, res) => {
+  if (erros.length >= 1) {
+    for (var i = 0; (i = erros.length); i++) {
+      erros.shift();
+    }
+  }
+  if (userCurtidas.length >= 0) {
+    for (var i = 0; (i = userCurtidas.length); i++) {
+      userCurtidas.shift();
+    }
+  }
+
+  if (
+    !req.body.user ||
+    typeof req.body.user == undefined ||
+    req.body.user == null ||
+    !req.body.password ||
+    typeof req.body.password == undefined ||
+    req.body.password == null
+  ) {
+    erros.push({ txt: "Preencha todos os campos!" });
+  }
+
+  if (erros.length > 1) {
+    console.log("erros");
+    erros.forEach((erro) => {
+      console.log(erro.txt);
+    });
+  } else {
+    const userIf = req.body.user;
+    if (userIf.includes("@")) {
+      User.findOne({ email: req.body.user })
+        .then((userExist) => {
+          if (userExist) {
+            if (userExist.password == req.body.password) {
+              const user = userExist._id;
+              
+
+              User.findOne({ _id: user }).then((userFind) => {
+                
+                req.session.user = userFind
+                naoLogado = 0;
+                res.redirect("/home");
+              });
+            } else {
+              res.redirect("/");
+              erros.push({ txt: "Usuário ou senha incorretos!" });
+            }
+          } else {
+            res.redirect("/");
+            erros.push({ txt: "Usuário ou senha incorretos!" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else
+      User.findOne({ user: req.body.user })
+        .then((userExist) => {
+          if (userExist) {
+            if (userExist.password == req.body.password) {
+              const user = userExist._id;
+             
+
+              User.findOne({ _id:user }).then((userFind) => {
+                
+                req.session.user = userFind
+               
+                naoLogado = 0;
+                res.redirect("/home");
+              });
+            } else {
+              res.redirect("/");
+              erros.push({ txt: "Usuário ou senha incorretos!" });
+            }
+          } else {
+            res.redirect("/");
+            erros.push({ txt: "Usuário ou senha incorretos!" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+});
+
 routes.post("/cadastro", (req, res) => {
   if (erros.length >= 1) {
     for (var i = 0; (i = erros.length); i++) {
@@ -330,11 +496,7 @@ routes.post("/cadastro", (req, res) => {
     errosPass.length > 0 ||
     errosEmail.length > 0
   ) {
-    console.log("erros");
-    erros.forEach((erro) => {
-      console.log(erro.txt);
-    });
-
+    
     res.redirect("/cadastro");
   } else {
     const newUser = {
@@ -342,46 +504,29 @@ routes.post("/cadastro", (req, res) => {
       user: req.body.user,
       email: req.body.email,
       password: req.body.password,
+      publiCurtidas: 'ns',
       userAdm: 0,
     };
 
     new User(newUser)
       .save()
-      .then(() => {
-        userEmail = req.body.email;
-        res.redirect(307, "/cadastroRedirect");
-        console.log(userEmail + " Usuário cadastrado com sucesso!");
+      .then((userFind) => {
+
+        req.session.user = userFind
+        naoLogado = 0;
+        res.redirect("/home");
+        
       })
       .catch((erro) => {
-        console.log("Erro ao cadastrar usuário:" + erro);
+        
         res.redirect("/cadastro");
       });
   }
 });
 
-routes.post("/cadastroRedirect", (req, res) => {
-  User.findOne({ email: userEmail })
-    .then((userExist) => {
-      console.log(userEmail);
-      req.session.user = userExist;
-
-      User.findOne({ _id: req.session.user._id }).then((user) => {
-        userID = user._id;
-        userUser = user.user;
-        userEmail = user.email;
-        userEx = user.exibition;
-        userAdm = user.userAdm;
-
-        res.redirect("/home");
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
 routes.post("/logout", function (req, res) {
   req.session.destroy();
+  naoLogado = 1
   res.redirect("/");
 });
 
@@ -407,71 +552,6 @@ routes.post("/perfis", (req, res) => {
       naoLogado,
     });
   });
-});
-
-routes.get("/home", (req, res) => {
-  naoLogado = 0;
-  
-  if (req.session.user) {
-    var sessionID = req.session.user._id;
-
-    Pub.find({})
-      .sort({ createdAt: "desc" })
-      .then((pubs) => {
-        Noti.find({})
-          .sort({ createdAt: "asc" })
-          .then((nots) => {
-            res.render(views + "home", {
-              userUser,
-              userEmail,
-              userEx,
-              sucs,
-              pubs,
-              nots,
-              sessionID,
-              userAdm,
-              idPubli,
-              userCurtidas,
-              userCcLength,
-              User,
-              naoLogado,
-            });
-
-            sucs = "";
-          });
-      });
-  } else {
-    res.render(views + "logarse", { naoLogado });
-  }
-});
-
-routes.get("/suporte", function (req, res) {
-  naoLogado = 0;
-  if (req.session.user) {
-    Sup.find({})
-      .sort({ createdAt: "desc" })
-      .then((sups) => {
-        res.render(views + "suporte", {
-          userUser,
-          userEmail,
-          userEx,
-          userID,
-          sucs,
-          erros,
-          userAdm,
-          sups,
-          naoLogado,
-        });
-        if (erros.length >= 1) {
-          for (var i = 0; (i = erros.length); i++) {
-            erros.shift();
-          }
-        }
-        sucs = "";
-      });
-  } else {
-    res.render(views + "logarse", { naoLogado });
-  }
 });
 
 routes.post("/suporte", (req, res) => {
@@ -519,7 +599,7 @@ routes.post("/publicar", (req, res) => {
     userUser: userUser,
     conteudo: req.body.conteudo,
     idUser: userID,
-    publiCurtidas: 0,
+    userCurtidas: 'ns',
   };
 
   new Pub(newPub)
@@ -556,76 +636,58 @@ routes.post("/publiNoticia", (req, res) => {
 });
 
 routes.post("/descurtir/:id", (req, res) => {
+
   idPubli = req.params.id;
-  
 
-  var index = userCurtidas.indexOf(String(idPubli));
-  if (index > -1) {
-    userCurtidas.splice(index, 1);
-  }
-
-  User.findByIdAndUpdate({ _id: userID }, { $pull: { curtidas: userCurtidas } })
+  User.findByIdAndUpdate({ _id: userID }, { $pull: { publiCurtidas: idPubli } })
     .then((x) => {
       console.log("salvo descurtida");
-      Pub.findById({ _id: idPubli }).then((pubs) => {
-        descurtiu = pubs.publiCurtidas;
+      
     
-        descurtiu--;
-    
-        Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: descurtiu })
-          .then((x) => {
+        Pub.findByIdAndUpdate({ _id: idPubli }, { $pull: { userCurtidas: x.user } })
+          .then((xx) => {
             if (naoLogado == 2) {
-              res.redirect("/perfil/" + x.userUser);
+              res.redirect("/perfil/" + xx.userUser);
             } else {
               res.redirect("/home");
             }
           })
-          .catch((e) => {
-            console.log("nao salvo publi");
+          .catch((ee) => {
+            console.log(ee + "nao salvo publi");
           });
-      });
-    })
-    .catch((e) => {
-      console.log(e + " nao salvo");
-    });
+      }).catch((e) => {
 
-  
-});
+      console.log(e + " nao salvo");
+})
+})
 
 routes.post("/curtir/:id", async (req, res) => {
   
   idPubli = req.params.id;
-  var curtiu;
+  
 
   await User.findByIdAndUpdate(
     { _id: userID },
-    { $push: { curtidas: idPubli } }
+    { $push: { publiCurtidas: idPubli } }
   )
     .then((x) => {
-      userCcLength++;
-      userCurtidas.push(idPubli);
 
-      Pub.findById({ _id: idPubli }).then((pubs) => {
-        curtiu = pubs.publiCurtidas;
-    
-        curtiu++;
-    
-        Pub.findByIdAndUpdate({ _id: idPubli }, { publiCurtidas: curtiu })
-          .then((x) => {
+        Pub.findByIdAndUpdate({ _id: idPubli }, { $push: { userCurtidas: x.user } })
+          .then((xx) => {
             if (naoLogado == 2) {
-              res.redirect("/perfil/" + x.userUser);
+              res.redirect("/perfil/" + xx.userUser);
             } else {
               res.redirect("/home");
             }
           })
-          .catch((e) => {
-            console.log("nao salvo");
+          .catch((ee) => {
+            console.log(ee + "nao salvo");
           });
-      });
+      
 
     })
     .catch((e) => {
-      console.log("nao salvo");
+      console.log(e + "nao salvo");
     });
 
   
@@ -729,83 +791,5 @@ routes.post("/deletar-sup-adm/:id", (req, res) => {
     });
 });
 
-routes.get("/sobre", (req, res) => {
-  naoLogado = 0;
-  if (req.session.user) {
-    res.render(views + "sobre", {
-      userUser,
-      userEmail,
-      userEx,
-      userAdm,
-      naoLogado,
-    });
-  } else {
-    res.render(views + "logarse", { naoLogado });
-  }
-});
-
-routes.get("/perfil/:user", (req, res) => {
-  naoLogado = 2;
-
-  if (req.session.user) {
-    User.findOne({ user: req.params.user }).then((userExist) => {
-      if (req.session.user == userExist._id) {
-        sessionID = "YES";
-        perfilUser = userExist.user;
-        perfilEx = userExist.exibition;
-
-        Pub.find({ userUser: userExist.user })
-          .sort({ createdAt: "desc" })
-          .then((pubs) => {
-            sessionID = req.session.user;
-
-            res.render(views + "perfil", {
-              perfilEx,
-              perfilUser,
-              userUser,
-              userEmail,
-              userEx,
-              sucs,
-              pubs,
-              sessionID,
-              userAdm,
-              idPubli,
-              userCurtidas,
-              userCcLength,
-              User,
-              naoLogado,
-            });
-          });
-      } else {
-        sessionID = "NOT";
-        perfilUser = userExist.user;
-        perfilEx = userExist.exibition;
-
-        Pub.find({ userUser: perfilUser })
-          .sort({ createdAt: "desc" })
-          .then((pubs) => {
-            res.render(views + "perfil", {
-              perfilEx,
-              perfilUser,
-              userUser,
-              userEmail,
-              userEx,
-              sucs,
-              pubs,
-              sessionID,
-              userAdm,
-              idPubli,
-              userCurtidas,
-              userCcLength,
-              User,
-              naoLogado,
-            });
-          });
-      }
-    });
-  } else {
-    res.render(views + "logarse", { naoLogado });
-  }
-});
 
 module.exports = routes;

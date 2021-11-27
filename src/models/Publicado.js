@@ -8,7 +8,7 @@ const PublicadoSchema = new mongoose.Schema({
         required: true
     },
     comentarios:[{ 
-        comentario:[{
+        
 contComent: {
 
             null: false,
@@ -35,9 +35,10 @@ contComent: {
             default: Date.now 
         }
 
-        }],
+        
             
     }], 
+
     ValiaID:{
 
         type: String,
@@ -62,10 +63,12 @@ contComent: {
         require: true,
 
     },
-    publiCurtidas: {
+    userCurtidas: {
 
-        type: Number,
+        type: Array,
         require: false,
+        unique: false,
+        null: false,
 
     },
     createdAt:{ 
@@ -77,6 +80,6 @@ contComent: {
 
 mongoose.model("publicados", PublicadoSchema)
 
-const Pub = mongoose.model("publicados", PublicadoSchema)
+const Pub = mongoose.model("publicacoes", PublicadoSchema)
 
 module.exports = Pub

@@ -150,8 +150,8 @@
 
               </div>
 
-              <%pub.comentarios.forEach(coment => {%>
-            <%coment.comentario.forEach(comentario => {%> 
+              <%pub.comentarios.forEach(comentario => {%>
+            
               
                      
                 <div class="modal-body">
@@ -169,7 +169,7 @@
                 
                </div>
                <div class="hr"></div>
-                <%})%>
+                
             
             
                
@@ -190,20 +190,20 @@
             <% var visao = String(pub._id)
               %> 
 
-            <% if(userCurtidas.indexOf(visao)>=0){%>
+            
               <form action="/descurtir/<%=pub._id%>" method="post">
               
               <button type="submit"><img src="img/star.png" alt="Tirar estrela"></button>
             </form>
               
-              <%}else{%> 
+              
                 
             <form action="/curtir/<%=pub._id%>" method="post">
               
               <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
             </form>
 
-            <%}%>
+            
 
             <%= pub.publiCurtidas %>
             </div>
