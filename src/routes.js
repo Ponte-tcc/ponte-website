@@ -20,10 +20,13 @@ var userUser;
 var userEmail;
 var userEx;
 var userID;
-var userCcLength;
+var publiCurtidas = [];
 
 var perfilUser;
 var perfilEx;
+
+var curtida
+var star 
 
 var sucs;
 const erros = [];
@@ -36,7 +39,7 @@ const errosEmail = [];
 const errosPass = [];
 
 var idPubli;
-var userCurtidas = [];
+
 
 var naoLogado;
 var sessionID;
@@ -49,7 +52,7 @@ const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/;
 //MIDDLEWARES
 
 routes.use((req, res, next) => {
-  console.log(req.session.user)
+  
   if (!req.session.user ) {
     res.clearCookie('user_sid');
   }else{
@@ -60,11 +63,17 @@ routes.use((req, res, next) => {
     userEmail = req.session.user.email;
     userEx = req.session.user.exibition;
     userAdm = req.session.user.userAdm;
+     
 
-    for (var i = 0; i < req.session.user.publiCurtidas.length; i++) {
-      userCurtidas.push(req.session.user.publiCurtidas[i]);
+    
+    for (var i = 0; (i = publiCurtidas.length); i++) {
+      publiCurtidas.shift();
     }
-
+    
+    for (var i = 0; i < req.session.user.publiCurtidas.length; i++) {
+      publiCurtidas.push(req.session.user.publiCurtidas[i]);
+    
+}
 
   }
   next();
@@ -100,7 +109,7 @@ var logadoChecker = (req, res, next) => {
 routes.get("/", sessionChecker, (req, res) => {
   
   naoLogado = 1;
-
+ 
   res.render(views + "index", { erros, naoLogado });
   if (erros.length >= 1) {
     for (var i = 0; (i = erros.length); i++) {
@@ -111,21 +120,19 @@ routes.get("/", sessionChecker, (req, res) => {
 
 routes.get("/home", logadoChecker, (req, res) => {
 
-  
+  console.log(req.session.user)
   
   if (req.session.user) {
     var sessionID = req.session.user._id;
-var curtida
+
+    
     Pub.find({})
       .sort({ createdAt: "desc" })
       .then((pubs) => {
 
-      Pub.findOne({userCurtidas: userUser}).then((x) => {
 
-        console.log(x)
 
-      })
-
+      
         Noti.find({})
           .sort({ createdAt: "asc" })
           .then((nots) => {
@@ -142,8 +149,8 @@ var curtida
               sessionID,
               userAdm,
               idPubli,
-              userCurtidas,
-              userCcLength,
+              publiCurtidas,
+              Pub,
               User,
               naoLogado,
             });
@@ -263,8 +270,8 @@ routes.get("/perfil/:user", logadoChecker, (req, res) => {
               sessionID,
               userAdm,
               idPubli,
-              userCurtidas,
-              userCcLength,
+              publiCurtidas,
+              
               User,
               naoLogado,
             });
@@ -288,8 +295,8 @@ routes.get("/perfil/:user", logadoChecker, (req, res) => {
               sessionID,
               userAdm,
               idPubli,
-              userCurtidas,
-              userCcLength,
+              publiCurtidas,
+              
               User,
               naoLogado,
             });
@@ -311,11 +318,6 @@ routes.post("/", (req, res) => {
       erros.shift();
     }
   }
-  if (userCurtidas.length >= 0) {
-    for (var i = 0; (i = userCurtidas.length); i++) {
-      userCurtidas.shift();
-    }
-  }
 
   if (
     !req.body.user ||
@@ -329,9 +331,9 @@ routes.post("/", (req, res) => {
   }
 
   if (erros.length > 1) {
-    console.log("erros");
+    
     erros.forEach((erro) => {
-      console.log(erro.txt);
+      
     });
   } else {
     const userIf = req.body.user;
@@ -359,7 +361,7 @@ routes.post("/", (req, res) => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          
         });
     } else
       User.findOne({ user: req.body.user })
@@ -386,7 +388,7 @@ routes.post("/", (req, res) => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          
         });
   }
 });
@@ -417,14 +419,9 @@ routes.post("/cadastro", (req, res) => {
       errosPass.shift();
     }
   }
-  if (userCurtidas.length >= 0) {
-    for (var i = 0; (i = userCurtidas.length); i++) {
-      userCurtidas.shift();
-    }
-  }
+ 
 
-  console.log(req.body.user);
-  console.log(regexOne.test(req.body.user));
+
 
   if (
     !req.body.user ||
@@ -442,8 +439,7 @@ routes.post("/cadastro", (req, res) => {
     });
   }
 
-  console.log(req.body.exibition);
-  console.log(regexTwo.test(req.body.exibition));
+
 
   if (
     !req.body.exibition ||
@@ -504,7 +500,6 @@ routes.post("/cadastro", (req, res) => {
       user: req.body.user,
       email: req.body.email,
       password: req.body.password,
-      publiCurtidas: 'ns',
       userAdm: 0,
     };
 
@@ -528,6 +523,7 @@ routes.post("/logout", function (req, res) {
   req.session.destroy();
   naoLogado = 1
   res.redirect("/");
+  
 });
 
 routes.post("/publicacoes", (req, res) => {
@@ -547,8 +543,7 @@ routes.post("/perfis", (req, res) => {
       sessionID,
       userAdm,
       idPubli,
-      userCurtidas,
-      userCcLength,
+      publiCurtidas,
       naoLogado,
     });
   });
@@ -582,12 +577,12 @@ routes.post("/suporte", (req, res) => {
     new Sup(newSup)
       .save()
       .then(() => {
-        console.log("Suporte cadastrado com sucesso!");
+        
         sucs = "Suporte enviado!";
         res.redirect("/suporte");
       })
       .catch((erro) => {
-        console.log("Erro ao cadastrar suporte:" + erro);
+        
         res.redirect("/suporte");
       });
   }
@@ -599,18 +594,18 @@ routes.post("/publicar", (req, res) => {
     userUser: userUser,
     conteudo: req.body.conteudo,
     idUser: userID,
-    userCurtidas: 'ns',
+    
   };
 
   new Pub(newPub)
     .save()
     .then((pubs) => {
-      console.log("Publicado com sucesso!");
+      
       sucs = "Publicado!";
       res.redirect("/home");
     })
     .catch((erro) => {
-      console.log("Erro: " + erro);
+      
       res.redirect("/home");
     });
 });
@@ -625,12 +620,12 @@ routes.post("/publiNoticia", (req, res) => {
   new Noti(newNoti)
     .save()
     .then((nots) => {
-      console.log("Publicado com sucesso!");
+     
       res.redirect("/home");
       sucs = "Publicado!";
     })
     .catch((erro) => {
-      console.log("Erro: " + erro);
+     
       res.redirect("/home");
     });
 });
@@ -639,9 +634,16 @@ routes.post("/descurtir/:id", (req, res) => {
 
   idPubli = req.params.id;
 
+  
+
+  const index = req.session.user.publiCurtidas.indexOf(idPubli);
+if (index > -1) {
+  req.session.user.publiCurtidas.splice(index, 1);
+}
+
   User.findByIdAndUpdate({ _id: userID }, { $pull: { publiCurtidas: idPubli } })
     .then((x) => {
-      console.log("salvo descurtida");
+      
       
     
         Pub.findByIdAndUpdate({ _id: idPubli }, { $pull: { userCurtidas: x.user } })
@@ -653,11 +655,11 @@ routes.post("/descurtir/:id", (req, res) => {
             }
           })
           .catch((ee) => {
-            console.log(ee + "nao salvo publi");
+            
           });
       }).catch((e) => {
 
-      console.log(e + " nao salvo");
+      
 })
 })
 
@@ -665,12 +667,14 @@ routes.post("/curtir/:id", async (req, res) => {
   
   idPubli = req.params.id;
   
-
+  req.session.user.publiCurtidas.push(idPubli)
   await User.findByIdAndUpdate(
     { _id: userID },
     { $push: { publiCurtidas: idPubli } }
   )
     .then((x) => {
+
+        
 
         Pub.findByIdAndUpdate({ _id: idPubli }, { $push: { userCurtidas: x.user } })
           .then((xx) => {
@@ -681,13 +685,13 @@ routes.post("/curtir/:id", async (req, res) => {
             }
           })
           .catch((ee) => {
-            console.log(ee + "nao salvo");
+            
           });
       
 
     })
     .catch((e) => {
-      console.log(e + "nao salvo");
+      
     });
 
   
@@ -701,7 +705,7 @@ routes.post("/comentar/:id", (req, res) => {
     typeof req.body.contComent == "undefined" ||
     req.body.contComent == null
   ) {
-    console.log("digita alguma coisa meo");
+    
     if (naoLogado == 2) {
       res.redirect("/perfil/" + userUser);
     } else {
@@ -716,7 +720,7 @@ routes.post("/comentar/:id", (req, res) => {
 
     Pub.findByIdAndUpdate(
       { _id: req.params.id },
-      { $push: { comentarios: { comentario: comment } } }
+      { $push: { comentarios:  comment  } }
     )
       .then((x) => {
         if (naoLogado == 2) {
@@ -726,7 +730,7 @@ routes.post("/comentar/:id", (req, res) => {
         }
       })
       .catch((e) => {
-        console.log("nao salvo");
+       
       });
   }
 });
@@ -740,10 +744,10 @@ routes.post("/deletar/:id", (req, res) => {
         res.redirect("/home");
       }
 
-      console.log("deletado");
+      
     })
     .catch((err) => {
-      console.log(err);
+      
     });
 });
 
@@ -751,10 +755,10 @@ routes.post("/deletar-noti-adm/:id", (req, res) => {
   Noti.remove({ _id: req.params.id })
     .then(() => {
       res.redirect("/home");
-      console.log("deletado");
+      
     })
     .catch((err) => {
-      console.log(err);
+      
     });
 });
 
@@ -762,10 +766,10 @@ routes.post("/deletar-adm/:id", (req, res) => {
   Pub.remove({ _id: req.params.id })
     .then(() => {
       res.redirect(307, "/publicacoes");
-      console.log("deletado");
+      
     })
     .catch((err) => {
-      console.log(err);
+      
     });
 });
 
@@ -773,10 +777,10 @@ routes.post("/deletar-user-adm/:id", (req, res) => {
   User.remove({ _id: req.params.id })
     .then(() => {
       res.redirect(307, "/perfis");
-      console.log("deletado");
+     
     })
     .catch((err) => {
-      console.log(err);
+     
     });
 });
 
@@ -784,10 +788,10 @@ routes.post("/deletar-sup-adm/:id", (req, res) => {
   Sup.remove({ _id: req.params.id })
     .then(() => {
       res.redirect(307, "/suporte");
-      console.log("deletado");
+     
     })
     .catch((err) => {
-      console.log(err);
+      
     });
 });
 

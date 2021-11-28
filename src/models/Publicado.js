@@ -78,7 +78,7 @@ contComent: {
 
 })
 
-mongoose.model("publicados", PublicadoSchema)
+mongoose.model("publicacoes", PublicadoSchema)
 
 const Pub = mongoose.model("publicacoes", PublicadoSchema)
 

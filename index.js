@@ -27,7 +27,7 @@ mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    //useFindAndModify: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log("MongoDB Conectado...");
@@ -56,6 +56,7 @@ server.use(
     },
     
     store: MongoStore.create({
+  
       mongoUrl: uri,
       ttl: 14 * 24 * 60 * 60,
       autoRemove: 'native' 

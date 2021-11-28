@@ -43,10 +43,17 @@
           </form>
 
         </div>
-      
+        
         <div class="publicados">
          
-          <% var i = 0; pubs.forEach(pub => {%>
+          <% var i = 0; var curtida
+          var star
+           pubs.forEach(pub => {
+
+            
+            var visao = pub.userCurtidas.findIndex(curti => curti ==  userUser  )
+          if(visao >=0 ){ curtida = 'descurtir'; star = 'star'  } 
+          else{ curtida = 'curtir'; star = 'starun'}%> 
 
           
 
@@ -64,7 +71,7 @@
             </div>
 
           </div>
-
+         
           <div class="modal" id="modal<%=pub._id%>">
 
             
@@ -187,21 +194,13 @@
             <div class="p11">
             <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
             <%=pub.comentarios.length%>
-            <% var visao = String(pub._id)
-              %> 
-
+              
+            <form action="/<%=curtida%>/<%=pub._id%>" method="post">
+              
+              <button type="submit"><img src="img/<%=star%>.png" ></button>
+              <%=pub.userCurtidas.length%>
+            </form>
             
-              <form action="/descurtir/<%=pub._id%>" method="post">
-              
-              <button type="submit"><img src="img/star.png" alt="Tirar estrela"></button>
-            </form>
-              
-              
-                
-            <form action="/curtir/<%=pub._id%>" method="post">
-              
-              <button type="submit"><img src="img/starun.png" alt="Dar uma estrela"></button>
-            </form>
 
             
 
