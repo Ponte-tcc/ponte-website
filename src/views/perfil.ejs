@@ -14,7 +14,7 @@
         
        
 
-<% if(sessionID === 'NOT'){%>
+<% if(perfilUser != userUser){%>
 <div class="partPerfil">
   <div class="avatar"><img src="../img/userM.png" alt=""></div>
     <div class="nome">
@@ -26,7 +26,12 @@
         <div class="publicados">
 
 
-  <%var i = 0; pubs.forEach(pub =>{%>
+  <%var i = 0; pubs.forEach(pub =>{
+    var visao = pub.userCurtidas.findIndex(curti => curti ==  userUser  )
+          if(visao >=0 ){ curtida = 'descurtir'; star = 'star'  } 
+          else{ curtida = 'curtir'; star = 'starun'}
+    
+    %>
 
     <div class="modal" id="modal<%=pub._id%>">
 
@@ -156,25 +161,7 @@
 <div class="p11">
 <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="../img/ballon.png" alt=""></button>
 <%=pub.comentarios.length%>
-<% var visao = String(pub._id)
-  %> 
 
-<% if(userCurtidas.indexOf(visao)>=0){%>
-  <form action="/descurtir/<%=pub._id%>" method="post">
-  
-  <button type="submit"><img src="../img/star.png" alt="Tirar estrela"></button>
-</form>
-  
-  <%}else{%> 
-    
-<form action="/curtir/<%=pub._id%>" method="post">
-  
-  <button type="submit"><img src="../img/starun.png" alt="Dar uma estrela"></button>
-</form>
-
-<%}%>
-
-<%= pub.publiCurtidas %>
 </div>
 <div class="p12">
 <% var monthNames = [
@@ -192,7 +179,11 @@ var mi = pub.createdAt.getMinutes()%>
 
 <input type="hidden" name='pubId' value="<%=pub._id%>">
 
-        
+<form action="/<%=curtida%>/<%=pub._id%>" method="post">
+              
+              <button type="submit"><img src="img/<%=star%>.png" ></button>
+              <%=pub.userCurtidas.length%>
+            </form>
 
 
 
@@ -224,7 +215,12 @@ var mi = pub.createdAt.getMinutes()%>
         <div class="publicados">
 
 
-  <%var i = 0; pubs.forEach(pub =>{%>
+  <%var i = 0; pubs.forEach(pub =>{
+    var visao = pub.userCurtidas.findIndex(curti => curti ==  userUser  )
+          if(visao >=0 ){ curtida = 'descurtir'; star = 'star'  } 
+          else{ curtida = 'curtir'; star = 'starun'}
+    
+    %>
     <div class="modal" id="modal<%=pub._id%>">
 
             
@@ -352,25 +348,11 @@ var mi = pub.createdAt.getMinutes()%>
 <div class="p11">
 <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="../img/ballon.png" alt=""></button>
 <%=pub.comentarios.length%>
-<% var visao = String(pub._id)
-  %> 
-
-<% if(userCurtidas.indexOf(visao)>=0){%>
-  <form action="/descurtir/<%=pub._id%>" method="post">
-  
-  <button type="submit"><img src="../img/star.png" alt="Tirar estrela"></button>
-</form>
-  
-  <%}else{%> 
-    
-<form action="/curtir/<%=pub._id%>" method="post">
-  
-  <button type="submit"><img src="../img/starun.png" alt="Dar uma estrela"></button>
-</form>
-
-<%}%>
-
-<%= pub.publiCurtidas %>
+<form action="/<%=curtida%>/<%=pub._id%>" method="post">
+              
+              <button type="submit"><img src="img/<%=star%>.png" ></button>
+              <%=pub.userCurtidas.length%>
+            </form>
 </div>
 <div class="p12">
 <% var monthNames = [
