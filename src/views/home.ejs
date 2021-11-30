@@ -14,7 +14,137 @@
   
 
   <div class="container home">
+    <div class="noticias">
+
+      <div class="notiTitle"><h3>Notícias</h3></div>
+
+      <div class="box-noti">
+<%nots.forEach(noti => {%>
+  
+
+    <div class="noticia">
+
+      <div class="manchete">
+      <h4><%=noti.titulo%></h4>
+      
+      <small class="categoriaNoti">- <%=noti.categoria%></small>
+      </div>
+
+      <div class="contNoti">
+        
+        <span class="input" role="textbox"> <%= noti.conteudo %> </span>
+
+        <% var monthNames = [
+            'Janeiro', 'Fevereiro', 'Março',
+            'Abril', 'Maio', 'Junho', 'Julho',
+            'Agosto', 'Setembro', 'Outubro',
+            'Novembro', 'Dezembro'
+            ];
+            var d = noti.createdAt.getDate();
+            var m = monthNames[noti.createdAt.getMonth()];
+            var y = noti.createdAt.getFullYear();
+            var h = noti.createdAt.getHours()
+            var mi = noti.createdAt.getMinutes()%>
+            <div class="footer-noti">
+            <small class="dataNoti"><%= d + ' ' +m + ' de ' +y %></small>
+            <%if(userAdm == 1){%>
+            <button data-modal-target="#modal<%=noti._id%>" class="btnDelete">Deletar</button>
+            <%}%>
+        </div>
+      </div>
+    
+    </div>
+
+   
+
+ <div class="modal" id="modal<%=noti._id%>">
+
+            
+
+<div class="modal-header">
+<div class="title">PONTE</div>
+<button data-close-button class="close-button">&times;</button>
+
+</div>
+
+<div class="modal-body deletar">
+  <h3>Certeza que deseja deletar esta notícia?</h3>
+  <span class="input" role="textbox"> <%= noti.conteudo %> </span> 
+  <div class="delete">
+   
+  <form action="/deletar-noti-adm/<%=noti._id%>" method="post">
+
+    <button type="submit" class="sim">Sim</button>
+    
+  </form>
+<button data-close-button class="nao">Não</button>
+</div>
+</div>
+
+
+  
+  
+</div>
+ <%})%>
  
+ </div>
+<div class="modal noti" id="modalNoti">
+
+            
+
+<div class="modal-header">
+<div class="title">Adicionar nova notícia</div>
+<button data-close-button class="close-button">&times;</button>
+
+</div>
+
+  <div class="modal-body">
+<form action="/publiNoticia" method="post" class="formNoti">
+
+<div class="inp">
+<label for="inputTitleNoti">Título</label>
+<input type="text" name="inputTitleNoti" id="inputTitleNoti" maxlength="14">
+</div>
+
+<div class="inp">
+<label for="inputCatNoti">Categoria</label>
+<input type="text" name="inputCatNoti" id="inputCatNoti" maxlength="10">
+</div>
+
+<div class="inp">
+<label for="inputContNoti">Conteúdo</label>
+<textarea class="textInput" name="inputContNoti" id="" 
+              placeholder="" 
+              maxlength="120" wrap="hard"></textarea>
+
+</div>
+
+<div class="btnSubNoti">
+<button type="submit" class="btSubmit">Confirmar</button>
+</div>
+</form>
+  
+ </div>
+  
+  
+</div>
+    <%if(userAdm == 1){%>
+      
+      
+  
+
+<div>
+<button data-modal-target="#modalNoti" class="modalNoti">&#x2B;</button>
+</div>
+    
+
+
+    <%}%>
+      
+  
+
+  </div> 
+
     <main class="mainHome">
 <div class="imgHome"><img class="logo" src="img/icoPonte.png" alt=""></div>
       
@@ -82,7 +212,7 @@
             
             </div>
       
-            <div class="modal-body">
+            <div class="modal-body deletar">
               <h3>Certeza que deseja deletar esta publicação?</h3>
               <span class="input" role="textbox"> <%= pub.conteudo %> </span> 
               <div class="delete">
@@ -171,7 +301,7 @@
               <a href="/perfil/<%= comentario.userUser %>"><small>  @<%= comentario.userUser %></small></a>
               </div>
               
-              <textarea class="textCont" readonly><%= comentario.contComent %></textarea>
+              <span class="input" role="textbox"> <%=comentario.contComent%> </span>
               </div>   
                 
                </div>
@@ -241,133 +371,7 @@
 
       
     </main>
-    <div class="noticias">
-
-      <div class="notiTitle"><h3>Notícias</h3></div>
-<%nots.forEach(noti => {%>
-  
-
-    <div class="noticia">
-
-      <div class="manchete">
-      <h4><%=noti.titulo%></h4>
-      
-      <small class="categoriaNoti">- <%=noti.categoria%></small>
-      </div>
-
-      <div class="contNoti">
-        
-        <span class="input" role="textbox"> <%= noti.conteudo %> </span>
-
-        <% var monthNames = [
-            'Janeiro', 'Fevereiro', 'Março',
-            'Abril', 'Maio', 'Junho', 'Julho',
-            'Agosto', 'Setembro', 'Outubro',
-            'Novembro', 'Dezembro'
-            ];
-            var d = noti.createdAt.getDate();
-            var m = monthNames[noti.createdAt.getMonth()];
-            var y = noti.createdAt.getFullYear();
-            var h = noti.createdAt.getHours()
-            var mi = noti.createdAt.getMinutes()%>
-            <div class="footer-noti">
-            <small class="dataNoti"><%= d + ' ' +m + ' de ' +y %></small>
-            <%if(userAdm == 1){%>
-            <button data-modal-target="#modal<%=noti._id%>" class="btnDelete">Deletar</button>
-            <%}%>
-        </div>
-      </div>
-    
-    </div>
-
    
-
- <div class="modal" id="modal<%=noti._id%>">
-
-            
-
-<div class="modal-header">
-<div class="title">PONTE</div>
-<button data-close-button class="close-button">&times;</button>
-
-</div>
-
-<div class="modal-body">
-  <h3>Certeza que deseja deletar esta notícia?</h3>
-  <span class="input" role="textbox"> <%= noti.conteudo %> </span> 
-  <div class="delete">
-   
-  <form action="/deletar-noti-adm/<%=noti._id%>" method="post">
-
-    <button type="submit" class="sim">Sim</button>
-    
-  </form>
-<button data-close-button class="nao">Não</button>
-</div>
-</div>
-
-
-  
-  
-</div>
- <%})%>
-<div class="modal noti" id="modalNoti">
-
-            
-
-<div class="modal-header">
-<div class="title">Adicionar nova notícia</div>
-<button data-close-button class="close-button">&times;</button>
-
-</div>
-
-  <div class="modal-body">
-<form action="/publiNoticia" method="post" class="formNoti">
-
-<div class="inp">
-<label for="inputTitleNoti">Título</label>
-<input type="text" name="inputTitleNoti" id="inputTitleNoti" maxlength="14">
-</div>
-
-<div class="inp">
-<label for="inputCatNoti">Categoria</label>
-<input type="text" name="inputCatNoti" id="inputCatNoti" maxlength="10">
-</div>
-
-<div class="inp">
-<label for="inputContNoti">Conteúdo</label>
-<textarea class="textInput" name="inputContNoti" id="" 
-              placeholder="" 
-              maxlength="120" wrap="hard"></textarea>
-
-</div>
-
-<div class="btnSubNoti">
-<button type="submit" class="btSubmit">Confirmar</button>
-</div>
-</form>
-  
- </div>
-  
-  
-</div>
-    <%if(userAdm == 1){%>
-      
-      
-  
-
-<div>
-<button data-modal-target="#modalNoti" class="modalNoti">&#x2B;</button>
-</div>
-    
-
-
-    <%}%>
-      
-  
-
-  </div> 
-
 <script src="script/coment.js"></script>
 <script src="script/autoResize.js"></script>
 <script src="script/curtir.js"></script>

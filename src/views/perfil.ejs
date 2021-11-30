@@ -127,8 +127,8 @@
 
 </div>
 
-<%pub.comentarios.forEach(coment => {%>
-<%coment.comentario.forEach(comentario => {%> 
+<%pub.comentarios.forEach(comentario => {%>
+ 
 
        
   <div class="modal-body">
@@ -146,7 +146,7 @@
   
  </div>
  <div class="hr"></div>
-  <%})%>
+  
 
 
  
@@ -181,7 +181,7 @@ var mi = pub.createdAt.getMinutes()%>
 
 <form action="/<%=curtida%>/<%=pub._id%>" method="post">
               
-              <button type="submit"><img src="img/<%=star%>.png" ></button>
+              <button type="submit"><img src="../img/<%=star%>.png" ></button>
               <%=pub.userCurtidas.length%>
             </form>
 
@@ -231,7 +231,7 @@ var mi = pub.createdAt.getMinutes()%>
 
 </div>
 
-<div class="modal-body">
+<div class="modal-body deletar">
   <h3>Certeza que deseja deletar esta publicação?</h3>
   <span class="input" role="textbox"> <%= pub.conteudo %> </span> 
   <div class="delete">
@@ -314,8 +314,8 @@ var mi = pub.createdAt.getMinutes()%>
 
 </div>
 
-<%pub.comentarios.forEach(coment => {%>
-<%coment.comentario.forEach(comentario => {%> 
+<%pub.comentarios.forEach(comentario => {%>
+
 
        
   <div class="modal-body">
@@ -333,7 +333,7 @@ var mi = pub.createdAt.getMinutes()%>
   
  </div>
  <div class="hr"></div>
-  <%})%>
+ 
 
 
  
@@ -350,7 +350,7 @@ var mi = pub.createdAt.getMinutes()%>
 <%=pub.comentarios.length%>
 <form action="/<%=curtida%>/<%=pub._id%>" method="post">
               
-              <button type="submit"><img src="img/<%=star%>.png" ></button>
+              <button type="submit"><img src="../img/<%=star%>.png" ></button>
               <%=pub.userCurtidas.length%>
             </form>
 </div>
