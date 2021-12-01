@@ -82,6 +82,7 @@ routes.use((req, res, next) => {
 var sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
 
+    naoLogado = 0
     res.redirect('/home')
 
   } else {
@@ -602,10 +603,11 @@ routes.post("/publicar", (req, res) => {
     .then((pubs) => {
       
       sucs = "Publicado!";
+      naoLogado = 0
       res.redirect("/home");
     })
     .catch((erro) => {
-      
+      naoLogado = 0
       res.redirect("/home");
     });
 });
@@ -620,12 +622,12 @@ routes.post("/publiNoticia", (req, res) => {
   new Noti(newNoti)
     .save()
     .then((nots) => {
-     
+      naoLogado = 0
       res.redirect("/home");
       sucs = "Publicado!";
     })
     .catch((erro) => {
-     
+      naoLogado = 0
       res.redirect("/home");
     });
 });
@@ -651,6 +653,7 @@ if (index > -1) {
             if (naoLogado == 2) {
               res.redirect("/perfil/" + xx.userUser);
             } else {
+              naoLogado = 0
               res.redirect("/home");
             }
           })
@@ -681,6 +684,7 @@ routes.post("/curtir/:id", async (req, res) => {
             if (naoLogado == 2) {
               res.redirect("/perfil/" + xx.userUser);
             } else {
+              naoLogado = 0
               res.redirect("/home");
             }
           })
@@ -709,6 +713,7 @@ routes.post("/comentar/:id", (req, res) => {
     if (naoLogado == 2) {
       res.redirect("/perfil/" + userUser);
     } else {
+      naoLogado = 0
       res.redirect("/home");
     }
   } else {
@@ -726,6 +731,7 @@ routes.post("/comentar/:id", (req, res) => {
         if (naoLogado == 2) {
           res.redirect("/perfil/" + perfilUser);
         } else {
+          naoLogado = 0
           res.redirect("/home");
         }
       })
@@ -741,6 +747,7 @@ routes.post("/deletar/:id", (req, res) => {
       if (naoLogado == 2) {
         res.redirect("/perfil/" + userUser);
       } else {
+        naoLogado = 0
         res.redirect("/home");
       }
 
@@ -754,6 +761,7 @@ routes.post("/deletar/:id", (req, res) => {
 routes.post("/deletar-noti-adm/:id", (req, res) => {
   Noti.remove({ _id: req.params.id })
     .then(() => {
+      naoLogado = 0
       res.redirect("/home");
       
     })
