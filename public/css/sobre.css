@@ -17,8 +17,8 @@
 
 .sobreC img{
 
-    width: 470px;
-    height: 170px;
+    width: 90%;
+    height: 90%;
 
 }
 
@@ -34,26 +34,6 @@
 
         padding: 20px;
         box-sizing: border-box;
-    
-    }
-
-    .sobreC img{
-
-        width: 370px;
-        height: 70px;
-    
-    }
-
-
-}
-
-@media (max-width: 400px){
-
-   
-    .sobreC img{
-
-        width: 350px;
-        height: 50px;
     
     }
 

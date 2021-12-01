@@ -61,6 +61,11 @@ max-width: 80%;
 
 
 }
+footer nav a:hover{
+
+    text-decoration: underline dashed;
+
+}
 
 footer .repo:hover > legend{
 
