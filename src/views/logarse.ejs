@@ -3,7 +3,7 @@
 <html lang="pt-br">
   
 
-  <%- include('parts/head', { title : 'Logar-se', linkCss: ''} ) %>
+  <%- include('parts/head', { title : 'Logar-se', linkCss: 'css/logarse.css'} ) %>
 
   
 
@@ -13,13 +13,15 @@
     <%- include('parts/header', { title : ''}) %>
     
 
-    <main>
+    <div class="mainLogarse">
      
-        <a href="/"><p>Faça o login para continuar</p></a> 
-        
+      <div class="box-login">
+        <p>Faça o login para continuar</p>
+        <a href="/">Login</a> 
+        </div>
 
         
-    </main>
+    </div>
 
 
     
