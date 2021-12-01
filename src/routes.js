@@ -119,7 +119,7 @@ routes.get("/", sessionChecker, (req, res) => {
 });
 
 routes.get("/home", logadoChecker, (req, res) => {
-
+naoLogado = 0
   console.log(req.session.user)
   
   if (req.session.user) {
