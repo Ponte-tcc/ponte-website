@@ -54,10 +54,11 @@ const regexTwo = /^[a-zA-Z0-9]+([_ -.]?[a-zA-Z0-9])*$/;
 routes.use((req, res, next) => {
   
   if (!req.session.user ) {
+    naoLogado = 1
     res.clearCookie('user_sid');
   }else{
 
-    
+    naoLogado = 0
     userID = req.session.user._id;
     userUser = req.session.user.user;
     userEmail = req.session.user.email;
