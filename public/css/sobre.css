@@ -8,6 +8,7 @@
 .sobreC{
 
     margin-top: 12px;
+    max-width: 800px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -16,7 +17,45 @@
 
 .sobreC img{
 
-    width: 800px;
+    width: 470px;
     height: 170px;
+
+}
+
+@media (max-width: 500px){
+
+    .container.sobre h1{font-size: 17px;}
+
+    .container.sobre h3{font-size: 16px;}
+
+    .container.sobre p{font-size: 14px;}
+
+    .sobreC{
+
+        padding: 20px;
+        box-sizing: border-box;
+    
+    }
+
+    .sobreC img{
+
+        width: 370px;
+        height: 70px;
+    
+    }
+
+
+}
+
+@media (max-width: 400px){
+
+   
+    .sobreC img{
+
+        width: 350px;
+        height: 50px;
+    
+    }
+
 
 }

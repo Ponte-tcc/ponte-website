@@ -38,15 +38,7 @@
             </a>
            
     
-            <% if(userAdm == 1){%>
-              <!--<form action="/publicacoes" method="post">
-              <button type="submit">Todas as publicações</button>
-              </form>  -->
-              
-              <form action="/perfis" method="post">
-                <button type="submit"><p>Todos os perfis</p> </button>
-                </form> 
-            <%}%>
+            
     
         
           
@@ -68,9 +60,28 @@
             <ul>
               <li><a href="/suporte">Suporte</a> </li>
               <li><a href="/sobre">Sobre</a> </li>
+
+              <% if(userAdm == 1){%>
+
+                <li>
               
-              <li><form action="/logout" method="post"><button>Logout</button></form></a> 
+              
+                <form action="/perfis" method="post">
+                  <button>Perfis</button>
+                  </form>
+
               </li>
+
+              <%}%>
+
+              <li>
+                <form action="/logout" method="post">
+                <button>Logout</button>
+              </form>
+             
+              </li>
+
+            
     
             </ul>
     
@@ -105,15 +116,7 @@
             </a>
            
     
-            <% if(userAdm == 1){%>
-              <!--<form action="/publicacoes" method="post">
-              <button type="submit">Todas as publicações</button>
-              </form>  -->
-              
-              <form action="/perfis" method="post">
-                <button type="submit"><p>Todos os perfis</p> </button>
-                </form> 
-            <%}%>
+            
     
         
           
@@ -136,8 +139,17 @@
               <li><a href="/suporte">Suporte</a> </li>
               <li><a href="/sobre">Sobre</a> </li>
               
+              
+              <% if(userAdm == 1){%><li>
+              
+              
+                <form action="/perfis" method="post">
+                  <button >Perfis </button>
+                  </form> 
+              </li><%}%>
               <li><form action="/logout" method="post"><button>Logout</button></form></a> 
               </li>
+
     
             </ul>
     

@@ -1,3 +1,10 @@
+.container.suporte{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
 .mainSuporte{
     padding-top: 12px;
 width: 100%;
@@ -8,12 +15,19 @@ width: 100%;
     margin-top: 2vh;
 
 }
+.mainSuporte h3{
+
+    text-align: center;
+
+}
+
 
 .formSup{
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 100%;
     align-items: flex-end;
+    max-width: 700px;
 
 }
 
@@ -33,7 +47,7 @@ padding: 1vh;
 height: fit-content;
     margin: 0 auto;
     width: 100%;
-
+box-sizing: border-box;
     resize: none;
 }
 
