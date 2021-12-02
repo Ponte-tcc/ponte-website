@@ -326,9 +326,8 @@
             <div class="p11">
             <button data-modal-target="#modal<%=i%>" class="comentPart <%=i%>"><img src="img/ballon.png" alt=""></button>
             <%=pub.comentarios.length%>
-              
-            <form action="/<%=curtida%>/<%=pub._id%>" method="post">
-              
+              <%=//action="/curtida/pub._id%>
+            <form action="/<%=curtida%>/<%=pub._id%>" method="post" ajax='true'>
               <button type="submit" id="curtida"><img src="img/<%=star%>.png" ></button>
               <%=pub.userCurtidas.length%>
             </form>

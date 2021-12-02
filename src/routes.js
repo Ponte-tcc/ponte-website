@@ -3,6 +3,9 @@ const routes = express.Router();
 const views = __dirname + "/views/";
 const mongoose = require("mongoose");
 
+const jsdom = require("jsdom");
+const dom = new jsdom.JSDOM("")
+const $ = require('jquery')(dom.window)
 
 require("./models/User");
 const User = mongoose.model("users");
@@ -15,6 +18,9 @@ const Pub = mongoose.model("publicacoes");
 
 require("./models/Noticia");
 const Noti = mongoose.model("noticias");
+
+require("./models/Teste");
+const Teste = mongoose.model("testes");
 
 var userUser;
 var userEmail;
@@ -313,6 +319,23 @@ routes.get("/perfil/:user", logadoChecker, (req, res) => {
 
 
 // POST
+
+routes.post('/ajax', (req, res) => {
+
+  const newTeste = {
+    hero: req.body.ajax,
+  };
+
+  new Teste(newTeste)
+    .save()
+    .then((nots) => {
+      console.log('ae')
+    })
+    .catch((erro) => {
+      console.log('ae n ' + erro)
+    });
+})
+
 
 routes.post("/", (req, res) => {
   if (erros.length >= 1) {
