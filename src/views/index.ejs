@@ -21,39 +21,39 @@
 
       <div class="box">
         <h1>Login</h1>
+        <div class="erros">
+        <% if(erros.length > 1){erros.splice(-1,1)} %> 
+          <% erros.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+        </div>
         <form class="box-login" method="post" action="/">
           
 
-          <% if(erros.length > 1){erros.splice(-1,1)} %> 
-          <% erros.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
           
-          <div class="text-box">
-            
-            <i class="far fa-user" aria-hidden="true" name="user-icon"> </i>
+          
+         
+            <div class="inputPart">
             <input
               type="text"
               id="user"
               maxlength="15"
               minlength="4"
               name="user"
-              placeholder="user ou email"
+              placeholder="User ou Email"
             />
-          </div>
-
-          <div class="text-box">
-            <i class="far fa-lock" aria-hidden="true" name="password-icon"></i>
+          
+            
             <input
               type="password"
               id="senha"
-              
               name="password"
               placeholder="Senha"
             />
-          </div>
-          <button type='submit'id="submit">Confirmar</button>
-          <a href="/cadastro" id="cadastro-btn">Se não tem um login, Cadastre-se</a>
+            
+         </div>
+          <button type='submit'id="submit"><img src="img/check.png" ></button>
+          
         </form>
-        
+        <a href="/cadastro" id="cadastro-btn">Se não tem um login, Cadastre-se</a>
 
         
           

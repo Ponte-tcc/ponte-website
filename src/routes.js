@@ -651,7 +651,8 @@ if (index > -1) {
     
         Pub.findByIdAndUpdate({ _id: idPubli }, { $pull: { userCurtidas: x.user } })
           .then((xx) => {
-            if (naoLogado == 2) {
+            
+           if (naoLogado == 2) {
               res.redirect("/perfil/" + xx.userUser);
             } else {
               naoLogado = 0
@@ -667,7 +668,7 @@ if (index > -1) {
 })
 })
 
-routes.post("/curtir/:id", async (req, res) => {
+routes.post("/curtir/:id", async (req, res, ) => {
   
   idPubli = req.params.id;
   
@@ -682,6 +683,8 @@ routes.post("/curtir/:id", async (req, res) => {
 
         Pub.findByIdAndUpdate({ _id: idPubli }, { $push: { userCurtidas: x.user } })
           .then((xx) => {
+
+            
             if (naoLogado == 2) {
               res.redirect("/perfil/" + xx.userUser);
             } else {
@@ -690,7 +693,7 @@ routes.post("/curtir/:id", async (req, res) => {
             }
           })
           .catch((ee) => {
-            
+            console.log(ee)
           });
       
 

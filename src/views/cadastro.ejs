@@ -22,70 +22,77 @@
 
       <div class="box">
         <h1>Cadastro</h1>
-        <form class="box-cad" method="post" >
-          
-
-          <div class="display">
-            <div class="erros">
+        
+        <div class="erros">
 
             <% if(erros.length > 1){%> <a>* Preencha todos os campos</a> <%}
             else if(erros.length == 1){erros.forEach(erro => { %><a>* <%= erro.txt %></a><% })} %>
+            
+            <% errosPass.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+            
+            <% errosUser.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+            
+            <% errosEx.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+           
+            <% errosEmail.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
             </div>
-            <div class="container-left">
-              <div class="text-box">
-                <i class="far fa-user" aria-hidden="true" name="user"> </i
-                ><input
+
+        <form class="box-cad" method="post" >
+          
+
+          <div class="inputPart">
+            
+            
+              <div >
+                <input
                   type="text"
                   name="user"
                   id="user-cad"
                   placeholder="User"
                 />
-                <% errosUser.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
-                 
-                 
-              </div>
+                
+                 </div>
+              
 
-              <div class="text-box">
-                <i class="far fa-user" aria-hidden="true" name="user"> </i
-                ><input
+              <div>
+                <input
                   type="text"
                   name="exibition"
                   id="exibition-cad"
                   placeholder="Nome de exibição"
                 />
-                <% errosEx.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
-              </div>
-
-              <div class="text-box">
-                <i class="far fa-envelope" aria-hidden="true" name="email"> </i
-                ><input
+                
+</div>
+              
+<div>
+                <input
                   type="text"
                   name="email"
                   id="email-cad"
                   placeholder="Email"
                 />
-                <% errosEmail.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
-              </div>
-            </div>
-
-            <div class="container-right">
-              <div class="text-box">
-                <i class="far fa-lock" aria-hidden="true" name="password"></i>
+                
+            
+</div>
+            
+                <div>
                 <input
                   type="password"
                   name="password"
                   id="senha-cad"
                   placeholder="Senha"
                 />
-                <% errosPass.forEach(erro => { %><a>* <%= erro.txt %></a><% }) %>
+                
               </div>
+              </div>
+              <button id="submit"><img src="img/check.png" ></button>
             </div>
 
-          </div>
-          <button id="submit">Cadastrar</button>
-          <a href="/" id="login-btn">Se já tem um login, Logar-se</a>
+          
+          
+          
         </form>
-        
+        <a href="/" id="login-btn">Se já tem um login, Logar-se</a>
 
        
           
@@ -93,8 +100,8 @@
       </div>
     </div>
 
-    <div class="color"></div>
-
+   
+</div>
     
   </body>
 

@@ -329,7 +329,7 @@
               
             <form action="/<%=curtida%>/<%=pub._id%>" method="post">
               
-              <button type="submit"><img src="img/<%=star%>.png" ></button>
+              <button type="submit" id="curtida"><img src="img/<%=star%>.png" ></button>
               <%=pub.userCurtidas.length%>
             </form>
             
@@ -376,6 +376,7 @@
    
 <script src="script/coment.js"></script>
 <script src="script/autoResize.js"></script>
+<script src="script/test.js"></script>
 
 <script>
   $("textarea").keydown(function(e){
